@@ -1,6 +1,11 @@
-<ul>
-  <li *ngFor="let station of stations">
-    <a routerLink="/stations/{{station.stationuuid}}" routerLinkActive="active">{{station.name}}</a>
-    <app-play-button [station]="station"></app-play-button>
-  </li>
-</ul>
+<div fxFlexFill
+     [fxLayout]="'row wrap'"
+     fxLayoutGap="10px 5px grid"
+     style="cursor: pointer;">
+  <div fxFlex.lg="20" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="50" *ngFor="let station of stations">
+    <div fxFlexFill fxLayoutAlign="center center" style="background-color: aquamarine;">
+      <a routerLink="/stations/{{station.stationuuid}}" routerLinkActive="active">{{station.name}}</a>
+      <app-play-button [station]="station"></app-play-button>
+    </div>
+  </div>
+</div>
