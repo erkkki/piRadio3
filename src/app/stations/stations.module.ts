@@ -8,7 +8,7 @@ import { StationsRoutingModule } from './stations-routing.module';
 import { StationsComponent } from './stations/stations.component';
 import { StationListComponent } from './station-list/station-list.component';
 import { StationComponent } from './station/station.component';
-import {SharedModule} from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 

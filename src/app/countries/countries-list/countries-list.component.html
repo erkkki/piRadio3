@@ -2,9 +2,13 @@
      [fxLayout]="'row wrap'"
      fxLayoutGap="10px 5px grid"
      style="cursor: pointer;">
-  <div fxFlex.lg="20" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="50" *ngFor="let country of countries">
+  <div fxFlex.lg="20"
+       fxFlex.md="33"
+       fxFlex.sm="50"
+       fxFlex.xs="50"
+       *ngFor="let country of countries | min: 'stationcount'">
     <div fxFlexFill fxLayoutAlign="center center" style="background-color: aquamarine;">
-      <a routerLink="/stations/country/{{country.name}}" routerLinkActive="active">{{country.name}}</a>
+      <a routerLink="/stations/country/{{country.name}}" routerLinkActive="active">{{country.name}},{{country.stationcount}}</a>
     </div>
   </div>
 </div>

@@ -6,14 +6,19 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CountriesComponent } from './countries/countries.component';
 import { CountriesRoutingModule } from './countries-routing.module';
 import { CountriesListComponent } from './countries-list/countries-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
-  declarations: [CountriesComponent, CountriesListComponent],
+  declarations: [
+    CountriesComponent,
+    CountriesListComponent
+  ],
   imports: [
     CommonModule,
     FlexLayoutModule,
-    CountriesRoutingModule
+    CountriesRoutingModule,
+    SharedModule
   ]
 })
 export class CountriesModule { }
