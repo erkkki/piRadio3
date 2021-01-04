@@ -1,0 +1,13 @@
+
+<div *ngIf="station">
+  <p>
+    {{ station.name }}
+    <img src="{{station.favicon}}" alt="">
+    <app-play-button [station]="station"></app-play-button>
+  </p>
+  <code>
+  <pre>
+    {{ station | json}}
+  </pre>
+  </code>
+</div>

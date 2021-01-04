@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let station of stations">
+    <a routerLink="/stations/{{station.stationuuid}}" routerLinkActive="active">{{station.name}}</a>
+    <app-play-button [station]="station"></app-play-button>
+  </li>
+</ul>
