@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill" [formGroup]="form">
+  <mat-label>Countries</mat-label>
+  <mat-select formControlName="country" panelClass="example-panel">
+    <mat-option>None</mat-option>
+    <mat-option *ngFor="let country of countries" [value]="country.name">
+      {{ country.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

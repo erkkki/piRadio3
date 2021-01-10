@@ -12,15 +12,15 @@ export interface Station {
   state: string;
   language: string;
   votes: number;
-  lastchangetime: Date;
+  lastchangetime: string;
   codec: string;
   bitrate: number;
   hls: number;
   lastcheckok: number;
-  lastchecktime: Date;
-  lastcheckoktime: Date;
-  lastlocalchecktime: Date;
-  clicktimestamp: Date;
+  lastchecktime: string;
+  lastcheckoktime: string;
+  lastlocalchecktime: string;
+  clicktimestamp: string;
   clickcount: number;
   clicktrend: number;
 }

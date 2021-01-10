@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'stations',
     loadChildren: () => import('./stations/stations.module').then(m => m.StationsModule)
+  },
+  {
+    path: 'player',
+    loadChildren: () => import('./player/player.module').then(m => m.PlayerModule)
   }
 ];
 

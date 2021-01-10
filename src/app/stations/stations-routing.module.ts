@@ -1,22 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { StationsComponent } from './stations/stations.component';
 import {StationComponent} from './station/station.component';
+import {StationsSearchComponent} from './stations-search/stations-search.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: StationsComponent
-  },
-  {
-    path: ':uuid',
+    path: 'station/:uuid',
     component: StationComponent
   },
   {
-    path: 'country/:country',
-    component: StationsComponent
-  }
+    path: 'search',
+    component: StationsSearchComponent
+  },
 ];
 
 @NgModule({

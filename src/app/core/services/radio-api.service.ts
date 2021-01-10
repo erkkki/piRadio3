@@ -1,42 +1,58 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
+import {Observable} from 'rxjs';
+import {debounceTime, distinctUntilChanged, map, filter, switchMap} from 'rxjs/operators';
 
 import {RadioApiServerService} from './radio-api-server.service';
-import { Server } from '../models/server';
-import { Station } from '../models/station';
-import {mergeMap} from 'rxjs/operators';
-import {Observable, ReplaySubject} from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class RadioApiService {
 
-  private server: Server;
-  private readonly path: string;
+  constructor(private http: HttpClient, private serverService: RadioApiServerService) {}
 
-  constructor(private http: HttpClient) {
-    this.path = 'http://all.api.radio-browser.info/json';
+  private get serverUrl(): Observable<string> {
+    return this.serverService.server$.pipe(
+      filter(servers => servers !== null),
+      map(server => server.name),
+    );
   }
 
   getCountries(): Observable<any> {
-    return this.http.get(`${this.path}/countries`);
+    return this.serverUrl.pipe(
+      filter(countries => countries !== null),
+      switchMap(name => {
+        return this.http.get(`https://${name}/json/countries`);
+      })
+    );
   }
 
   getTags(): Observable<any> {
-    return this.http.get(`${this.path}/tags`);
+    return this.serverUrl.pipe(
+      filter(tags => tags !== null),
+      switchMap(name => {
+        return this.http.get(`https://${name}/json/tags`);
+      })
+    );
   }
 
   getStationsBy(by: string, search: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.http.get(`${this.path}/stations/${by}/${search}`, { params });
+    return this.serverUrl.pipe(
+      switchMap(name => {
+        return this.http.get(`https://${name}/json/stations/${by}/${search}`, { params });
+      })
+    );
+  }
+
+  getStationsSearch(params: HttpParams = new HttpParams()): Observable<any> {
+    return this.serverUrl.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap(name => {
+        return this.http.get(`https://${name}/json//stations/search`, { params });
+      })
+    );
   }
 }
-
-// getTopStations() {}
-// getCountries() {}
-// getGenres() {}
-// getStationById(station_id) {}
-// getStationsByGenre(genre) {}
-// getStationsByCountry(country) {}

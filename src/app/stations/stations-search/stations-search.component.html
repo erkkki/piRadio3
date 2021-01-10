@@ -1,0 +1,21 @@
+<form [formGroup]="filterForm">
+  <mat-form-field>
+    <mat-label>Clearable input</mat-label>
+    <label>
+      <input matInput type="text" formControlName="search">
+    </label>
+  </mat-form-field>
+
+
+
+  <app-country-select formControlName="country"></app-country-select>
+  <app-genre-select formControlName="genre"></app-genre-select>
+  <app-order formControlName="order"></app-order>
+</form>
+
+<p>{{filterForm.value | json}}</p>
+
+<mat-divider></mat-divider>
+
+
+<app-station-list [stations]="stations$ | async"></app-station-list>

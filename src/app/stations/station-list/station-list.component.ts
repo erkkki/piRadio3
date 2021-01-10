@@ -10,9 +10,9 @@ import { Station } from '../../core/models/station';
 })
 export class StationListComponent implements OnInit {
 
-  @Input() stations: Station[];
+  @Input() stations: Station[] = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RadioApiService } from '../../core/services/radio-api.service';
 import {Observable} from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
+
+
+import { CountriesService } from '../../core/services/countries.service';
+import { Country } from '../../core/models/country';
 
 @Component({
   selector: 'app-countries',
@@ -10,12 +14,12 @@ import {Observable} from 'rxjs';
 })
 export class CountriesComponent implements OnInit {
 
-  countries$: Observable<any>;
+  countries$: Observable<Country[]>;
 
-  constructor(private radioApiService: RadioApiService) { }
+  constructor(private countriesService: CountriesService) { }
 
   ngOnInit(): void {
-    this.countries$ = this.radioApiService.getCountries();
+    this.countries$ = this.countriesService.countries;
   }
 
 }

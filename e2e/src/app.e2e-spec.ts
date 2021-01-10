@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('piRadio3 app is running!');
+    expect(page.getTitleText()).toEqual('piradio3 app is running!');
   });
 
   afterEach(async () => {

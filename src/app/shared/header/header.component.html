@@ -1,19 +1,13 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My App</span>
-  <span>
-    <a routerLink="/" routerLinkActive="active">Home</a>
-  </span>
-  <span>
-    <a routerLink="/countries" routerLinkActive="active">Countries</a>
-  </span>
-  <span>
-    <a routerLink="/stations" routerLinkActive="active">Stations</a>
-  </span>
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link routerLink="/">Home</a>
+    <a mat-tab-link routerLink="/stations/search">search</a>
+    <a mat-tab-link routerLink="/countries">Countries</a>
+    <a mat-tab-link routerLink="/player">Player</a>
+  </nav>
 
   <span class="example-spacer"></span>
+
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
     <mat-icon>favorite</mat-icon>
   </button>

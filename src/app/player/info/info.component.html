@@ -1,0 +1,9 @@
+<div *ngIf="station" class="info">
+  <p>{{ station.name }}</p>
+  <p>{{ station.country }}</p>
+  <p>{{ station.clickcount }}</p>
+
+  <div class="favicon">
+    <img src="{{station.favicon}}" alt="">
+  </div>
+</div>

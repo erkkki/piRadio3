@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import {Country} from '../../core/models/country';
+
 @Component({
   selector: 'app-countries-list',
   templateUrl: './countries-list.component.html',
@@ -7,11 +9,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CountriesListComponent implements OnInit {
 
-  @Input() countries: any;
+  @Input() countries: Country[];
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  changeCountry(country): void {
+    localStorage.setItem('country', country);
   }
 
 }

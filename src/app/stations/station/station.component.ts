@@ -21,12 +21,6 @@ export class StationComponent implements OnInit {
   constructor(private route: ActivatedRoute, private radioApiService: RadioApiService) { }
 
   ngOnInit(): void {
-    // this.route.paramMap.pipe(
-    //   switchMap(params => {
-    //     this.stationUuid = params.get('uuid');
-    //     return this.radioApiService.getStationsBy('byuuid', this.stationUuid);
-    //   })
-    // );
     this.stationUuid = this.route.snapshot.paramMap.get('uuid');
     this.radioApiService.getStationsBy('byuuid', this.stationUuid).subscribe(stations => {
       this.station = stations[0];

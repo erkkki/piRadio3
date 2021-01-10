@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  radioApiUrl: 'http://all.api.radio-browser.info/json/servers',
 };

@@ -1,0 +1,12 @@
+.column {
+  columns: 16em;
+  column-gap: 1em;
+  margin-top: 2em;
+}
+.child {
+  margin: 10px;
+  break-inside: avoid;
+}
+.child:first-child {
+  margin-top: 0;
+}
