@@ -18,7 +18,6 @@ import { CountriesRoutingModule } from './countries-routing.module';
 import { TableComponent } from './table/table.component';
 import { SharedModule } from '../shared/shared.module';
 import { ListComponent } from './list/list.component';
-import { EarthComponent } from './earth/earth.component';
 import {MatCardModule} from '@angular/material/card';
 
 
@@ -27,7 +26,6 @@ import {MatCardModule} from '@angular/material/card';
     CountriesComponent,
     TableComponent,
     ListComponent,
-    EarthComponent,
   ],
   imports: [
     CommonModule,
@@ -40,11 +38,11 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonToggleModule,
     MatTableModule,
     MatSortModule,
+    MatTabsModule,
+    MatCardModule,
     /** Own modules */
     CountriesRoutingModule,
     SharedModule,
-    MatTabsModule,
-    MatCardModule,
   ]
 })
 export class CountriesModule { }

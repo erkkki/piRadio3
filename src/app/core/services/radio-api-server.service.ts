@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
 import {catchError, first, map, retry, switchMap} from 'rxjs/operators';
 import {sample} from 'lodash-es';
 
@@ -34,7 +34,10 @@ export class RadioApiServerService {
           return throwError(error);
         }),
         retry(4),
-      ).subscribe(error => console.log('No connection to api servers.'));
+      ).subscribe(
+        val => console.log('Api server is working.'),
+        error => console.log('No connection to api server.')
+      );
     }, error => console.log('No connection to radio api serves / no internet connection')
     );
   }

@@ -11,7 +11,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
-import { HeaderComponent } from './header/header.component';
 import { PlayButtonComponent } from './play-button/play-button.component';
 import { GenreSelectComponent } from './input/genre-select/genre-select.component';
 import { CountrySelectComponent } from './input/country-select/country-select.component';
@@ -20,7 +19,6 @@ import { CountrySelectComponent } from './input/country-select/country-select.co
 
 @NgModule({
   declarations: [
-    HeaderComponent,
     PlayButtonComponent,
     GenreSelectComponent,
     CountrySelectComponent,
@@ -38,7 +36,6 @@ import { CountrySelectComponent } from './input/country-select/country-select.co
       ReactiveFormsModule,
     ],
   exports: [
-    HeaderComponent,
     PlayButtonComponent,
     GenreSelectComponent,
     CountrySelectComponent,
