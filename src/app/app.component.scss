@@ -1,3 +1,4 @@
+// Import library functions for theme creation.
 .sidenav-container {
   position: absolute;
   top: 60px;
@@ -11,7 +12,7 @@
   align-items: center;
   justify-content: center;
   width: 160px;
-  background: rgba(255, 0, 0, 0.5);
+  background-color: rgb(33, 33, 33);
 }
 
 .header {
@@ -24,3 +25,8 @@
 .spacer {
   flex: 1 1 auto;
 }
+
+.logo {
+  max-width: 100%;
+}
+

@@ -1,21 +1,32 @@
-<form [formGroup]="filterForm">
-  <mat-form-field>
-    <mat-label>Clearable input</mat-label>
-    <label>
-      <input matInput type="text" formControlName="search">
-    </label>
-  </mat-form-field>
+<mat-toolbar>
+  <form [formGroup]="filterForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput type="text" formControlName="search" autocomplete="off">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="filterForm.patchValue({search: ''})">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
 
+    <app-country-select formControlName="country"></app-country-select>
 
+    <app-genre-select formControlName="genre"></app-genre-select>
 
-  <app-country-select formControlName="country"></app-country-select>
-  <app-genre-select formControlName="genre"></app-genre-select>
-  <app-order formControlName="order"></app-order>
-</form>
+    <mat-button-toggle-group formControlName="order" name="order" aria-label="Order">
+      <mat-button-toggle value="clickcount">Popularity</mat-button-toggle>
+      <mat-button-toggle value="name">Name</mat-button-toggle>
+    </mat-button-toggle-group>
 
-<p>{{filterForm.value | json}}</p>
+    <button mat-raised-button (click)="filterForm.reset({order: 'name'})">Reset</button>
+  </form>
+</mat-toolbar>
+
+<!--{{ filterForm.value | json}}-->
 
 <mat-divider></mat-divider>
 
+<div style="padding: 20px">
+  <!--<app-station-list [stations]="stations$ | async"></app-station-list>-->
+  <app-station-table [stations]="stations$ | async"></app-station-table>
+</div>
 
-<app-station-list [stations]="stations$ | async"></app-station-list>

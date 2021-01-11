@@ -1,7 +1,7 @@
-<mat-form-field appearance="fill" [formGroup]="form">
+<mat-form-field appearance="outline" [formGroup]="form">
   <mat-label>Genres</mat-label>
-  <mat-select formControlName="genre">
-    <mat-option>None</mat-option>
+  <mat-select formControlName="genre" panelClass="genre-panel" multiple>
+    <mat-option (click)="form.reset()">Unselect All</mat-option>
     <mat-option *ngFor="let genre of genres" [value]="genre.name">
       {{ genre.name }}
     </mat-option>

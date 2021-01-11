@@ -1,0 +1,12 @@
+
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+
+  <g>
+    <title>background</title>
+    <rect fill="none" id="canvas_background" height="602" width="802" y="-1" x="-1"/>
+  </g>
+  <g>
+    <title>Layer 1</title>
+    <text id="svg_1" font-size="2em" fill="#00f0f0" y="208.52344" x="153.72656">PiRadio</text>
+  </g>
+</svg>

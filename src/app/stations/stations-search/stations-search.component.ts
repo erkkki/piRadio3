@@ -18,7 +18,7 @@ import {HttpParams} from '@angular/common/http';
 export class StationsSearchComponent implements OnInit, OnDestroy {
 
   stations$: Observable<Station[]>;
-  subcriptions: Subscription[] = [];
+  subscriptions: Subscription[] = [];
 
   filterForm = new FormGroup( {
     search: new FormControl(''),
@@ -34,17 +34,18 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
 
     this.search(this.filterForm.value);
 
-    this.filterForm.valueChanges.pipe(
+    const sub = this.filterForm.valueChanges.pipe(
       distinctUntilChanged()
     ).subscribe((value) => {
       const formValues = this.filterForm.value;
       localStorage.setItem('stationsearchform', JSON.stringify(formValues));
       this.search(formValues);
     });
+    this.subscriptions.push(sub);
   }
 
   ngOnDestroy(): void {
-    this.subcriptions.forEach((sub) => sub.unsubscribe());
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   loadFromLocalStorage(): void {
@@ -74,11 +75,23 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
     const params = {
       name: (formValues.search) ? formValues.search : '',
       limit: '200',
-      country: (formValues.country.country) ? formValues.country.country : '',
-      tag: (formValues.genre.genre) ? formValues.genre.genre : '',
-      order: (formValues.order.order) ? formValues.order.order : 'clickcount',
-      reverse: 'true',
+      country: (formValues.country?.country) ? formValues.country.country : '',
+      tag: (formValues.genre?.genre) ? formValues.genre.genre : '',
+      order: '',
+      reverse: '',
     };
+    switch (formValues.order) {
+      case('clickcount'): {
+        params.order = 'clickcount';
+        params.reverse = 'true';
+        break;
+      }
+      default: {
+        params.order = 'name';
+        break;
+      }
+    }
+
     this.stations$ = this.radioApiService.getStationsSearch(new HttpParams({ fromObject: params}));
   }
 }

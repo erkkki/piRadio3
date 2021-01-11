@@ -9,17 +9,25 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
 
 import { CountriesComponent } from './countries/countries.component';
 import { CountriesRoutingModule } from './countries-routing.module';
-import { CountriesListComponent } from './countries-list/countries-list.component';
+import { TableComponent } from './table/table.component';
 import { SharedModule } from '../shared/shared.module';
+import { ListComponent } from './list/list.component';
+import { EarthComponent } from './earth/earth.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
   declarations: [
     CountriesComponent,
-    CountriesListComponent,
+    TableComponent,
+    ListComponent,
+    EarthComponent,
   ],
   imports: [
     CommonModule,
@@ -30,9 +38,13 @@ import { SharedModule } from '../shared/shared.module';
     MatIconModule,
     MatSliderModule,
     MatButtonToggleModule,
+    MatTableModule,
+    MatSortModule,
     /** Own modules */
     CountriesRoutingModule,
-    SharedModule
+    SharedModule,
+    MatTabsModule,
+    MatCardModule,
   ]
 })
 export class CountriesModule { }

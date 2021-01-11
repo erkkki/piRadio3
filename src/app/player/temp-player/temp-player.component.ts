@@ -20,7 +20,7 @@ export class TempPlayerComponent implements OnInit {
 
   ngOnInit(): void {
     this.station = this.playerService.station;
-    this.playState = this.playerService.playState;
+    this.playState = this.playerService.playing;
   }
 
 }

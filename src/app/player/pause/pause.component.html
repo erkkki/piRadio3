@@ -1,4 +1,4 @@
-<button mat-mini-fab color="primary" (click)="pause()" aria-label="Play or pause playback">
-  <mat-icon *ngIf="playState">play_circle</mat-icon>
-  <mat-icon *ngIf="!playState">pause_circle</mat-icon>
+<button mat-icon-button color="primary" (click)="pause()" aria-label="Play or pause playback">
+  <mat-icon *ngIf="playing">play_arrow</mat-icon>
+  <mat-icon *ngIf="!playing">pause</mat-icon>
 </button>

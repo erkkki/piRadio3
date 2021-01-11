@@ -38,13 +38,13 @@ export class PlayerService {
 
   station: ReplaySubject<Station>;
   volume: ReplaySubject<number>;
-  playState: ReplaySubject<boolean>;
+  playing: ReplaySubject<boolean>;
 
   constructor() {
     this.volume = new ReplaySubject<number>();
     this.volume.next(10);
-    this.playState = new ReplaySubject<boolean>();
-    this.playState.next(false);
+    this.playing = new ReplaySubject<boolean>();
+    this.playing.next(false);
     this.station = new ReplaySubject<Station>();
     this.station.next(tempStation);
 
@@ -57,7 +57,7 @@ export class PlayerService {
       console.log(val);
     });
 
-    this.playState.subscribe(val => {
+    this.playing.subscribe(val => {
       console.log(val);
     });
   }

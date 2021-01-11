@@ -1,4 +1,20 @@
-<app-countries-list [countries]="countries$ | async"></app-countries-list>
+<mat-tab-group>
+  <mat-tab label="Table">
+    <div class="table-container">
+      <app-countries-table></app-countries-table>
+    </div>
+  </mat-tab>
+  <mat-tab label="List">
+    <div class="table-container">
+      <app-countries-list></app-countries-list>
+    </div>
+  </mat-tab>
+<!--  TODO -->
+<!--  <mat-tab label="Earth">-->
+<!--    <app-countries-earth></app-countries-earth>-->
+<!--  </mat-tab>-->
+</mat-tab-group>
+
 
 
 

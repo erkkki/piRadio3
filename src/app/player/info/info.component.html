@@ -1,9 +1,4 @@
-<div *ngIf="station" class="info">
-  <p>{{ station.name }}</p>
-  <p>{{ station.country }}</p>
-  <p>{{ station.clickcount }}</p>
-
-  <div class="favicon">
-    <img src="{{station.favicon}}" alt="">
-  </div>
+<div *ngIf="station" class="info" routerLink="/stations/station/{{station.stationuuid}}">
+  <span class="name">{{ station.name }}</span>
+  <span class="tags">Genres: {{ station.tags }}</span>
 </div>

@@ -15,7 +15,6 @@ import { HeaderComponent } from './header/header.component';
 import { PlayButtonComponent } from './play-button/play-button.component';
 import { GenreSelectComponent } from './input/genre-select/genre-select.component';
 import { CountrySelectComponent } from './input/country-select/country-select.component';
-import { OrderComponent } from './input/order/order.component';
 
 
 
@@ -25,7 +24,6 @@ import { OrderComponent } from './input/order/order.component';
     PlayButtonComponent,
     GenreSelectComponent,
     CountrySelectComponent,
-    OrderComponent,
   ],
     imports: [
       RouterModule,
@@ -44,7 +42,6 @@ import { OrderComponent } from './input/order/order.component';
     PlayButtonComponent,
     GenreSelectComponent,
     CountrySelectComponent,
-    OrderComponent,
   ]
 })
 export class SharedModule { }

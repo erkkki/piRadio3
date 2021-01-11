@@ -1,26 +1,31 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
-import {ReplaySubject} from 'rxjs';
+import {ReplaySubject, Subscription} from 'rxjs';
+
+import {PlayerService} from '../../core/services/player.service';
 
 @Component({
   selector: 'app-player-pause',
   templateUrl: './pause.component.html',
   styleUrls: ['./pause.component.scss']
 })
-export class PauseComponent implements OnInit {
+export class PauseComponent implements OnInit, OnDestroy {
 
-  @Input() playState$: ReplaySubject<boolean>;
-  playState: boolean;
+  playing: boolean;
+  subscription: Subscription;
 
-  constructor() { }
+  constructor(private player: PlayerService) { }
 
   ngOnInit(): void {
-    this.playState = false;
-    this.playState$.subscribe(val => this.playState = val);
+    this.playing = false;
+    this.subscription = this.player.playing.subscribe(value => this.playing = value);
   }
 
   pause(): void {
-    this.playState$.next(!this.playState);
+    this.player.playing.next(!this.playing);
+  }
+
+  ngOnDestroy(): void {
   }
 
 }

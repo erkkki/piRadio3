@@ -1,11 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
-import {Observable} from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
-
-
-import { CountriesService } from '../../core/services/countries.service';
-import { Country } from '../../core/models/country';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-countries',
@@ -14,12 +7,6 @@ import { Country } from '../../core/models/country';
 })
 export class CountriesComponent implements OnInit {
 
-  countries$: Observable<Country[]>;
-
-  constructor(private countriesService: CountriesService) { }
-
-  ngOnInit(): void {
-    this.countries$ = this.countriesService.countries;
-  }
-
+  constructor() { }
+  ngOnInit(): void {}
 }

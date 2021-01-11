@@ -43,7 +43,10 @@ export class GenreSelectComponent implements OnInit, ControlValueAccessor {
   }
   registerOnTouched(fn: any): void {}
   writeValue(obj: any): void {
-    /* set value throws error when empty */
+    if (!obj) {
+      this.form.reset();
+      return;
+    }
     this.form.patchValue(obj);
   }
 

@@ -1,0 +1,28 @@
+<table mat-table [dataSource]="stations" class="mat-elevation-z8" style="width: 100%">
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef> country </th>
+    <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="clickcount">
+    <th mat-header-cell *matHeaderCellDef> clickcount </th>
+    <td mat-cell *matCellDef="let element"> {{element.clickcount}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tags">
+    <th mat-header-cell *matHeaderCellDef> tags </th>
+    <td mat-cell *matCellDef="let element" style="max-width: 200px; padding-right: 20px;">
+      <div style="overflow: hidden; white-space: nowrap;">{{element.tags}}</div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
