@@ -21,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
 import { StationsSearchComponent } from './stations-search/stations-search.component';
 import { TableComponent } from './table/table.component';
 import {MatTableModule} from '@angular/material/table';
+import { PlayComponent } from './play/play.component';
 
 
 
@@ -31,7 +32,8 @@ import {MatTableModule} from '@angular/material/table';
     ListComponent,
     StationComponent,
     StationsSearchComponent,
-    TableComponent
+    TableComponent,
+    PlayComponent
   ],
   imports: [
     CommonModule,

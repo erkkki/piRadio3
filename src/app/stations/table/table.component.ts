@@ -9,11 +9,13 @@ import {Station} from '../../core/models/station';
 export class TableComponent implements OnInit {
 
   @Input() stations: Station[];
-  displayedColumns: string[] = ['name', 'tags', 'clickcount', 'country'];
+  defaultDisplayedColumns: string[] = ['play', 'name', 'tags', 'clickcount', 'country'];
+  tabletDisplayedColumns: string[] = ['play', 'name', 'tags', 'country'];
+  mobileDisplayedColumns: string[] = ['play', 'name', 'country'];
+  displayedColumns: string[];
   innerWidth: number;
 
   constructor() { }
-
 
   ngOnInit(): void {
     this.responsiveColumns();
@@ -21,11 +23,20 @@ export class TableComponent implements OnInit {
 
   responsiveColumns(): void {
     const width = window.innerWidth;
-    if (width < 600) {
-      this.displayedColumns = ['name', 'country'];
+
+    /* For phones */
+    if (width < 768) {
+      this.displayedColumns = this.mobileDisplayedColumns;
+      return;
     }
+    /* For tablets */
+    if (width < 992) {
+      this.displayedColumns = this.tabletDisplayedColumns;
+      return;
+    }
+    /* Rest */
     else {
-      this.displayedColumns = ['name', 'tags', 'clickcount', 'country'];
+      this.displayedColumns = this.defaultDisplayedColumns;
     }
   }
 
