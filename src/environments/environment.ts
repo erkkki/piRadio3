@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  radioApiUrl: 'http://all.api.radio-browser.info/json/servers',
+  // radioApiUrl: 'http://all.api.radio-browser.info/json/servers',
+  radioApiUrl: 'https://fr1.api.radio-browser.info/json/servers',
 };
 
 /*
