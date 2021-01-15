@@ -1,19 +1,36 @@
-<div fxFlexFill *ngIf="countries"
-     [fxLayout]="'row wrap'"
-     fxLayoutGap="10px 10px grid">
-  <div fxFlex.lg="20"
-       fxFlex.md="33"
-       fxFlex.sm="50"
-       fxFlex.xs="50"
-       *ngFor="let country of countries">
-    <div fxFlexFill fxLayoutAlign="center center">
-      <mat-card routerLink="/stations/search" (click)="changeCountry(country.name)" style="width: 100%">
-        <div [fxLayout]="'row'" style="cursor: pointer;">
-          <span fxFlex="90">{{country.name}}</span>
-          <span fxFlex="10">{{country.stationcount}}</span>
-        </div>
-      </mat-card>
+<div *ngIf="countries"
+       fxLayout="row wrap" fxFlexFill>
+    <div fxFlex="20%"
+         fxFlex.md="33%"
+         fxFlex.sm="50%"
+         fxFlex.xs="100%"
+         *ngFor="let country of countries">
+        <mat-card routerLink="/stations/search" (click)="changeCountry(country.name)">
+          <div style="cursor: pointer;" fxLayout="row">
+            <span fxFlex="90"  class="country">{{country.name}}</span>
+            <span style="position: absolute; top: 0; right: 6px;"
+                  matTooltip="Station count">{{country.stationcount}}</span>
+          </div>
+        </mat-card>
     </div>
   </div>
-</div>
+
+<!--<div fxFlexFill *ngIf="countries"-->
+<!--     fxLayout="row wrap"-->
+<!--     fxLayoutGap="10px 10px grid">-->
+<!--  <div fxFlex.lg="20"-->
+<!--       fxFlex.md="33"-->
+<!--       fxFlex.sm="50"-->
+<!--       fxFlex.xs="50"-->
+<!--       *ngFor="let country of countries">-->
+<!--    <div fxFlexFill fxLayoutAlign="center center">-->
+<!--      <mat-card routerLink="/stations/search" (click)="changeCountry(country.name)" style="width: 100%">-->
+<!--        <div fxLayout="row" style="cursor: pointer;">-->
+<!--          <span fxFlex="90">{{country.name}}</span>-->
+<!--          <span fxFlex="10">{{country.stationcount}}</span>-->
+<!--        </div>-->
+<!--      </mat-card>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 

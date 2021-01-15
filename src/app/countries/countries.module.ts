@@ -19,6 +19,10 @@ import { TableComponent } from './table/table.component';
 import { SharedModule } from '../shared/shared.module';
 import { ListComponent } from './list/list.component';
 import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { SearchComponent } from './search/search.component';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -26,6 +30,7 @@ import {MatCardModule} from '@angular/material/card';
     CountriesComponent,
     TableComponent,
     ListComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +48,9 @@ import {MatCardModule} from '@angular/material/card';
     /** Own modules */
     CountriesRoutingModule,
     SharedModule,
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatButtonModule,
   ]
 })
 export class CountriesModule { }

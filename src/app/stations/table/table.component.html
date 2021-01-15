@@ -1,13 +1,66 @@
-<table mat-table [dataSource]="stations" class="mat-elevation-z8" style="width: 100%">
-
-  <ng-container matColumnDef="play">
-    <th mat-header-cell *matHeaderCellDef style="padding-left: 4px;"> Play </th>
-    <td mat-cell *matCellDef="let element" style="padding-left: 0;"><app-stations-play [station]="element"></app-stations-play></td>
+<table mat-table [dataSource]="stations" class="mat-elevation-z8">
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <div fxLayout="row">
+<!--        <app-shared-favorite fxFlex="40" [station]="element"></app-shared-favorite>-->
+        <app-play-button fxFlex="40" [station]="element"></app-play-button>
+      </div>
+    </td>
   </ng-container>
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  <ng-container matColumnDef="station-name">
+    <th mat-header-cell *matHeaderCellDef> Station </th>
+    <td mat-cell *matCellDef="let element">
+      <div fxLayout="column">
+        <span fxFlex="60" routerLink="/stations/station/{{element.stationuuid}}">{{element.name}}</span>
+        <mat-chip-list fxFlex="40" aria-label="Genres, tags">
+          <mat-chip disabled>{{element.country}}</mat-chip>
+          <ng-container *ngFor="let tag of element.tags?.split(',').slice(0,4)">
+            <mat-chip *ngIf="tag" disabled>{{tag}}</mat-chip>
+          </ng-container>
+        </mat-chip-list>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="station-name-compact">
+    <th mat-header-cell *matHeaderCellDef> Station </th>
+    <td mat-cell *matCellDef="let element">
+      <span routerLink="/stations/station/{{element.stationuuid}}">{{element.name}}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="info">
+    <th mat-header-cell *matHeaderCellDef> Info </th>
+    <td mat-cell *matCellDef="let element">
+      <div fxLayout="column">
+        <div fxFlex="60">
+          <span> {{element.lastcheckoktime | date:'short': locale}} </span>
+        </div>
+        <div fxFlex="40" style="font-size: small">
+          <span *ngIf="element.codec && element.codec !== 'UNKNOWN'">{{element.codec}} </span>
+          <span *ngIf="element.bitrate">{{element.bitrate}}kbits</span>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="favicon">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <img *ngIf="!element.faviconerror" [src]="element.favicon" [alt]="element.name" (error)="element.faviconerror = true">
+      <mat-icon *ngIf="element.faviconerror" color="warn">photo</mat-icon>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tags">
+    <th mat-header-cell *matHeaderCellDef> tags </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-chip-list aria-label="Genres, tags" *ngFor="let tag of element.tags.split(',')">
+        <mat-chip *ngIf="tag">{{tag}}</mat-chip>
+      </mat-chip-list>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="country">
@@ -15,17 +68,50 @@
     <td mat-cell *matCellDef="let element"> {{element.country}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="clickcount">
-    <th mat-header-cell *matHeaderCellDef> clickcount </th>
-    <td mat-cell *matCellDef="let element"> {{element.clickcount}} </td>
+<!--  Number of votes for this station. This number is by server and only ever increases. It will never be reset to 0.-->
+  <ng-container matColumnDef="votes">
+    <th mat-header-cell *matHeaderCellDef> votes </th>
+    <td mat-cell *matCellDef="let element"> {{element.votes}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="tags">
-    <th mat-header-cell *matHeaderCellDef> tags </th>
-    <td mat-cell *matCellDef="let element" style="max-width: 200px; padding-right: 20px;">
-      <div style="overflow: hidden; white-space: nowrap;">{{element.tags}}</div>
+  <ng-container matColumnDef="codec">
+    <th mat-header-cell *matHeaderCellDef> codec </th>
+    <td mat-cell *matCellDef="let element"> {{element.codec}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="bitrate">
+    <th mat-header-cell *matHeaderCellDef> bitrate </th>
+    <td mat-cell *matCellDef="let element">
+      <span *ngIf="element.codec && element.codec !== 'UNKNOWN'">{{element.codec}} </span>
+      <span *ngIf="element.bitrate">{{element.bitrate}}kbits</span>
     </td>
   </ng-container>
+
+<!--  The last time when the stream was checked for the online status with a positive result-->
+  <ng-container matColumnDef="lastcheckoktime">
+    <th mat-header-cell *matHeaderCellDef> lastcheckoktime </th>
+    <td mat-cell *matCellDef="let element"> {{element.lastcheckoktime | date:'short': locale}} </td>
+  </ng-container>
+
+<!--  The difference of the clickcounts within the last 2 days. Posivite values mean an increase, negative a decrease of clicks.-->
+  <ng-container matColumnDef="clicktrend">
+    <th mat-header-cell *matHeaderCellDef>Trend</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon *ngIf="element.clicktrend < 0" color="warn">trending_down</mat-icon>
+      <mat-icon *ngIf="element.clicktrend > 0" color="accent">trending_up</mat-icon>
+      <mat-icon *ngIf="element.clicktrend == 0">trending_flat</mat-icon>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="clicktrend-compact">
+    <th mat-header-cell *matHeaderCellDef>Trend</th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="element.clicktrend < 0" class="clicktrend-compact warn"></div>
+      <div *ngIf="element.clicktrend > 0" class="clicktrend-compact accent"></div>
+    </td>
+  </ng-container>
+
+
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

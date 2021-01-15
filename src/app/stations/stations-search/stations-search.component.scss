@@ -1,0 +1,22 @@
+.toolbar-mobile {
+  padding: 0;
+}
+.form-mobile  {
+  width: 100%;
+}
+.field-mobile {
+  width: 100%;
+  margin: 0;
+}
+
+app-genre-select, app-country-select, mat-form-field {
+  margin: 20px;
+}
+
+.error-container {
+  padding: 10%;
+}
+
+.error-container h2 {
+  text-align: center;
+}

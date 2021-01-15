@@ -1,6 +1,6 @@
-<mat-form-field appearance="outline" [formGroup]="form">
+<mat-form-field [formGroup]="form">
   <mat-label>Countries</mat-label>
-  <mat-select formControlName="country" disableOptionCentering panelClass="country-panel" placeholder="All">
+  <mat-select formControlName="country" disableOptionCentering placeholder="All">
     <mat-option>All</mat-option>
     <mat-option *ngFor="let country of countries" [value]="country.name">
       {{ country.name }}

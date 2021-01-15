@@ -1,6 +1,19 @@
-<mat-toolbar>
-  <form [formGroup]="filterForm">
-    <mat-form-field appearance="outline">
+<!--    Mobile -->
+<ng-container *ngIf="mediaQueryList.matches">
+    <form [formGroup]="filterForm" class="form-mobile">
+      <mat-form-field appearance="fill" class="field-mobile">
+        <mat-label>Search</mat-label>
+        <input matInput type="text" formControlName="search" autocomplete="off">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="filterForm.reset();">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+</ng-container>
+<!--    Others -->
+<ng-container *ngIf="!mediaQueryList.matches">
+  <form [formGroup]="filterForm" fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field fxFlex="20">
       <mat-label>Search</mat-label>
       <input matInput type="text" formControlName="search" autocomplete="off">
       <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="filterForm.patchValue({search: ''})">
@@ -8,25 +21,44 @@
       </button>
     </mat-form-field>
 
-    <app-country-select formControlName="country"></app-country-select>
+    <app-country-select fxFlex="20" formControlName="country"></app-country-select>
 
-    <app-genre-select formControlName="genre"></app-genre-select>
+    <app-genre-select fxFlex="20" formControlName="genre"></app-genre-select>
 
-    <mat-button-toggle-group formControlName="order" name="order" aria-label="Order">
-      <mat-button-toggle value="clickcount">Popularity</mat-button-toggle>
-      <mat-button-toggle value="name">Name</mat-button-toggle>
-    </mat-button-toggle-group>
+    <!--    <mat-button-toggle-group formControlName="order" name="order" aria-label="Order">-->
+    <!--      <mat-button-toggle value="clickcount">Popularity</mat-button-toggle>-->
+    <!--      <mat-button-toggle value="name">Name</mat-button-toggle>-->
+    <!--    </mat-button-toggle-group>-->
 
     <button mat-raised-button (click)="filterForm.reset({order: 'name'})">Reset</button>
   </form>
-</mat-toolbar>
+</ng-container>
+
 
 <!--{{ filterForm.value | json}}-->
 
 <mat-divider></mat-divider>
+<mat-progress-bar *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-bar>
 
-<div style="padding: 20px">
-  <!--<app-station-list [stations]="stations$ | async"></app-station-list>-->
-  <app-station-table [stations]="stations$ | async"></app-station-table>
+<div *ngIf="stations">
+  <div fxLayout="row"
+       fxLayoutAlign="center center">
+    <div fxFlex="60" fxFlex.md="80" fxFlex.sm="100" fxFlex.xs="100">
+      <div *ngIf="stations.length > 0">
+        <app-station-table  [stations]="stations"></app-station-table>
+      </div>
+      <div class="error-container">
+        <div *ngIf="stations.length === 0">
+          <mat-card>
+            <mat-card-content>
+              <h2>No stations found.</h2>
+              <h2> Try to search something else.</h2>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 

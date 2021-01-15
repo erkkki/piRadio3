@@ -1,13 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {MediaMatcher} from '@angular/cdk/layout';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 
-import {Observable, Subscription} from 'rxjs';
-import {count, distinctUntilChanged} from 'rxjs/operators';
+import {Observable, of, Subscription} from 'rxjs';
+import {count, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 import {Station} from '../../core/models/station';
 import {RadioApiService} from '../../core/services/radio-api.service';
 import {HttpParams} from '@angular/common/http';
+import {log} from 'util';
+
 
 
 @Component({
@@ -17,8 +21,10 @@ import {HttpParams} from '@angular/common/http';
 })
 export class StationsSearchComponent implements OnInit, OnDestroy {
 
-  stations$: Observable<Station[]>;
+  stations: Station[];
   subscriptions: Subscription[] = [];
+  mediaQueryList: MediaQueryList;
+  loading: boolean;
 
   filterForm = new FormGroup( {
     search: new FormControl(''),
@@ -27,9 +33,14 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
     order: new FormControl('name'),
   });
 
-  constructor(private radioApiService: RadioApiService, private route: ActivatedRoute) { }
+  constructor(private radioApiService: RadioApiService,
+              private route: ActivatedRoute,
+              private mediaMatcher: MediaMatcher) {
+    this.mediaQueryList = mediaMatcher.matchMedia('(max-width: 768px)');
+  }
 
   ngOnInit(): void {
+    this.loading = false;
     this.loadFromLocalStorage();
 
     this.search(this.filterForm.value);
@@ -74,9 +85,9 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
   search(formValues): void {
     const params = {
       name: (formValues.search) ? formValues.search : '',
-      limit: '200',
+      limit: '40',
       country: (formValues.country?.country) ? formValues.country.country : '',
-      tag: (formValues.genre?.genre) ? formValues.genre.genre : '',
+      tagList: (formValues.genre?.genre) ? formValues.genre.genre : '',
       order: '',
       reverse: '',
     };
@@ -91,7 +102,13 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
         break;
       }
     }
-
-    this.stations$ = this.radioApiService.getStationsSearch(new HttpParams({ fromObject: params}));
+    this.loading = true;
+    this.radioApiService.getStationsSearch(new HttpParams({ fromObject: params}))
+      .subscribe(next => {
+        this.stations = next;
+        this.loading = false;
+      }, error => {
+        console.log('Something went wrong in search of stations.');
+      });
   }
 }

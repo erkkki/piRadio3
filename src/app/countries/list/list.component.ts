@@ -1,30 +1,21 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+
 import {Subscription} from 'rxjs';
-import {CountriesService} from '../../core/services/countries.service';
+
 import {Country} from '../../core/models/country';
 
 @Component({
   selector: 'app-countries-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class ListComponent implements OnInit {
 
-  subscription: Subscription;
-  countries: Country[];
+  @Input() countries: Country[];
 
+  constructor() { }
 
-  constructor(private countriesService: CountriesService) { }
-
-  ngOnInit(): void {
-    this.subscription = this.countriesService.countries.subscribe(value => {
-      this.countries = value;
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  ngOnInit(): void {}
 
   changeCountry(country): void {
     localStorage.setItem('country', country);

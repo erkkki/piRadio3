@@ -23,6 +23,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { PlayerModule } from './player/player.module';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -32,29 +33,30 @@ import { PlayerModule } from './player/player.module';
   declarations: [
     AppComponent
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    /** Material */
-    MatSidenavModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatTabsModule,
-    /** Own modules */
-    CoreModule,
-    SharedModule,
-    HomeModule,
-    PlayerModule,
-    MatListModule,
-    MatIconModule,
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        /** Material */
+        MatSidenavModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatTabsModule,
+        /** Own modules */
+        CoreModule,
+        SharedModule,
+        HomeModule,
+        PlayerModule,
+        MatListModule,
+        MatIconModule,
+        MatTooltipModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

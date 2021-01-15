@@ -9,7 +9,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
 export class AppComponent {
   mediaQueryList: MediaQueryList;
 
-  constructor(mediaMatcher: MediaMatcher) {
+  constructor(private mediaMatcher: MediaMatcher) {
     this.mediaQueryList = mediaMatcher.matchMedia('(max-width: 768px)');
   }
 }

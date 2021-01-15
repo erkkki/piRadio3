@@ -1,0 +1,27 @@
+// Import material theming functions
+@import '~@angular/material/theming';
+
+
+$dark-primary: (
+  Main:  #00f0f0,
+  Light: #6effff,
+  Dark:  #00bdbe,
+  contrast: (
+    Main:  #f5f5f5,
+    Light: #000,
+    Dark:  #fff
+  ));
+$dark-accent: (
+  Main:  #bd68ef,
+  Light: #f299ff,
+  Dark:  #8a38bc,
+  contrast: (
+    Main:  #fff,
+    Light: #fff,
+    Dark:  #fff
+  ));
+$dark-warn: $mat-red;
+
+$primary: mat-palette($dark-primary, Main, Light, Dark);
+$accent: mat-palette($dark-accent, Main, Light, Dark);
+$warn: mat-palette($dark-warn, A200, A400, A700);

@@ -14,7 +14,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { PlayButtonComponent } from './play-button/play-button.component';
 import { GenreSelectComponent } from './input/genre-select/genre-select.component';
 import { CountrySelectComponent } from './input/country-select/country-select.component';
-
+import { FavoriteComponent } from './favorite/favorite.component';
 
 
 @NgModule({
@@ -22,6 +22,7 @@ import { CountrySelectComponent } from './input/country-select/country-select.co
     PlayButtonComponent,
     GenreSelectComponent,
     CountrySelectComponent,
+    FavoriteComponent,
   ],
     imports: [
       RouterModule,
@@ -35,10 +36,11 @@ import { CountrySelectComponent } from './input/country-select/country-select.co
       MatButtonToggleModule,
       ReactiveFormsModule,
     ],
-  exports: [
-    PlayButtonComponent,
-    GenreSelectComponent,
-    CountrySelectComponent,
-  ]
+    exports: [
+        PlayButtonComponent,
+        GenreSelectComponent,
+        CountrySelectComponent,
+        FavoriteComponent,
+    ]
 })
 export class SharedModule { }

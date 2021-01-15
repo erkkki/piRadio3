@@ -1,5 +1,9 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit, Output, EventEmitter} from '@angular/core';
+
+import { getUserLocale  } from 'get-user-locale';
+
 import {Station} from '../../core/models/station';
+import {Genre} from '../../core/models/genre';
 
 @Component({
   selector: 'app-station-table',
@@ -9,15 +13,18 @@ import {Station} from '../../core/models/station';
 export class TableComponent implements OnInit {
 
   @Input() stations: Station[];
-  defaultDisplayedColumns: string[] = ['play', 'name', 'tags', 'clickcount', 'country'];
-  tabletDisplayedColumns: string[] = ['play', 'name', 'tags', 'country'];
-  mobileDisplayedColumns: string[] = ['play', 'name', 'country'];
+  defaultDisplayedColumns: string[] = ['favicon', 'actions', 'station-name', 'clicktrend'];
+  tabletDisplayedColumns: string[] = ['actions', 'station-name', 'clicktrend'];
+  mobileDisplayedColumns: string[] = ['actions', 'station-name-compact', 'clicktrend-compact'];
+
   displayedColumns: string[];
   innerWidth: number;
+  locale = 'en-US';
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+    this.locale = getUserLocale();
     this.responsiveColumns();
   }
 
@@ -25,12 +32,12 @@ export class TableComponent implements OnInit {
     const width = window.innerWidth;
 
     /* For phones */
-    if (width < 768) {
+    if (width < 600) {
       this.displayedColumns = this.mobileDisplayedColumns;
       return;
     }
     /* For tablets */
-    if (width < 992) {
+    if (width < 960) {
       this.displayedColumns = this.tabletDisplayedColumns;
       return;
     }

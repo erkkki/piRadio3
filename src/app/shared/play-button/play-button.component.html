@@ -1,1 +1,4 @@
-<button (click)="changeStation(station)">play</button>
+<button mat-icon-button color="primary" (click)="changeStation(station)" aria-label="Start station playback">
+  <mat-icon>play_arrow</mat-icon>
+<!--  <mat-icon *ngIf="!playing">pause</mat-icon>-->
+</button>
