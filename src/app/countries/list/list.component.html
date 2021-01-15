@@ -7,9 +7,8 @@
          *ngFor="let country of countries">
         <mat-card routerLink="/stations/search" (click)="changeCountry(country.name)">
           <div style="cursor: pointer;" fxLayout="row">
-            <span fxFlex="90"  class="country">{{country.name}}</span>
-            <span style="position: absolute; top: 0; right: 6px;"
-                  matTooltip="Station count">{{country.stationcount}}</span>
+            <span fxFlex="90" class="country">{{country.name}}</span>
+            <span matTooltip="Station count">{{country.stationcount}}</span>
           </div>
         </mat-card>
     </div>
