@@ -1,16 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {MediaMatcher} from '@angular/cdk/layout';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 
-import {Observable, of, Subscription} from 'rxjs';
-import {count, distinctUntilChanged, switchMap} from 'rxjs/operators';
-import { map, startWith } from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {distinctUntilChanged} from 'rxjs/operators';
 
 import {Station} from '../../core/models/station';
 import {RadioApiService} from '../../core/services/radio-api.service';
 import {HttpParams} from '@angular/common/http';
-import {log} from 'util';
 
 
 
@@ -85,7 +83,7 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
   search(formValues): void {
     const params = {
       name: (formValues.search) ? formValues.search : '',
-      limit: '40',
+      limit: '200',
       country: (formValues.country?.country) ? formValues.country.country : '',
       tagList: (formValues.genre?.genre) ? formValues.genre.genre : '',
       order: '',

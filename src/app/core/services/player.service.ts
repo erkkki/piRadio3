@@ -75,7 +75,9 @@ export class PlayerService {
       if (!this.player) {
         return;
       }
-      this.player.load(value.url_resolved, 'audio/mp3');
+
+      const url = value.url_resolved;
+      this.player.load(url);
       this.player.play();
     });
   }
@@ -87,6 +89,11 @@ export class PlayerService {
   loadPlayer(): void {
     if (!this.player) {
       this.player = new Clappr.Player({source: '', parentId: '#player', autoPlay: true});
+
+      console.log(this.player.getVolume());
+      if (this.player.getVolume() === 100) {
+        this.player.setVolume(10);
+      }
     }
   }
 }
