@@ -15,6 +15,7 @@ import { PlayButtonComponent } from './play-button/play-button.component';
 import { GenreSelectComponent } from './input/genre-select/genre-select.component';
 import { CountrySelectComponent } from './input/country-select/country-select.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { ClapprComponent } from './clappr/clappr.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
     GenreSelectComponent,
     CountrySelectComponent,
     FavoriteComponent,
+    ClapprComponent,
   ],
     imports: [
       RouterModule,
@@ -36,11 +38,12 @@ import { FavoriteComponent } from './favorite/favorite.component';
       MatButtonToggleModule,
       ReactiveFormsModule,
     ],
-    exports: [
-        PlayButtonComponent,
-        GenreSelectComponent,
-        CountrySelectComponent,
-        FavoriteComponent,
-    ]
+  exports: [
+    PlayButtonComponent,
+    GenreSelectComponent,
+    CountrySelectComponent,
+    FavoriteComponent,
+    ClapprComponent,
+  ]
 })
 export class SharedModule { }

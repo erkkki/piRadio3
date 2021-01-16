@@ -32,7 +32,9 @@
               "src/theme.scss",
               "src/_variables.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/clappr/dist/clappr.js"
+            ]
           },
           "configurations": {
             "production": {

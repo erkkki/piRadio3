@@ -1,11 +1,11 @@
-<!--<div class="info-container">-->
-<!--  <app-player-info [station$]="station"></app-player-info>-->
-<!--</div>-->
+<div class="info-container">
+  <app-player-info [station]="station"></app-player-info>
+</div>
 
-<!--<app-player-pause [playing$]="playing"></app-player-pause>-->
-<!--<app-player-volume></app-player-volume>-->
+<app-player-pause playing="playState"></app-player-pause>
+<app-player-volume></app-player-volume>
 
 <pre>
   {{ station | async | json}}
 </pre>
-
+<div id="player"></div>
