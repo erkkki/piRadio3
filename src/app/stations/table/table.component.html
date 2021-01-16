@@ -71,8 +71,8 @@
 
 <!--  Number of votes for this station. This number is by server and only ever increases. It will never be reset to 0.-->
   <ng-container matColumnDef="votes">
-    <th mat-header-cell *matHeaderCellDef> votes </th>
-    <td mat-cell *matCellDef="let element"> {{element.votes}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Votes </th>
+    <td mat-cell *matCellDef="let element">{{element.votes}}</td>
   </ng-container>
 
   <ng-container matColumnDef="codec">
@@ -91,21 +91,29 @@
 <!--  The last time when the stream was checked for the online status with a positive result-->
   <ng-container matColumnDef="lastcheckoktime">
     <th mat-header-cell *matHeaderCellDef> lastcheckoktime </th>
-    <td mat-cell *matCellDef="let element"> {{element.lastcheckoktime | date:'short': locale}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.lastcheckoktime | date:'short'}} </td>
   </ng-container>
 
 <!--  The difference of the clickcounts within the last 2 days. Posivite values mean an increase, negative a decrease of clicks.-->
   <ng-container matColumnDef="clicktrend">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Trend</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Votes</th>
     <td mat-cell *matCellDef="let element">
-      <mat-icon *ngIf="element.clicktrend < 0" color="warn">trending_down</mat-icon>
-      <mat-icon *ngIf="element.clicktrend > 0" color="accent">trending_up</mat-icon>
-      <mat-icon *ngIf="element.clicktrend == 0">trending_flat</mat-icon>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <div fxFlex="60">
+          <mat-icon *ngIf="element.clicktrend < 0" color="warn">trending_down</mat-icon>
+          <mat-icon *ngIf="element.clicktrend > 0" color="accent">trending_up</mat-icon>
+          <mat-icon *ngIf="element.clicktrend == 0">trending_flat</mat-icon>
+        </div>
+        <div fxFlex="40">
+          <mat-chip disabled>{{element.votes}}</mat-chip>
+        </div>
+      </div>
+
     </td>
   </ng-container>
 
   <ng-container matColumnDef="clicktrend-compact">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="clicktrend">Trend</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="clicktrend"></th>
     <td mat-cell *matCellDef="let element">
       <div *ngIf="element.clicktrend < 0" class="clicktrend-compact warn"></div>
       <div *ngIf="element.clicktrend > 0" class="clicktrend-compact accent"></div>

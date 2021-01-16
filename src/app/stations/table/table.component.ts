@@ -29,7 +29,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   data: MatTableDataSource<Station>;
   defaultDisplayedColumns: string[] = ['favicon', 'actions', 'station-name', 'clicktrend'];
   tabletDisplayedColumns: string[] = ['actions', 'station-name', 'clicktrend'];
-  mobileDisplayedColumns: string[] = ['actions', 'station-name-compact', 'clicktrend-compact'];
+  mobileDisplayedColumns: string[] = ['actions', 'station-name-compact', 'votes', 'clicktrend-compact'];
   displayedColumns: string[];
 
   stationCount = 0;
@@ -54,7 +54,8 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
       const isAsc = this.sort.direction === 'asc';
       data.sort((a, b) => {
         switch (this.sort.active) {
-          case 'clicktrend': return this.compare(a.clicktrend, b.clicktrend, isAsc);
+          case 'clicktrend': return this.compare(a.votes, b.votes, isAsc);
+          case 'votes': return this.compare(a.votes, b.votes, isAsc);
           case 'name': return this.compare(a.name, b.name, isAsc);
           default: return 0;
         }
@@ -73,6 +74,10 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
     if (this.stations.length > 0) {
       this.stationCount = this.stations.length;
       /* Load first page */
+      if (this.paginator) {
+        this.paginator.pageIndex = 0;
+      }
+
       this.sortedStations = this.stations;
       this.data.data = this.sortedStations.slice(0, this.pageSize);
     }

@@ -17,6 +17,12 @@ table {
 .mat-column-clicktrend-compact {
   position: relative;
 }
+.mat-column-votes {
+  text-align: right;
+}
+.mat-column-actions {
+  width: 50px;
+}
 .clicktrend-compact {
   position: absolute;
   top: 0;
@@ -47,6 +53,7 @@ img {
 .mat-column-favicon {
   position: relative;
   min-width: 50px;
+  width: 50px;
 }
 .mat-column-favicon img {
   position: absolute;
