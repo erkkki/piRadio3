@@ -11,7 +11,6 @@ import {RadioApiService} from '../../core/services/radio-api.service';
 import {HttpParams} from '@angular/common/http';
 
 
-
 @Component({
   selector: 'app-stations-search',
   templateUrl: './stations-search.component.html',
@@ -28,7 +27,6 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
     search: new FormControl(''),
     country: new FormControl(''),
     genre: new FormControl(''),
-    order: new FormControl('name'),
   });
 
   constructor(private radioApiService: RadioApiService,
@@ -41,16 +39,28 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
     this.loading = false;
     this.loadFromLocalStorage();
 
-    this.search(this.filterForm.value);
+    let formValues = this.filterForm.value;
+
+
+    this.search(this.getParams(formValues));
 
     const sub = this.filterForm.valueChanges.pipe(
       distinctUntilChanged()
     ).subscribe((value) => {
-      const formValues = this.filterForm.value;
+      formValues = this.filterForm.value;
       localStorage.setItem('stationsearchform', JSON.stringify(formValues));
-      this.search(formValues);
+      this.search(this.getParams(formValues));
     });
     this.subscriptions.push(sub);
+  }
+
+  private getParams(formValues): object {
+    return {
+      name: (formValues.search) ? formValues.search : '',
+      limit: (formValues.country?.country || formValues.country?.country) ? '' : 100,
+      country: (formValues.country?.country) ? formValues.country.country : '',
+      tagList: (formValues.genre?.genre) ? formValues.genre.genre : '',
+    };
   }
 
   ngOnDestroy(): void {
@@ -80,26 +90,7 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  search(formValues): void {
-    const params = {
-      name: (formValues.search) ? formValues.search : '',
-      limit: '200',
-      country: (formValues.country?.country) ? formValues.country.country : '',
-      tagList: (formValues.genre?.genre) ? formValues.genre.genre : '',
-      order: '',
-      reverse: '',
-    };
-    switch (formValues.order) {
-      case('clickcount'): {
-        params.order = 'clickcount';
-        params.reverse = 'true';
-        break;
-      }
-      default: {
-        params.order = 'name';
-        break;
-      }
-    }
+  search(params): void {
     this.loading = true;
     this.radioApiService.getStationsSearch(new HttpParams({ fromObject: params}))
       .subscribe(next => {

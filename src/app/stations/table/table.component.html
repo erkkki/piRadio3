@@ -1,4 +1,5 @@
-<table mat-table [dataSource]="stations" class="mat-elevation-z8">
+<table mat-table [dataSource]="data" matSort class="mat-elevation-z8">
+
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let element">
@@ -10,7 +11,7 @@
   </ng-container>
 
   <ng-container matColumnDef="station-name">
-    <th mat-header-cell *matHeaderCellDef> Station </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Station </th>
     <td mat-cell *matCellDef="let element">
       <div fxLayout="column">
         <span fxFlex="60" routerLink="/stations/station/{{element.stationuuid}}">{{element.name}}</span>
@@ -25,7 +26,7 @@
   </ng-container>
 
   <ng-container matColumnDef="station-name-compact">
-    <th mat-header-cell *matHeaderCellDef> Station </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Station </th>
     <td mat-cell *matCellDef="let element">
       <span routerLink="/stations/station/{{element.stationuuid}}">{{element.name}}</span>
     </td>
@@ -95,7 +96,7 @@
 
 <!--  The difference of the clickcounts within the last 2 days. Posivite values mean an increase, negative a decrease of clicks.-->
   <ng-container matColumnDef="clicktrend">
-    <th mat-header-cell *matHeaderCellDef>Trend</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Trend</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon *ngIf="element.clicktrend < 0" color="warn">trending_down</mat-icon>
       <mat-icon *ngIf="element.clicktrend > 0" color="accent">trending_up</mat-icon>
@@ -104,7 +105,7 @@
   </ng-container>
 
   <ng-container matColumnDef="clicktrend-compact">
-    <th mat-header-cell *matHeaderCellDef>Trend</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="clicktrend">Trend</th>
     <td mat-cell *matCellDef="let element">
       <div *ngIf="element.clicktrend < 0" class="clicktrend-compact warn"></div>
       <div *ngIf="element.clicktrend > 0" class="clicktrend-compact accent"></div>
@@ -116,3 +117,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<mat-paginator [length]="stationCount" [pageSize]="pageSize" (page)="pageChange($event)"></mat-paginator>
+

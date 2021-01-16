@@ -20,16 +20,8 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-
     <app-country-select fxFlex="20" formControlName="country"></app-country-select>
-
     <app-genre-select fxFlex="20" formControlName="genre"></app-genre-select>
-
-    <!--    <mat-button-toggle-group formControlName="order" name="order" aria-label="Order">-->
-    <!--      <mat-button-toggle value="clickcount">Popularity</mat-button-toggle>-->
-    <!--      <mat-button-toggle value="name">Name</mat-button-toggle>-->
-    <!--    </mat-button-toggle-group>-->
-
     <button mat-raised-button (click)="filterForm.reset({order: 'name'})">Reset</button>
   </form>
 </ng-container>
