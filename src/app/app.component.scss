@@ -7,6 +7,18 @@
   right: 0;
 }
 
+mat-toolbar {
+  padding: 0;
+}
+.mat-toolbar-sidenav-open {
+  padding-left: 160px;
+}
+
+app-player-toolbar {
+  width: 100%;
+  height: 100%;
+}
+
 .sidenav {
   display: flex;
   align-items: center;
