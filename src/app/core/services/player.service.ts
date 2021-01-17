@@ -88,7 +88,7 @@ export class PlayerService {
    */
   loadPlayer(): void {
     if (!this.player) {
-      this.player = new Clappr.Player({source: '', parentId: '#player', autoPlay: true});
+      this.player = new Clappr.Player({source: '', parentId: '#player', autoPlay: true, baseUrl: '/assets'});
 
       console.log(this.player.getVolume());
       if (this.player.getVolume() === 100) {
