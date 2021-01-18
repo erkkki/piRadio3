@@ -86,6 +86,16 @@ export class PlayerService {
     } else {
       this.loadFromLocalStorage();
     }
+
+    this.volume.pipe(
+      debounceTime(10),
+      distinctUntilChanged()
+    ).subscribe(value => this.changeVolume(value));
+    this.station.pipe(
+      debounceTime(100),
+      distinctUntilChanged()
+    ).subscribe(value => this.loadPlayBack(value));
+
   }
 
   private loadFromLocalStorage(): void {
@@ -114,15 +124,6 @@ export class PlayerService {
       this.player.on(Clappr.Events.PLAYBACK_PAUSE , () => this.playing.next(false));
       this.player.on(Clappr.Events.PLAYER_PLAY , () => this.playing.next(true));
       this.player.on(Clappr.Events.PLAYER_PAUSE , () => this.playing.next(false));
-
-      this.volume.pipe(
-        debounceTime(10),
-        distinctUntilChanged()
-      ).subscribe(value => this.changeVolume(value));
-      this.station.pipe(
-        debounceTime(100),
-        distinctUntilChanged()
-      ).subscribe(value => this.loadPlayBack(value));
     }
   }
 

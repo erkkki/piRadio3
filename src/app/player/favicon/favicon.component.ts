@@ -17,7 +17,7 @@ export class FaviconComponent implements OnInit, OnDestroy{
   constructor(private player: PlayerService) { }
 
   ngOnInit(): void {
-    this.player.station.subscribe(station => {
+    this.sub = this.player.station.subscribe(station => {
       this.station = station;
       this.faviconerror = false;
     });
