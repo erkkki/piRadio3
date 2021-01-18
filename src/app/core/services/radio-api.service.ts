@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map, filter, switchMap} from 'rxjs/operators';
 
 import {RadioApiServerService} from './radio-api-server.service';
+import {Station} from '../models/station';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,18 @@ export class RadioApiService {
       filter(servers => servers !== null),
       map(server => server.name),
     );
+  }
+
+  clickStation(station: Station): void {
+    if (!station.stationuuid) {
+      return;
+    }
+    this.serverUrl.pipe(
+      filter(countries => countries !== null),
+      switchMap(name => {
+        return this.http.get(`https://${name}/json/url/${station.stationuuid}`);
+      })
+    ).subscribe();
   }
 
   getCountries(): Observable<any> {

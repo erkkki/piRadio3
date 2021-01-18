@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {PlayerService} from '../../core/services/player.service';
+import {Station} from '../../core/models/station';
+import {MediaMatcher} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-player-toolbar',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() { }
+  mediaQueryList: MediaQueryList;
+
+  constructor(private mediaMatcher: MediaMatcher) { }
 
   ngOnInit(): void {
+    this.mediaQueryList = this.mediaMatcher.matchMedia('(max-width: 500px)');
   }
 
 }

@@ -1,4 +1,11 @@
 <div *ngIf="station" class="info" routerLink="/stations/station/{{station.stationuuid}}">
-  <span class="name">{{ station.name }}</span>
-  <span class="tags">Genres: {{ station.tags }}</span>
+  <div class="name" [ngClass]="!mediaQueryList.matches?'':'name-mobile'">{{ station.name | titlecase }}</div>
+  <div class="error" *ngIf="error" [ngClass]="!mediaQueryList.matches?'':'error-mobile'"
+       matTooltip="Radio station is offline of stream playback isn't supported."
+       aria-label="Radio station is offline of stream playback isn't supported.">{{ error.msg }}</div>
+  <div class="tags" *ngIf="(!mediaQueryList.matches && !error)">
+    <ng-container *ngFor="let tag of station.tags?.split(',').slice(0,4)">
+      <mat-chip *ngIf="tag" disabled>{{tag | titlecase}}</mat-chip>
+    </ng-container>
+  </div>
 </div>

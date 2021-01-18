@@ -1,10 +1,40 @@
 import {Injectable} from '@angular/core';
+import { environment } from '../../../environments/environment';
 
-import {ReplaySubject} from 'rxjs';
+import {BehaviorSubject, ReplaySubject, Subject} from 'rxjs';
 
 import {Station} from '../models/station';
+import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
+import {RadioApiService} from './radio-api.service';
 
 declare var Clappr: any;
+
+const emptyStation: Station = {
+  bitrate: 0,
+  changeuuid: '',
+  clickcount: 0,
+  clicktimestamp: '',
+  clicktrend: -4,
+  codec: '',
+  country: '',
+  countrycode: '',
+  favicon: '',
+  hls: 0,
+  homepage: '',
+  language: '',
+  lastchangetime: '',
+  lastcheckok: 0,
+  lastcheckoktime: '',
+  lastchecktime: '',
+  lastlocalchecktime: '',
+  name: '',
+  state: '',
+  stationuuid: '',
+  tags: '',
+  url: '',
+  url_resolved: '',
+  votes: 0,
+};
 
 const tempStation: Station = {
   bitrate: 0,
@@ -33,53 +63,41 @@ const tempStation: Station = {
   votes: 49,
 };
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerService {
 
-  station: ReplaySubject<Station>;
-  volume: ReplaySubject<number>;
-  playing: ReplaySubject<boolean>;
+  station: BehaviorSubject<Station>;
+  volume: BehaviorSubject<number>;
+  playing: BehaviorSubject<boolean>;
+  error: BehaviorSubject<any>;
 
   public player: any;
 
-  constructor() {
-    this.volume = new ReplaySubject<number>();
-    this.playing = new ReplaySubject<boolean>();
-    this.station = new ReplaySubject<Station>();
+  constructor(private radioApiService: RadioApiService) {
+    this.volume = new BehaviorSubject<number>(100);
+    this.playing = new BehaviorSubject<boolean>(false);
+    this.station = new BehaviorSubject<Station>(emptyStation);
+    this.error = new BehaviorSubject<any>(null);
 
+    if (!environment.production) {
+      this.volume.next(4);
+    } else {
+      this.loadFromLocalStorage();
+    }
+  }
 
-    this.playing.subscribe(value => {
-      if (!this.player) {
-        return;
-      }
-      if (value === true) {
-        this.player.pause();
-      }
-      if (value === false) {
-        this.player.play();
-      }
-    });
+  private loadFromLocalStorage(): void {
+    const volume: number = JSON.parse(localStorage.getItem('volume'));
+    const station: Station = JSON.parse(localStorage.getItem('station'));
 
-    this.volume.subscribe(value => {
-      if (!this.player) {
-        return;
-      }
-      this.player.volume = value;
-    });
-
-    this.station.subscribe(value => {
-      if (!this.player) {
-        return;
-      }
-
-      const url = value.url_resolved;
-      this.player.load(url);
-      this.player.play();
-    });
+    if (volume) {
+      this.volume.next(volume);
+    }
+    if (station) {
+      this.station.next(station);
+    }
   }
 
   /**
@@ -89,11 +107,60 @@ export class PlayerService {
   loadPlayer(): void {
     if (!this.player) {
       this.player = new Clappr.Player({source: '', parentId: '#player', autoPlay: true, baseUrl: '/assets'});
+      this.player.on(Clappr.Events.PLAYER_ERROR , () => this.error.next({type: 'player', msg: 'Error in player.'}));
+      this.player.on(Clappr.Events.PLAYBACK_ERROR , () => this.error.next({type: 'playback', msg: 'Error in playback.'}));
+      this.player.on(Clappr.Events.CONTAINER_ERROR , () => this.error.next({type: 'container', msg: 'Error in container.'}));
+      this.player.on(Clappr.Events.PLAYBACK_PLAY , () => this.playing.next(true));
+      this.player.on(Clappr.Events.PLAYBACK_PAUSE , () => this.playing.next(false));
+      this.player.on(Clappr.Events.PLAYER_PLAY , () => this.playing.next(true));
+      this.player.on(Clappr.Events.PLAYER_PAUSE , () => this.playing.next(false));
 
-      console.log(this.player.getVolume());
-      if (this.player.getVolume() === 100) {
-        this.player.setVolume(10);
-      }
+      this.volume.pipe(
+        debounceTime(10),
+        distinctUntilChanged()
+      ).subscribe(value => this.changeVolume(value));
+      this.station.pipe(
+        debounceTime(100),
+        distinctUntilChanged()
+      ).subscribe(value => this.loadPlayBack(value));
     }
+  }
+
+  private changeVolume(value: number): void {
+    const volume = Math.floor(value);
+    if (!this.player) {
+      return;
+    }
+    localStorage.setItem('volume', JSON.stringify(volume));
+    this.player.setVolume(volume);
+  }
+
+  togglePLaying(): void {
+    const playState = this.player.isPlaying();
+
+    if (playState) {
+      this.pause();
+    } else {
+      this.play();
+    }
+  }
+
+  private play(): void {
+    this.player.play();
+  }
+
+  private pause(): void {
+    this.player.pause();
+  }
+
+  private loadPlayBack(station: Station): void {
+    if (!this.player) {
+      return;
+    }
+    const url = station.url_resolved;
+    this.player.load(url);
+    this.play();
+    localStorage.setItem('station', JSON.stringify(station));
+    this.radioApiService.clickStation(station);
   }
 }

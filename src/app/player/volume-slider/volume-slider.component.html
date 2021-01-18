@@ -1,0 +1,3 @@
+<mat-slider min="0" max="100" step="1" tickInterval="auto" color="primary"
+            [value]="volume$ | async"
+            (input)="volumeChange($event)"></mat-slider>

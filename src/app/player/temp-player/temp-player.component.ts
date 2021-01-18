@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../core/services/player.service';
 
 import { Station } from '../../core/models/station';
-import {ReplaySubject} from 'rxjs';
+import {BehaviorSubject, ReplaySubject} from 'rxjs';
 
 @Component({
   selector: 'app-temp-player',
@@ -13,8 +13,8 @@ import {ReplaySubject} from 'rxjs';
 })
 export class TempPlayerComponent implements OnInit {
 
-  station: ReplaySubject<Station>;
-  playState: ReplaySubject<boolean>;
+  station: BehaviorSubject<Station>;
+  playState: BehaviorSubject<boolean>;
 
 
   constructor(private playerService: PlayerService) { }

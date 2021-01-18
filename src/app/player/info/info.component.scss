@@ -1,11 +1,11 @@
-//@import "src/theme";
+@import "src/_variables.scss";
+
 
 .info {
   height: 100%;
-  width: 200px;
+  width: 100%;
   position: relative;
   overflow: hidden;
-  background-color: rgb(22, 22, 22);;
 }
 .name {
   position: absolute;
@@ -13,25 +13,45 @@
   left: 50%;
   transform: translate(-50%, 0);
 
+  font-size: 1em;
+  top: 0;
+  color: mat-color($primary, Main);
+}
+.name-mobile {
+  left: 0;
+  transform: none;
   font-size: 0.8em;
-  top: -6px;
-  //color: mat-color($dark-primary, Main);
+  top: 4px;
+}
+.error {
+  position: absolute;
+  font-size: 1em;
+  /** Centers text. */
+  left: 50%;
+  bottom: 6px;
+  transform: translate(-50%, 0);
+  color: mat-color($warn);
+}
+.error-mobile {
+  position: absolute;
+  font-size: 0.8em;
+  bottom: 0;
 }
 
 .tags {
+  overflow: hidden;
   font-size: 0.6em;
+  line-height: 20px;
   position: absolute;
-  bottom: -10px;
+  bottom: 4px;
   left: 0;
-  //color: mat-color($dark-primary, Dark);
-
-  white-space: nowrap;
-  animation: floatText 20s infinite linear;
-  padding-left: 100%;
 }
 
-@keyframes floatText {
-  to {
-    transform: translateX(-100%);
-  }
+.mat-chip {
+  font-size: 10px;
+  margin-left: 4px;
+}
+
+.mat-standard-chip {
+  min-height: 14px;
 }

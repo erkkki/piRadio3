@@ -28,6 +28,7 @@ import { TableComponent } from './table/table.component';
 import { PlayComponent } from './play/play.component';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -43,28 +44,29 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     TableComponent,
     PlayComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        FlexLayoutModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatIconModule,
-        MatExpansionModule,
-        MatCardModule,
-        MatDividerModule,
-        MatButtonToggleModule,
-        MatButtonModule,
-        MatToolbarModule,
-        /** Own modules */
-        StationsRoutingModule,
-        SharedModule,
-        MatTableModule,
-        MatChipsModule,
-        MatProgressBarModule,
-        MatProgressSpinnerModule,
-        MatSortModule,
-        MatPaginatorModule,
-    ]
+  imports: [
+    CommonModule,
+    RouterModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatDividerModule,
+    MatButtonToggleModule,
+    MatButtonModule,
+    MatToolbarModule,
+    /** Own modules */
+    StationsRoutingModule,
+    SharedModule,
+    MatTableModule,
+    MatChipsModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+  ]
 })
 export class StationsModule { }

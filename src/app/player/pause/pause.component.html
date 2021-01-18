@@ -1,4 +1,4 @@
 <button mat-icon-button color="primary" (click)="pause()" aria-label="Play or pause playback">
-  <mat-icon *ngIf="playing">play_arrow</mat-icon>
-  <mat-icon *ngIf="!playing">pause</mat-icon>
+  <mat-icon *ngIf="(playing$ | async)">pause</mat-icon>
+  <mat-icon *ngIf="!(playing$ | async)">play_arrow</mat-icon>
 </button>

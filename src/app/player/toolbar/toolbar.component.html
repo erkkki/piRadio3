@@ -1,4 +1,6 @@
-<div fxLayout="row" fxLayoutAlign="space-between">
-  <app-player-info fxFlex></app-player-info>
-  <app-player-pause fxFlex></app-player-pause>
+<div fxLayout="row" fxFlexFill>
+  <app-player-favicon *ngIf="!mediaQueryList.matches" fxFlex="64px"></app-player-favicon>
+  <app-player-pause fxFlex="40px"></app-player-pause>
+  <app-player-info fxFlex="100"></app-player-info>
+  <app-player-volume fxFlex="40px"></app-player-volume>
 </div>

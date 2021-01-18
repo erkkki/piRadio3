@@ -1,0 +1,20 @@
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.center {
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%)
+}
+img {
+  width: 100%;
+}
+mat-icon {
+  text-align: center;
+  width: 100%;
+}

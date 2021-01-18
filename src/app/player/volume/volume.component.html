@@ -1,1 +1,11 @@
-<p>volume works!</p>
+<div class="container ">
+  <button mat-icon-button color="primary" (click)="toggle($event)" aria-label="Play or pause playback">
+    <mat-icon *ngIf="volume === 0">volume_off</mat-icon>
+    <mat-icon *ngIf="volume > 0 && volume <= 20">volume_mute</mat-icon>
+    <mat-icon *ngIf="volume > 20 && volume <= 70">volume_down</mat-icon>
+    <mat-icon *ngIf="volume > 70">volume_up</mat-icon>
+  </button>
+  <app-player-volume-slider></app-player-volume-slider>
+</div>
+
+

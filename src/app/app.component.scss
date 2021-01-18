@@ -7,9 +7,22 @@
   right: 0;
 }
 
+.header {
+
+}
+
 mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   padding: 0;
 }
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  padding: 0;
+}
+
 .mat-toolbar-sidenav-open {
   padding-left: 160px;
 }
@@ -27,12 +40,7 @@ app-player-toolbar {
   background-color: rgb(33, 33, 33);
 }
 
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-}
+
 
 .spacer {
   flex: 1 1 auto;

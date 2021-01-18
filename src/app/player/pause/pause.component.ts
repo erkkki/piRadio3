@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
-import {ReplaySubject, Subscription} from 'rxjs';
+import {BehaviorSubject, ReplaySubject, Subscription} from 'rxjs';
 
 import {PlayerService} from '../../core/services/player.service';
 
@@ -11,18 +11,16 @@ import {PlayerService} from '../../core/services/player.service';
 })
 export class PauseComponent implements OnInit, OnDestroy {
 
-  playing: boolean;
-  subscription: Subscription;
+  playing$: BehaviorSubject<boolean>;
 
   constructor(private player: PlayerService) { }
 
   ngOnInit(): void {
-    this.playing = false;
-    this.subscription = this.player.playing.subscribe(value => this.playing = value);
+    this.playing$ = this.player.playing;
   }
 
   pause(): void {
-    this.player.playing.next(!this.playing);
+    this.player.togglePLaying();
   }
 
   ngOnDestroy(): void {
