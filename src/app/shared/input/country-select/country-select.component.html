@@ -2,7 +2,8 @@
   <mat-label>Countries</mat-label>
   <mat-select formControlName="country" disableOptionCentering placeholder="All">
     <mat-option>All</mat-option>
-    <mat-option *ngFor="let country of countries" [value]="country.name">
+    <mat-option *ngFor="let country of countries" [value]="country.name"
+                routerLink="/stations/search/country/{{country.name}}">
       {{ country.name }}
     </mat-option>
   </mat-select>

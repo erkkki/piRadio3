@@ -19,7 +19,8 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() countries: Country[];
   displayedColumns: string[] = ['name', 'stationcount'];
   data = new MatTableDataSource([]);
-  countriesCount = 0;
+  pageSize = 20;
+  count = 0;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,12 +33,18 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.data.data = this.countries;
-    this.data.sort = this.sort;
-    if (this.paginator) {
-      this.data.paginator = this.paginator;
+    if (this.countries.length > 0) {
+      this.count = this.countries.length;
     }
-    this.countriesCount = this.countries?.length;
+    if (this.paginator) {
+      this.paginator.pageIndex = 0;
+    }
+    this.data.data = this.countries.slice(0, this.pageSize);
+  }
+
+  /** Load next stations to table */
+  pageChange(index): void {
+    this.data.data = this.countries.slice(this.pageSize * index.pageIndex, this.pageSize * index.pageIndex + this.pageSize);
   }
 
 }

@@ -49,7 +49,6 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
       if (params?.genre) {
         this.filterForm.patchValue({genre: {genre: params.genre}});
       }
-
     });
     this.subscriptions.push(sub);
 

@@ -17,6 +17,7 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() genres: Genre[];
   displayedColumns: string[] = ['name', 'stationcount'];
   data = new MatTableDataSource([]);
+  pageSize = 20;
   count = 0;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -30,11 +31,18 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.data.data = this.genres;
-    this.data.sort = this.sort;
-    if (this.paginator) {
-      this.data.paginator = this.paginator;
+    if (this.genres.length > 0) {
+      this.count = this.genres.length;
     }
+    if (this.paginator) {
+      this.paginator.pageIndex = 0;
+    }
+    this.data.data = this.genres.slice(0, this.pageSize);
+  }
+
+  /** Load next stations to table */
+  pageChange(index): void {
+    this.data.data = this.genres.slice(this.pageSize * index.pageIndex, this.pageSize * index.pageIndex + this.pageSize);
   }
 }
 

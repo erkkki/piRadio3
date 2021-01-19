@@ -16,14 +16,8 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
-<mat-toolbar>
-  <mat-toolbar-row>
-    <button mat-button (click)="paginator.firstPage()">First page</button>
-    <button mat-button (click)="paginator.lastPage()">Last page</button>
-    <span class="spacer"></span>
-    <mat-paginator [length]="count" pageSize="20"></mat-paginator>
-  </mat-toolbar-row>
-</mat-toolbar>
+<mat-paginator [length]="count" [pageSize]="pageSize" (page)="pageChange($event)"></mat-paginator>
+
 
 
 
