@@ -4,7 +4,7 @@
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
       <div fxLayout="row">
-<!--        <app-shared-favorite fxFlex="40" [station]="element"></app-shared-favorite>-->
+        <!--        <app-shared-favorite fxFlex="40" [station]="element"></app-shared-favorite>-->
         <app-shared-play-button fxFlex="40" [station]="element"></app-shared-play-button>
       </div>
     </td>
@@ -69,7 +69,7 @@
     <td mat-cell *matCellDef="let element"> {{element.country}} </td>
   </ng-container>
 
-<!--  Number of votes for this station. This number is by server and only ever increases. It will never be reset to 0.-->
+  <!--  Number of votes for this station. This number is by server and only ever increases. It will never be reset to 0.-->
   <ng-container matColumnDef="votes">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Votes </th>
     <td mat-cell *matCellDef="let element">{{element.votes}}</td>
@@ -88,13 +88,13 @@
     </td>
   </ng-container>
 
-<!--  The last time when the stream was checked for the online status with a positive result-->
+  <!--  The last time when the stream was checked for the online status with a positive result-->
   <ng-container matColumnDef="lastcheckoktime">
     <th mat-header-cell *matHeaderCellDef> lastcheckoktime </th>
     <td mat-cell *matCellDef="let element"> {{element.lastcheckoktime | date:'short'}} </td>
   </ng-container>
 
-<!--  The difference of the clickcounts within the last 2 days. Posivite values mean an increase, negative a decrease of clicks.-->
+  <!--  The difference of the clickcounts within the last 2 days. Posivite values mean an increase, negative a decrease of clicks.-->
   <ng-container matColumnDef="clicktrend">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Votes</th>
     <td mat-cell *matCellDef="let element">

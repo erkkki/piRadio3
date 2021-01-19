@@ -19,11 +19,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatChipsModule} from '@angular/material/chips';
 
 import { StationsRoutingModule } from './stations-routing.module';
-import { ListComponent } from './list/list.component';
 import { StationComponent } from './station/station.component';
 import { SharedModule } from '../shared/shared.module';
 import { StationsSearchComponent } from './stations-search/stations-search.component';
-import { TableComponent } from './table/table.component';
 
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -37,10 +35,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
-    ListComponent,
     StationComponent,
     StationsSearchComponent,
-    TableComponent,
   ],
   imports: [
     CommonModule,

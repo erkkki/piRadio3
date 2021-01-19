@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import { environment } from '../../../environments/environment';
 
-import {BehaviorSubject, ReplaySubject, Subject} from 'rxjs';
+import {BehaviorSubject, ReplaySubject, Subject, combineLatest} from 'rxjs';
 
 import {Station} from '../models/station';
 import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
@@ -81,6 +81,22 @@ export class PlayerService {
     this.station = new BehaviorSubject<Station>(emptyStation);
     this.error = new BehaviorSubject<any>(null);
 
+
+    /**
+     * If error & http stream link.
+     * Try to change it to https.
+     */
+    combineLatest([this.station, this.error]).subscribe(value => {
+      /** Check if values aren't empty */
+      if (!value[1] || !value[0]) {
+        return;
+      }
+      if (value[0].url_resolved.startsWith('http://')) {
+        value[0].url_resolved = value[0].url_resolved.replace('http://', 'https://');
+        this.station.next(value[0]);
+      }
+    });
+
     if (!environment.production) {
       this.volume.next(4);
       this.error.subscribe(value => console.log(value));
@@ -130,7 +146,7 @@ export class PlayerService {
       this.player.on(Clappr.Events.PLAYER_PLAY , () => this.playing.next(true));
       this.player.on(Clappr.Events.PLAYER_PAUSE , () => this.playing.next(false));
     }
-    // this.error.next({type: 'player', msg: 'Error in player.'});
+    this.error.next({type: 'player', msg: 'Error in player.'});
   }
 
   private changeVolume(value: number): void {
@@ -165,9 +181,13 @@ export class PlayerService {
       return;
     }
     const url = station.url_resolved;
-    // this.player.load(station.url_resolved, 'audio/'+station.codec);
-    // this.player.load(station.url_resolved, 'video/mp3');
-    this.player.load(station.url_resolved, 'video/mp4');
+
+    if (station.url_resolved.endsWith('m3u8')) {
+      this.player.load(station.url_resolved, 'application/x-mpegURL');
+    } else {
+      this.player.load(station.url_resolved, 'video/mp4');
+    }
+
     this.play();
     localStorage.setItem('station', JSON.stringify(station));
     this.radioApiService.clickStation(station);

@@ -1,29 +1,19 @@
-import {
-  Component,
-  HostListener,
-  Input,
-  OnInit,
-  ViewChild,
-  OnChanges,
-  SimpleChanges,
-  AfterViewInit, OnDestroy
-} from '@angular/core';
-
-
-import {Station} from '../../core/models/station';
+import {Component, HostListener, Input, OnInit, ViewChild, OnChanges,
+  SimpleChanges, AfterViewInit, OnDestroy} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {Subscription} from 'rxjs';
 
-@Component({
-  selector: 'app-station-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
-})
-export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+import {Station} from '../../../core/models/station';
 
+@Component({
+  selector: 'app-shared-station-table',
+  templateUrl: './station-table.component.html',
+  styleUrls: ['./station-table.component.scss']
+})
+export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input() stations: Station[];
   sortedStations: Station[];
   subscriptions: Subscription[] = [];

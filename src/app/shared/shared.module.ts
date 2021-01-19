@@ -17,6 +17,12 @@ import { CountrySelectComponent } from './input/country-select/country-select.co
 import { FavoriteComponent } from './favorite/favorite.component';
 import { ClapprComponent } from './clappr/clappr.component';
 import { FocusDirective } from './directives/focus.directive';
+import { StationTableComponent } from './table/station-table/station-table.component';
+import {MatTableModule} from '@angular/material/table';
+import {FlexModule} from '@angular/flex-layout';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -27,19 +33,25 @@ import { FocusDirective } from './directives/focus.directive';
     FavoriteComponent,
     ClapprComponent,
     FocusDirective,
+    StationTableComponent,
   ],
-    imports: [
-      RouterModule,
-      CommonModule,
-      MatToolbarModule,
-      MatIconModule,
-      MatButtonModule,
-      MatTabsModule,
-      MatSelectModule,
-      MatInputModule,
-      MatButtonToggleModule,
-      ReactiveFormsModule,
-    ],
+  imports: [
+    RouterModule,
+    CommonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonToggleModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    FlexModule,
+    MatChipsModule,
+    MatPaginatorModule,
+    MatSortModule,
+  ],
   exports: [
     PlayButtonComponent,
     GenreSelectComponent,
@@ -47,6 +59,7 @@ import { FocusDirective } from './directives/focus.directive';
     FavoriteComponent,
     ClapprComponent,
     FocusDirective,
+    StationTableComponent,
   ]
 })
 export class SharedModule { }
