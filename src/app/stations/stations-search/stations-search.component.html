@@ -3,8 +3,8 @@
     <form [formGroup]="filterForm" class="form-mobile">
       <mat-form-field appearance="fill" class="field-mobile">
         <mat-label>Search</mat-label>
-        <input matInput type="text" formControlName="search" autocomplete="off">
-        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="filterForm.reset();">
+        <input matInput type="text" appFocus autofocus formControlName="search" autocomplete="off">
+        <button type="reset" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="filterForm.reset();">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
@@ -15,14 +15,14 @@
   <form [formGroup]="filterForm" fxLayout="row" fxLayoutAlign="center center">
     <mat-form-field fxFlex="20">
       <mat-label>Search</mat-label>
-      <input matInput type="text" formControlName="search" autocomplete="off">
-      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="filterForm.patchValue({search: ''})">
+      <input matInput type="text" appFocus autofocus formControlName="search" autocomplete="off">
+      <button type="reset" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="filterForm.patchValue({search: ''})">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
     <app-country-select fxFlex="20" formControlName="country"></app-country-select>
     <app-genre-select fxFlex="20" formControlName="genre"></app-genre-select>
-    <button mat-raised-button (click)="filterForm.reset({order: 'name'})">Reset</button>
+    <button type="reset" mat-raised-button (click)="filterForm.reset({order: 'name'})">Reset</button>
   </form>
 </ng-container>
 

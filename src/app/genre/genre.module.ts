@@ -18,6 +18,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -26,22 +27,23 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     ListComponent,
     TableComponent,
   ],
-  imports: [
-    CommonModule,
-    MatTabsModule,
-    MatInputModule,
-    FlexModule,
-    MatCardModule,
-    RouterModule,
-    MatTooltipModule,
-    GenresRoutingModule,
-    FormsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatSortModule,
-    MatToolbarModule
-  ]
+    imports: [
+        CommonModule,
+        MatTabsModule,
+        MatInputModule,
+        FlexModule,
+        MatCardModule,
+        RouterModule,
+        MatTooltipModule,
+        GenresRoutingModule,
+        FormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatSortModule,
+        MatToolbarModule,
+        SharedModule
+    ]
 })
 export class GenreModule { }

@@ -1,10 +1,11 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 
 import {Genre} from '../../core/models/genre';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -12,9 +13,10 @@ import {Genre} from '../../core/models/genre';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit, OnChanges {
+export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   @Input() genres: Genre[];
+  subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['name', 'stationcount'];
   data = new MatTableDataSource([]);
   pageSize = 20;
@@ -28,6 +30,33 @@ export class TableComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.data.data = this.genres;
     this.data.sort = this.sort;
+  }
+
+  ngAfterViewInit(): void {
+    /** Sort change */
+    const sub = this.sort.sortChange.subscribe(() => {
+      const data = this.genres.slice();
+      this.paginator.pageIndex = 0;
+      const isAsc = this.sort.direction !== 'asc';
+      data.sort((a, b) => {
+        switch (this.sort.active) {
+          case 'stationcount': return this.compare(a.stationcount, b.stationcount, isAsc);
+          case 'name': return this.compare(a.name, b.name, isAsc);
+          default: return 0;
+        }
+      });
+      this.data.data = data.slice(0, this.pageSize);
+      this.data.data = data;
+    });
+    this.subscriptions.push(sub);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  compare(a: number | string, b: number | string, isAsc: boolean): number {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

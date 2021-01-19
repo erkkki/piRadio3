@@ -6,7 +6,7 @@ import {
   ViewChild,
   OnChanges,
   SimpleChanges,
-  AfterViewInit
+  AfterViewInit, OnDestroy
 } from '@angular/core';
 
 
@@ -15,16 +15,18 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MediaMatcher} from '@angular/cdk/layout';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-station-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit, OnChanges, AfterViewInit {
+export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   @Input() stations: Station[];
   sortedStations: Station[];
+  subscriptions: Subscription[] = [];
 
   data: MatTableDataSource<Station>;
   defaultDisplayedColumns: string[] = ['favicon', 'actions', 'station-name', 'clicktrend'];
@@ -42,16 +44,18 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
     this.data = new MatTableDataSource([]);
   }
 
+
+
   ngOnInit(): void {
     this.responsiveColumns();
   }
 
   ngAfterViewInit(): void {
     /** Sort change */
-    this.sort.sortChange.subscribe(() => {
+    const sub = this.sort.sortChange.subscribe(() => {
       const data = this.stations.slice();
       this.paginator.pageIndex = 0;
-      const isAsc = this.sort.direction === 'asc';
+      const isAsc = this.sort.direction !== 'asc';
       data.sort((a, b) => {
         switch (this.sort.active) {
           case 'clicktrend': return this.compare(a.votes, b.votes, isAsc);
@@ -63,6 +67,11 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
       this.data.data = data.slice(0, this.pageSize);
       this.sortedStations = data;
     });
+    this.subscriptions.push(sub);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   compare(a: number | string, b: number | string, isAsc: boolean): number {

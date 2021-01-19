@@ -16,6 +16,7 @@ import { GenreSelectComponent } from './input/genre-select/genre-select.componen
 import { CountrySelectComponent } from './input/country-select/country-select.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { ClapprComponent } from './clappr/clappr.component';
+import { FocusDirective } from './directives/focus.directive';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ClapprComponent } from './clappr/clappr.component';
     CountrySelectComponent,
     FavoriteComponent,
     ClapprComponent,
+    FocusDirective,
   ],
     imports: [
       RouterModule,
@@ -44,6 +46,7 @@ import { ClapprComponent } from './clappr/clappr.component';
     CountrySelectComponent,
     FavoriteComponent,
     ClapprComponent,
+    FocusDirective,
   ]
 })
 export class SharedModule { }

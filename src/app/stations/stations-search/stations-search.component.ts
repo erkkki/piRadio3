@@ -39,7 +39,6 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     let sub: Subscription;
 
-
     this.loadFromLocalStorage();
 
     sub = this.route.params.subscribe(params => {
@@ -65,6 +64,10 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
       this.search(this.getParams(formValues));
     });
     this.subscriptions.push(sub);
+  }
+
+  submit(form): void {
+    console.log(form.value);
   }
 
   getParams(formValues): object {

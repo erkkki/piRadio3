@@ -5,8 +5,8 @@
       <div fxFlex="60" fxFlex.md="80" fxFlex.sm="100" fxFlex.xs="100">
         <mat-form-field>
           <mat-label>Search</mat-label>
-          <input matInput type="text" autocomplete="off" [(ngModel)]="value" (ngModelChange)="search()">
-          <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <input matInput type="text" autofocus autocomplete="off" [(ngModel)]="value" (ngModelChange)="search()">
+          <button type="reset" mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
@@ -27,8 +27,8 @@
       <div fxFlex="60" fxFlex.md="80" fxFlex.sm="100" fxFlex.xs="100">
         <mat-form-field>
           <mat-label>Search</mat-label>
-          <input matInput type="text" autocomplete="off" [(ngModel)]="value" (ngModelChange)="search()">
-          <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <input matInput type="text" appFocus autofocus autocomplete="off" [(ngModel)]="value" (ngModelChange)="search()">
+          <button type="reset" mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
