@@ -83,9 +83,9 @@ export class PlayerService {
 
     if (!environment.production) {
       this.volume.next(4);
-    } else {
-      this.loadFromLocalStorage();
-    }
+      this.error.subscribe(value => console.log(value));
+    } 
+    this.loadFromLocalStorage();
 
     this.volume.pipe(
       debounceTime(10),
@@ -116,7 +116,12 @@ export class PlayerService {
    */
   loadPlayer(): void {
     if (!this.player) {
-      this.player = new Clappr.Player({source: '', parentId: '#player', autoPlay: true, baseUrl: '/assets'});
+      this.player = new Clappr.Player({
+        source: '',
+        parentId: '#player',
+        autoPlay: true,
+        baseUrl: '/assets',
+      });
       this.player.on(Clappr.Events.PLAYER_ERROR , () => this.error.next({type: 'player', msg: 'Error in player.'}));
       this.player.on(Clappr.Events.PLAYBACK_ERROR , () => this.error.next({type: 'playback', msg: 'Error in playback.'}));
       this.player.on(Clappr.Events.CONTAINER_ERROR , () => this.error.next({type: 'container', msg: 'Error in container.'}));
@@ -159,7 +164,9 @@ export class PlayerService {
       return;
     }
     const url = station.url_resolved;
-    this.player.load(url);
+    // this.player.load(station.url_resolved, 'audio/'+station.codec);
+    // this.player.load(station.url_resolved, 'video/mp3');
+    this.player.load(station.url_resolved, 'video/mp4');
     this.play();
     localStorage.setItem('station', JSON.stringify(station));
     this.radioApiService.clickStation(station);

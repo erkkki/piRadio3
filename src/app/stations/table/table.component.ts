@@ -71,6 +71,9 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
 
   /** Input data changed, load new data to table */
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.stations === null) {
+      return;
+    }
     if (this.stations.length > 0) {
       this.stationCount = this.stations.length;
       /* Load first page */

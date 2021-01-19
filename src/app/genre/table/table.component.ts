@@ -31,12 +31,13 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.genres.length > 0) {
-      this.count = this.genres.length;
+    if (this.genres === null) {
+      return;
     }
     if (this.paginator) {
       this.paginator.pageIndex = 0;
     }
+    this.count = this.genres.length;
     this.data.data = this.genres.slice(0, this.pageSize);
   }
 

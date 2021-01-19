@@ -68,10 +68,9 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
   }
 
   getParams(formValues): object {
-    console.log(formValues);
     return {
       name: (formValues.search) ? formValues.search : '',
-      limit: (formValues.country?.country || formValues.country?.country) ? '' : 100,
+      limit: (formValues.country?.country || formValues.genre?.genre) ? '' : 100,
       country: (formValues.country?.country) ? formValues.country.country : '',
       tagList: (formValues.genre?.genre) ? formValues.genre.genre : '',
     };
