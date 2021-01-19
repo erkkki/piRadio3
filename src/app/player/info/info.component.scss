@@ -1,33 +1,38 @@
 @import "src/_variables.scss";
 
+.container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
 
 .info {
   height: 100%;
   width: 100%;
-  position: relative;
-  overflow: hidden;
+  position: absolute;
+  top: 0;
 }
 .name {
-  cursor: pointer;
   position: absolute;
-  /** Centers text. */
-  left: 50%;
-  transform: translate(-50%, 0);
-
+  cursor: pointer;
   font-size: 1em;
-  top: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: mat-color($primary, Main);
 }
 .name-mobile {
-  left: 0;
-  transform: none;
   font-size: 0.8em;
-  top: 4px;
+}
+
+.name-error {
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .error {
   position: absolute;
   font-size: 1em;
-  /** Centers text. */
   left: 50%;
   bottom: 6px;
   transform: translate(-50%, 0);
@@ -42,10 +47,11 @@
 .tags {
   overflow: hidden;
   font-size: 0.6em;
-  line-height: 20px;
+  line-height: 12px;
   position: absolute;
-  bottom: 4px;
-  left: 0;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, -50%);
 }
 
 .mat-chip {

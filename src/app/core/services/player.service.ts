@@ -84,7 +84,7 @@ export class PlayerService {
     if (!environment.production) {
       this.volume.next(4);
       this.error.subscribe(value => console.log(value));
-    } 
+    }
     this.loadFromLocalStorage();
 
     this.volume.pipe(
@@ -130,6 +130,7 @@ export class PlayerService {
       this.player.on(Clappr.Events.PLAYER_PLAY , () => this.playing.next(true));
       this.player.on(Clappr.Events.PLAYER_PAUSE , () => this.playing.next(false));
     }
+    // this.error.next({type: 'player', msg: 'Error in player.'});
   }
 
   private changeVolume(value: number): void {
