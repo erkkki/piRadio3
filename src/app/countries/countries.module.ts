@@ -21,8 +21,8 @@ import { ListComponent } from './list/list.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { SearchComponent } from './search/search.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -30,7 +30,6 @@ import {MatButtonModule} from '@angular/material/button';
     CountriesComponent,
     TableComponent,
     ListComponent,
-    SearchComponent,
   ],
   imports: [
     CommonModule,
@@ -45,12 +44,13 @@ import {MatButtonModule} from '@angular/material/button';
     MatSortModule,
     MatTabsModule,
     MatCardModule,
-    /** Own modules */
-    CountriesRoutingModule,
-    SharedModule,
     MatTooltipModule,
     MatPaginatorModule,
     MatButtonModule,
+    /** Own modules */
+    CountriesRoutingModule,
+    SharedModule,
+    MatToolbarModule,
   ]
 })
 export class CountriesModule { }

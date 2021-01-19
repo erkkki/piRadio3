@@ -9,6 +9,12 @@
 .warn {
   background-color: mat-color($warn);
 }
+.spacer {
+  flex: 1 1 auto;
+}
+mat-toolbar {
+  background: #424242;
+}
 
 table {
   width: 100%;

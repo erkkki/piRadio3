@@ -1,6 +1,6 @@
 <mat-form-field [formGroup]="form">
   <mat-label>Genres</mat-label>
-  <mat-select formControlName="genre" multiple>
+  <mat-select formControlName="genre">
     <mat-option (click)="form.reset()">Unselect All</mat-option>
     <mat-option *ngFor="let genre of genres" [value]="genre.name">
       {{ genre.name }}

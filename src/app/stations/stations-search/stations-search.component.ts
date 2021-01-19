@@ -33,20 +33,34 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private mediaMatcher: MediaMatcher) {
     this.mediaQueryList = mediaMatcher.matchMedia('(max-width: 768px)');
+    this.loading = false;
   }
 
   ngOnInit(): void {
-    this.loading = false;
+    let sub: Subscription;
+
+
     this.loadFromLocalStorage();
 
+    sub = this.route.params.subscribe(params => {
+      if (params?.country) {
+        this.filterForm.patchValue({country: {country: params.country}});
+      }
+      if (params?.genre) {
+        this.filterForm.patchValue({genre: {genre: params.genre}});
+      }
+
+    });
+    this.subscriptions.push(sub);
+
+    /** Initial search */
     let formValues = this.filterForm.value;
-
-
     this.search(this.getParams(formValues));
 
-    const sub = this.filterForm.valueChanges.pipe(
+    /** Watch form values to change and start new search */
+    sub = this.filterForm.valueChanges.pipe(
       distinctUntilChanged()
-    ).subscribe((value) => {
+    ).subscribe(() => {
       formValues = this.filterForm.value;
       localStorage.setItem('stationsearchform', JSON.stringify(formValues));
       this.search(this.getParams(formValues));
@@ -54,7 +68,8 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
     this.subscriptions.push(sub);
   }
 
-  private getParams(formValues): object {
+  getParams(formValues): object {
+    console.log(formValues);
     return {
       name: (formValues.search) ? formValues.search : '',
       limit: (formValues.country?.country || formValues.country?.country) ? '' : 100,
@@ -68,16 +83,6 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
   }
 
   loadFromLocalStorage(): void {
-    const country = localStorage.getItem('country');
-    if (country !== null) {
-      localStorage.removeItem('country');
-      const tempForm = this.filterForm.value;
-      tempForm.country = { country };
-      this.filterForm.patchValue(tempForm);
-      localStorage.setItem('stationsearchform', JSON.stringify(tempForm));
-      return;
-    }
-
     /** Load last search form values from localstorage */
     const savedForm = JSON.parse(localStorage.getItem('stationsearchform'));
 
@@ -98,6 +103,7 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
         this.loading = false;
       }, error => {
         console.log('Something went wrong in search of stations.');
+        console.log(error);
       });
   }
 }

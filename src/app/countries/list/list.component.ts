@@ -16,9 +16,4 @@ export class ListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {}
-
-  changeCountry(country): void {
-    localStorage.setItem('country', country);
-  }
-
 }

@@ -1,25 +1,23 @@
-import {Component, OnInit, OnDestroy, ViewChild, AfterViewInit, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 
-import {Subscription} from 'rxjs';
-
-import {MatSort, Sort} from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
 
-import {Country} from '../../core/models/country';
+import {Genre} from '../../core/models/genre';
 
 
 @Component({
-  selector: 'app-countries-table',
+  selector: 'app-genre-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, OnChanges {
 
-  @Input() countries: Country[];
+  @Input() genres: Genre[];
   displayedColumns: string[] = ['name', 'stationcount'];
   data = new MatTableDataSource([]);
-  countriesCount = 0;
+  count = 0;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -27,17 +25,16 @@ export class TableComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
-    this.data.data = this.countries;
+    this.data.data = this.genres;
     this.data.sort = this.sort;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.data.data = this.countries;
+    this.data.data = this.genres;
     this.data.sort = this.sort;
     if (this.paginator) {
       this.data.paginator = this.paginator;
     }
-    this.countriesCount = this.countries?.length;
   }
-
 }
+

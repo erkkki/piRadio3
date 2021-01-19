@@ -1,10 +1,11 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
+import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 import {filter} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 import { Genre } from '../../../core/models/genre';
 import { GenresService } from '../../../core/services/genres.service';
-import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'app-genre-select',
@@ -18,24 +19,28 @@ import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@
     }
   ]
 })
-export class GenreSelectComponent implements OnInit, ControlValueAccessor {
+export class GenreSelectComponent implements OnInit, ControlValueAccessor, OnDestroy {
 
   form = new FormGroup({
     genre: new FormControl(''),
   });
   genres: Genre[];
+  subscriptions: Subscription[] = [];
 
   constructor(private genreService: GenresService) { }
 
   ngOnInit(): void {
-    this.genreService.genres
+    let sub: Subscription;
+
+    sub = this.genreService.genres
       .pipe(
         filter(result => result !== null)
       ).subscribe((result) => {
         this.genres = result.filter((genre) => {
-          return (genre.stationcount > 200);
+          return (genre.stationcount > 100);
         });
       });
+    this.subscriptions.push(sub);
   }
 
   registerOnChange(fn: any): void {
@@ -48,6 +53,10 @@ export class GenreSelectComponent implements OnInit, ControlValueAccessor {
       return;
     }
     this.form.patchValue(obj);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
 }

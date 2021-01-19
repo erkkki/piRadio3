@@ -13,6 +13,14 @@ const routes: Routes = [
     path: 'search',
     component: StationsSearchComponent
   },
+  {
+    path: 'search/country/:country',
+    component: StationsSearchComponent
+  },
+  {
+    path: 'search/genre/:genre',
+    component: StationsSearchComponent
+  },
 ];
 
 @NgModule({

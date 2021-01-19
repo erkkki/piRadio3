@@ -64,7 +64,7 @@ export class RadioApiService {
       debounceTime(500),
       distinctUntilChanged(),
       switchMap(name => {
-        return this.http.get(`https://${name}/json//stations/search`, { params });
+        return this.http.get(`https://${name}/json/stations/search`, { params });
       })
     );
   }

@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: () => import('./countries/countries.module').then(m => m.CountriesModule)
   },
   {
+    path: 'genres',
+    loadChildren: () => import('./genre/genre.module').then(m => m.GenreModule)
+  },
+  {
     path: 'stations',
     loadChildren: () => import('./stations/stations.module').then(m => m.StationsModule)
   },
