@@ -1,4 +1,9 @@
 <button mat-icon-button color="primary" (click)="changeStation(station)" aria-label="Start station playback">
-  <mat-icon>play_arrow</mat-icon>
-<!--  <mat-icon *ngIf="!playing">pause</mat-icon>-->
+  <ng-container *ngIf="!(playerPlaying$ | async)">
+    <mat-icon>play_arrow</mat-icon>
+  </ng-container>
+  <ng-container *ngIf="playerPlaying$ | async">
+    <mat-icon *ngIf="(playerStation$ | async).stationuuid !== station.stationuuid">play_arrow</mat-icon>
+    <mat-icon *ngIf="(playerStation$ | async).stationuuid === station.stationuuid">pause</mat-icon>
+  </ng-container>
 </button>

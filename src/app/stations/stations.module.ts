@@ -25,7 +25,6 @@ import { SharedModule } from '../shared/shared.module';
 import { StationsSearchComponent } from './stations-search/stations-search.component';
 import { TableComponent } from './table/table.component';
 
-import { PlayComponent } from './play/play.component';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -42,7 +41,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     StationComponent,
     StationsSearchComponent,
     TableComponent,
-    PlayComponent
   ],
   imports: [
     CommonModule,
