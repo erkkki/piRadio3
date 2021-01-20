@@ -113,10 +113,10 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
       return;
     }
     /* For tablets */
-    if (width < 960) {
-      this.displayedColumns = this.tabletDisplayedColumns;
-      return;
-    }
+    // if (width < 960) {
+    //   this.displayedColumns = this.tabletDisplayedColumns;
+    //   return;
+    // }
     /* Rest */
     else {
       this.displayedColumns = this.defaultDisplayedColumns;

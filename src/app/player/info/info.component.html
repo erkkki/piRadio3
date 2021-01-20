@@ -4,11 +4,13 @@
       <div class="name" [ngClass]="!mediaQueryList.matches?'':'name-mobile'">
         {{ station.name | titlecase }}
       </div>
-      <div class="tags" *ngIf="!mediaQueryList.matches">
-        <ng-container *ngFor="let tag of station.tags?.split(',').slice(0,4)">
-          <mat-chip *ngIf="tag" disabled>{{tag | titlecase}}</mat-chip>
-        </ng-container>
-      </div>
+<!--      <div class="tags" *ngIf="!mediaQueryList.matches">-->
+<!--        <mat-chip-list aria-label="Fish selection">-->
+<!--          <ng-container *ngFor="let tag of station.tags?.split(',').slice(0,4)">-->
+<!--            <mat-chip *ngIf="tag !== null" disabled>{{tag | titlecase}}</mat-chip>-->
+<!--          </ng-container>-->
+<!--        </mat-chip-list>-->
+<!--      </div>-->
     </div>
 
     <div *ngIf="error">
