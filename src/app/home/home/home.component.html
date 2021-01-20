@@ -1,12 +1,10 @@
-<h1>Hello from space.</h1>
-
-
 <div fxFlex="row">
-  <div fxFlex="50">
-
-  </div>
-  <div fxFlex="50">
+  <div fxFlex="50" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
     <app-shared-station-table [stations]="topStation$ | async"></app-shared-station-table>
+  </div>
+
+  <div fxFlex="50" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
+    <app-shared-genre-table [genres]="genres$ | async"></app-shared-genre-table>
   </div>
 </div>
 

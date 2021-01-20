@@ -20,6 +20,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.topStation$ = this.radioApi.getTopStation();
-    this.genres$ = this.genreService.genres;
+    this.genres$ = this.genreService.topTwenty;
   }
 }
