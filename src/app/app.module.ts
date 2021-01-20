@@ -42,6 +42,7 @@ import { environment } from '../environments/environment';
         BrowserAnimationsModule,
         LayoutModule,
         NgxGoogleAnalyticsModule.forRoot(environment.ga),
+        NgxGoogleAnalyticsRouterModule,
         /** Material */
         MatSidenavModule,
         MatToolbarModule,
