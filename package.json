@@ -25,6 +25,7 @@
     "clappr": "^0.3.13",
     "get-user-locale": "^1.4.0",
     "lodash-es": "^4.17.20",
+    "ngx-google-analytics": "^11.1.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

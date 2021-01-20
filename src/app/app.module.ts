@@ -5,16 +5,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
 
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,10 +26,8 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { PlayerModule } from './player/player.module';
-import {MatTooltipModule} from '@angular/material/tooltip';
 
-
-
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         ReactiveFormsModule,
         BrowserAnimationsModule,
         LayoutModule,
+        NgxGoogleAnalyticsModule.forRoot(environment.ga),
         /** Material */
         MatSidenavModule,
         MatToolbarModule,
