@@ -1,11 +1,5 @@
-<!--<div class="container">-->
-<!--  <div *ngIf="station" class="info" routerLink="/stations/station/{{station.stationuuid}}">-->
-<!--    {{station.name}}-->
-<!--  </div>-->
-<!--</div>-->
-
 <div class="container">
-  <div *ngIf="station" class="info" routerLink="/stations/station/{{station.stationuuid}}">
+  <div *ngIf="station && station.name !== ''" class="info" routerLink="/stations/station/{{station.stationuuid}}">
     <div *ngIf="!error">
       <div class="name" [ngClass]="!mediaQueryList.matches?'':'name-mobile'">
         {{ station.name | titlecase }}

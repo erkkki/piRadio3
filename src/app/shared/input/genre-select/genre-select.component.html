@@ -2,8 +2,7 @@
   <mat-label>Genres</mat-label>
   <mat-select formControlName="genre">
     <mat-option (click)="form.reset()">All</mat-option>
-    <mat-option *ngFor="let genre of genres" [value]="genre.name"
-                routerLink="/stations/search/genre/{{genre.name}}">
+    <mat-option *ngFor="let genre of genres" [value]="genre.name">
       {{ genre.name }}
     </mat-option>
   </mat-select>

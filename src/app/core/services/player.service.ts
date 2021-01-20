@@ -14,7 +14,7 @@ const emptyStation: Station = {
   changeuuid: '',
   clickcount: 0,
   clicktimestamp: '',
-  clicktrend: -4,
+  clicktrend: 0,
   codec: '',
   country: '',
   countrycode: '',
@@ -146,7 +146,7 @@ export class PlayerService {
       this.player.on(Clappr.Events.PLAYER_PLAY , () => this.playing.next(true));
       this.player.on(Clappr.Events.PLAYER_PAUSE , () => this.playing.next(false));
     }
-    this.error.next({type: 'player', msg: 'Error in player.'});
+    // this.error.next({type: 'player', msg: 'Error in player.'});
   }
 
   private changeVolume(value: number): void {

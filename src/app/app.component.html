@@ -12,11 +12,13 @@
     <mat-sidenav #sidenav [mode]="mediaQueryList?.matches ? 'over' : 'side'" fixedInViewport="true" [opened]="!mediaQueryList?.matches" class="sidenav">
       <img class="logo" routerLink="/" src="assets/title.svg" alt="piRadio">
       <mat-nav-list (click)="mediaQueryList?.matches ? sidenav.toggle(): ''">
-        <a mat-list-item routerLink="/">Home</a>
-        <a mat-list-item routerLink="/stations/search">Search</a>
-        <a mat-list-item routerLink="/countries">Countries</a>
-        <a mat-list-item routerLink="/genres">Genres</a>
-        <a mat-list-item routerLink="/player">Player</a>
+        <a mat-list-item routerLink="/"
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{exact:true}">Home</a>
+        <a mat-list-item routerLink="/stations/search" routerLinkActive="active-link">Search</a>
+        <a mat-list-item routerLink="/countries" routerLinkActive="active-link">Countries</a>
+        <a mat-list-item routerLink="/genres" routerLinkActive="active-link">Genres</a>
+        <a mat-list-item routerLink="/player" routerLinkActive="active-link">Player</a>
       </mat-nav-list>
     </mat-sidenav>
 

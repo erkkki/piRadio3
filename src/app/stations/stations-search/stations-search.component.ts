@@ -43,6 +43,7 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
 
     sub = this.route.params.subscribe(params => {
       if (params?.country) {
+        this.filterForm.reset();
         this.filterForm.patchValue({country: {country: params.country}});
       }
       if (params?.genre) {

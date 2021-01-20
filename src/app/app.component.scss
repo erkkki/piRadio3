@@ -1,4 +1,5 @@
-// Import library functions for theme creation.
+@import "src/_variables.scss";
+
 .sidenav-container {
   position: absolute;
   top: 60px;
@@ -7,8 +8,8 @@
   right: 0;
 }
 
-.header {
-
+.active-link {
+  color: mat-color($primary);
 }
 
 mat-toolbar {
