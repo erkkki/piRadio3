@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GenresComponent } from './genres/genres.component';
-import { ListComponent } from './list/list.component';
-import { TableComponent } from './table/table.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatInputModule} from '@angular/material/input';
 import {FlexModule} from '@angular/flex-layout';
@@ -24,8 +22,6 @@ import {SharedModule} from '../shared/shared.module';
 @NgModule({
   declarations: [
     GenresComponent,
-    ListComponent,
-    TableComponent,
   ],
     imports: [
         CommonModule,

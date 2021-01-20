@@ -1,5 +1,7 @@
-import {Component, HostListener, Input, OnInit, ViewChild, OnChanges,
-  SimpleChanges, AfterViewInit, OnDestroy} from '@angular/core';
+import {
+  Component, HostListener, Input, OnInit, ViewChild, OnChanges,
+  SimpleChanges, AfterViewInit, OnDestroy, HostBinding, ElementRef, AfterViewChecked
+} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
@@ -7,6 +9,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
 import {Subscription} from 'rxjs';
 
 import {Station} from '../../../core/models/station';
+import Table = WebAssembly.Table;
 
 @Component({
   selector: 'app-shared-station-table',
@@ -27,6 +30,7 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
   stationCount = 0;
   pageSize = 20;
 
+  @ViewChild('container') container: ElementRef;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -34,34 +38,41 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
     this.data = new MatTableDataSource([]);
   }
 
-
-
   ngOnInit(): void {
-    this.responsiveColumns();
+    this.displayedColumns = this.defaultDisplayedColumns;
   }
 
   ngAfterViewInit(): void {
-    /** Sort change */
-    const sub = this.sort.sortChange.subscribe(() => {
-      const data = this.stations.slice();
-      this.paginator.pageIndex = 0;
-      const isAsc = this.sort.direction !== 'asc';
-      data.sort((a, b) => {
-        switch (this.sort.active) {
-          case 'clicktrend': return this.compare(a.votes, b.votes, isAsc);
-          case 'votes': return this.compare(a.votes, b.votes, isAsc);
-          case 'name': return this.compare(a.name, b.name, isAsc);
-          default: return 0;
-        }
-      });
-      this.data.data = data.slice(0, this.pageSize);
-      this.sortedStations = data;
+    /** To fix ExpressionChangedAfterItHasBeenCheckedError */
+    setTimeout(() => {
+      this.responsiveColumns();
     });
+
+    /** Sort change */
+    const sub = this.sort.sortChange.subscribe(() => this.sortData());
     this.subscriptions.push(sub);
+
+
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  sortData(): void {
+    const data = this.stations.slice();
+    this.paginator.pageIndex = 0;
+    const isAsc = this.sort.direction !== 'asc';
+    data.sort((a, b) => {
+      switch (this.sort.active) {
+        case 'clicktrend': return this.compare(a.votes, b.votes, isAsc);
+        case 'votes': return this.compare(a.votes, b.votes, isAsc);
+        case 'name': return this.compare(a.name, b.name, isAsc);
+        default: return 0;
+      }
+    });
+    this.data.data = data.slice(0, this.pageSize);
+    this.sortedStations = data;
   }
 
   compare(a: number | string, b: number | string, isAsc: boolean): number {
@@ -79,7 +90,6 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
       if (this.paginator) {
         this.paginator.pageIndex = 0;
       }
-
       this.sortedStations = this.stations;
       this.data.data = this.sortedStations.slice(0, this.pageSize);
     }
@@ -96,16 +106,14 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
   }
 
   responsiveColumns(): void {
-    const mobile = this.mediaMatcher.matchMedia('(max-width: 600px)');
-    const tablet = this.mediaMatcher.matchMedia('(max-width: 960px)');
-
+    const width = this.container.nativeElement.offsetWidth;
     /* For phones */
-    if (mobile.matches) {
+    if (width < 600) {
       this.displayedColumns = this.mobileDisplayedColumns;
       return;
     }
     /* For tablets */
-    if (tablet.matches) {
+    if (width < 960) {
       this.displayedColumns = this.tabletDisplayedColumns;
       return;
     }

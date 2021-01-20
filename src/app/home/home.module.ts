@@ -6,6 +6,8 @@ import { HomeRoutingModule } from './home-routing.module';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {SharedModule} from '../shared/shared.module';
+import {FlexModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatDividerModule,
     MatIconModule,
     MatButtonModule,
+    SharedModule,
+    FlexModule,
   ]
 })
 export class HomeModule { }

@@ -15,9 +15,9 @@ import {MatTableModule} from '@angular/material/table';
 
 import { CountriesComponent } from './countries/countries.component';
 import { CountriesRoutingModule } from './countries-routing.module';
-import { TableComponent } from './table/table.component';
+
 import { SharedModule } from '../shared/shared.module';
-import { ListComponent } from './list/list.component';
+
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -28,8 +28,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 @NgModule({
   declarations: [
     CountriesComponent,
-    TableComponent,
-    ListComponent,
   ],
   imports: [
     CommonModule,

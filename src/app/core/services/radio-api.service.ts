@@ -51,6 +51,15 @@ export class RadioApiService {
     );
   }
 
+  getTopStation(): Observable<any> {
+    const count = 100;
+    return this.serverUrl.pipe(
+      switchMap(name => {
+        return this.http.get(`https://${name}/json/stations/topvote/${count}`);
+      })
+    );
+  }
+
   getStationsBy(by: string, search: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.serverUrl.pipe(
       switchMap(name => {

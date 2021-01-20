@@ -16,7 +16,7 @@
     <div fxLayout="row"
          fxLayoutAlign="center center">
       <div fxFlex="60" fxFlex.md="80" fxFlex.sm="100" fxFlex.xs="100">
-        <app-genre-table [genres]="filteredGenres"></app-genre-table>
+        <app-shared-genre-table [genres]="filteredGenres"></app-shared-genre-table>
       </div>
     </div>
   </mat-tab>
@@ -37,7 +37,7 @@
     <div fxLayout="row"
          fxLayoutAlign="center center">
       <div fxFlex="80" fxFlex.sm="100" fxFlex.xs="100" >
-        <app-genres-list [genres]="filteredGenres"></app-genres-list>
+        <app-shared-genre-list [genres]="filteredGenres"></app-shared-genre-list>
       </div>
     </div>
   </mat-tab>

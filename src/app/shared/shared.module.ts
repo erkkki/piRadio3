@@ -23,6 +23,11 @@ import {FlexModule} from '@angular/flex-layout';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { GenreTableComponent } from './table/genre-table/genre-table.component';
+import { GenreListComponent } from './list/genre-list/genre-list.component';
+import {MatCardModule} from '@angular/material/card';
+import { CountryListComponent } from './list/country-list/country-list.component';
+import { CountryTableComponent } from './table/country-table/country-table.component';
 
 
 @NgModule({
@@ -34,6 +39,10 @@ import {MatSortModule} from '@angular/material/sort';
     ClapprComponent,
     FocusDirective,
     StationTableComponent,
+    GenreTableComponent,
+    GenreListComponent,
+    CountryListComponent,
+    CountryTableComponent,
   ],
   imports: [
     RouterModule,
@@ -51,6 +60,7 @@ import {MatSortModule} from '@angular/material/sort';
     MatChipsModule,
     MatPaginatorModule,
     MatSortModule,
+    MatCardModule,
   ],
   exports: [
     PlayButtonComponent,
@@ -60,6 +70,10 @@ import {MatSortModule} from '@angular/material/sort';
     ClapprComponent,
     FocusDirective,
     StationTableComponent,
+    GenreTableComponent,
+    GenreListComponent,
+    CountryListComponent,
+    CountryTableComponent,
   ]
 })
 export class SharedModule { }

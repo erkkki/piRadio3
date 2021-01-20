@@ -16,12 +16,11 @@
     <div fxLayout="row"
          fxLayoutAlign="center center">
       <div fxFlex="60" fxFlex.md="80" fxFlex.sm="100" fxFlex.xs="100">
-        <app-countries-table [countries]="filteredCountries"></app-countries-table>
+        <app-shared-country-table [countries]="filteredCountries"></app-shared-country-table>
       </div>
     </div>
   </mat-tab>
   <mat-tab label="List">
-
     <div fxLayout="row"
          fxLayoutAlign="center center">
       <div fxFlex="60" fxFlex.md="80" fxFlex.sm="100" fxFlex.xs="100">
@@ -38,7 +37,7 @@
     <div fxLayout="row"
          fxLayoutAlign="center center">
       <div fxFlex="80" fxFlex.sm="100" fxFlex.xs="100" >
-        <app-countries-list [countries]="filteredCountries"></app-countries-list>
+        <app-shared-country-list [countries]="filteredCountries"></app-shared-country-list>
       </div>
     </div>
   </mat-tab>

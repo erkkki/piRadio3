@@ -1,18 +1,18 @@
 import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {Genre} from '../../../core/models/genre';
+import {Country} from '../../../core/models/country';
 import {Subscription} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-shared-genre-table',
-  templateUrl: './genre-table.component.html',
-  styleUrls: ['./genre-table.component.scss']
+  selector: 'app-shared-country-table',
+  templateUrl: './country-table.component.html',
+  styleUrls: ['./country-table.component.scss']
 })
-export class GenreTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class CountryTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
-  @Input() genres: Genre[];
+  @Input() countries: Country[];
   subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['name', 'stationcount'];
   data = new MatTableDataSource([]);
@@ -25,14 +25,14 @@ export class GenreTableComponent implements OnInit, OnChanges, AfterViewInit, On
   constructor() { }
 
   ngOnInit(): void {
-    this.data.data = this.genres;
+    this.data.data = this.countries;
     this.data.sort = this.sort;
   }
 
   ngAfterViewInit(): void {
     /** Sort change */
     const sub = this.sort.sortChange.subscribe(() => {
-      const data = this.genres.slice();
+      const data = this.countries.slice();
       this.paginator.pageIndex = 0;
       const isAsc = this.sort.direction !== 'asc';
       data.sort((a, b) => {
@@ -57,18 +57,19 @@ export class GenreTableComponent implements OnInit, OnChanges, AfterViewInit, On
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.genres === null) {
+    if (this.countries === null) {
       return;
     }
     if (this.paginator) {
       this.paginator.pageIndex = 0;
     }
-    this.count = this.genres.length;
-    this.data.data = this.genres.slice(0, this.pageSize);
+    this.count = this.countries.length;
+    this.data.data = this.countries.slice(0, this.pageSize);
   }
 
   /** Load next stations to table */
   pageChange(index): void {
-    this.data.data = this.genres.slice(this.pageSize * index.pageIndex, this.pageSize * index.pageIndex + this.pageSize);
+    this.data.data = this.countries.slice(this.pageSize * index.pageIndex, this.pageSize * index.pageIndex + this.pageSize);
   }
+
 }
