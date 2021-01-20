@@ -17,7 +17,9 @@ import Table = WebAssembly.Table;
   styleUrls: ['./station-table.component.scss']
 })
 export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+
   @Input() stations: Station[];
+  @Input() pageSize = 20;
   sortedStations: Station[];
   subscriptions: Subscription[] = [];
 
@@ -28,7 +30,6 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
   displayedColumns: string[];
 
   stationCount = 0;
-  pageSize = 20;
 
   @ViewChild('container') container: ElementRef;
   @ViewChild(MatSort) sort: MatSort;

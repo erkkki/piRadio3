@@ -13,10 +13,10 @@ import {MatPaginator} from '@angular/material/paginator';
 export class GenreTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   @Input() genres: Genre[];
+  @Input() pageSize = 20;
   subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['name', 'stationcount'];
   data = new MatTableDataSource([]);
-  pageSize = 20;
   count = 0;
 
   @ViewChild(MatSort) sort: MatSort;

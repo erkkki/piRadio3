@@ -8,6 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {SharedModule} from '../shared/shared.module';
 import {FlexModule} from '@angular/flex-layout';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {FlexModule} from '@angular/flex-layout';
     MatButtonModule,
     SharedModule,
     FlexModule,
+    MatCardModule,
   ]
 })
 export class HomeModule { }

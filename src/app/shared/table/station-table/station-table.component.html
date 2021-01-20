@@ -114,7 +114,7 @@
     </ng-container>
 
     <ng-container matColumnDef="clicktrend-compact">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="clicktrend"></th>
+      <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
         <div *ngIf="element.clicktrend < 0" class="clicktrend-compact warn"></div>
         <div *ngIf="element.clicktrend > 0" class="clicktrend-compact accent"></div>

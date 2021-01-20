@@ -1,10 +1,41 @@
-<div fxFlex="row">
-  <div fxFlex="50" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
-    <app-shared-station-table [stations]="topStation$ | async"></app-shared-station-table>
-  </div>
+<div class="container">
+  <div fxLayout="row wrap" fxLayoutAlign="space-evenly" fxFlexFill>
 
-  <div fxFlex="50" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
-    <app-shared-genre-table [genres]="genres$ | async"></app-shared-genre-table>
+    <div fxFlex="50" fxFlex.lg="30" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
+      <ng-container *ngTemplateOutlet="about"></ng-container>
+    </div>
+    <div fxFlex="50" fxFlex.lg="30" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
+      <ng-container *ngTemplateOutlet="topStations"></ng-container>
+    </div>
+    <div fxFlex="50" fxFlex.lg="30" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
+      <ng-container *ngTemplateOutlet="topGenres"></ng-container>
+    </div>
   </div>
 </div>
 
+<ng-template #about>
+  <mat-card class="mat-elevation-z12">
+    <mat-card-title>About</mat-card-title>
+    <mat-card-content>
+      Radio station player / search tool.
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template #topGenres>
+  <mat-card class="mat-elevation-z12">
+    <mat-card-title>Genres</mat-card-title>
+    <mat-card-content>
+      <app-shared-genre-table [pageSize]="10" [genres]="genres$ | async"></app-shared-genre-table>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template #topStations>
+  <mat-card class="mat-elevation-z12">
+    <mat-card-title>Most popular station</mat-card-title>
+    <mat-card-content>
+      <app-shared-station-table [pageSize]="10" [stations]="topStation$ | async"></app-shared-station-table>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
