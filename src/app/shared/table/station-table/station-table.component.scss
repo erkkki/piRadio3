@@ -20,6 +20,13 @@ table {
   width: 100%;
 }
 
+.mat-column-station-name span {
+  cursor: pointer;
+}
+.mat-column-station-name-compact span {
+  cursor: pointer;
+}
+
 .mat-column-clicktrend-compact {
   position: relative;
 }
