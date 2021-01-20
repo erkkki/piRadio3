@@ -3,5 +3,4 @@
     <img *ngIf="!faviconerror" [src]="station.favicon" [alt]="station.name" (error)="faviconerror = true">
     <mat-icon *ngIf="faviconerror" color="warn">photo</mat-icon>
   </div>
-
 </div>

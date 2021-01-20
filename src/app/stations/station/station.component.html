@@ -1,13 +1,76 @@
-
-<div *ngIf="station">
-  <p>
-    {{ station.name }}
-    <img src="{{station.favicon}}" alt="">
-    <app-play-button [station]="station"></app-play-button>
-  </p>
-  <code>
-  <pre>
-    {{ station | json}}
-  </pre>
-  </code>
+<div *ngIf="!station">
+  No station selected.
 </div>
+
+<div *ngIf="station" class="container">
+  <ng-container *ngIf="!station else stationCard"></ng-container>
+</div>
+
+<ng-template #stationCard>
+  <mat-card class="example-card mat-elevation-z12">
+    <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" fxFlexFill>
+      <mat-card-title>
+        {{station.name | titlecase}}
+      </mat-card-title>
+      <app-shared-play-button [station]="station"></app-shared-play-button>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div fxLayout="row wrap">
+        <div fxFlex="50" fxFlex.sm="100" fxFlex.xs="100">
+          <mat-list>
+
+            <div mat-subheader class="subheader">Homepage</div>
+            <mat-list-item><a mat-button href="{{station.homepage}}" target="_blank">Homepage: {{station.name | titlecase}}</a></mat-list-item>
+
+            <div mat-subheader class="subheader">Last time checked status</div>
+            <mat-list-item>{{station.lastcheckoktime | date: 'full'}}</mat-list-item>
+
+            <div mat-subheader class="subheader">Country</div>
+            <mat-list-item>
+              <a mat-button routerLink="/stations/search/country/{{station.country}}">{{station.country | titlecase}}</a>
+              <span *ngIf="station.state">{{station.state}}</span>
+            </mat-list-item>
+
+            <ng-container *ngIf="station.tags !== ''">
+              <div mat-subheader class="subheader" >Genres</div>
+              <mat-list-item *ngFor="let tag of station.tags.split(',')">
+                {{tag | titlecase}}
+              </mat-list-item>
+            </ng-container>
+
+            <div mat-subheader class="subheader">Votes, Clicks</div>
+            <mat-list-item>Votes: {{station.votes}}</mat-list-item>
+            <mat-list-item>
+              Clicks in the last 24 hours: {{station.clickcount}}
+              <mat-icon *ngIf="station.clicktrend < 0" color="warn" matTooltip="Trending down">trending_down</mat-icon>
+              <mat-icon *ngIf="station.clicktrend > 0" color="accent" matTooltip="Trending up">trending_up</mat-icon>
+              <mat-icon *ngIf="station.clicktrend == 0" matTooltip="No change">trending_flat</mat-icon>
+            </mat-list-item>
+
+            <div mat-subheader class="subheader">Codec, Bitrate</div>
+            <mat-list-item *ngIf="station.codec !== 'UNKNOWN'">
+              {{station.codec}} , <span> {{station.bitrate}} kbps</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="station.codec === 'UNKNOWN'">
+              Unknown , <span> {{station.bitrate}} kbps</span>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div fxFlex="50" fxFlex.sm="100" fxFlex.xs="100">
+          <ng-container *ngIf="!station else favicon"></ng-container>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <share-buttons show="11"></share-buttons>
+    </mat-card-actions>
+  </mat-card>
+</ng-template>
+
+<ng-template #favicon>
+  <div class="favicon-container">
+    <img class="mat-elevation-z12" *ngIf="!faviconerror" [src]="station.favicon" [alt]="station.name" (error)="faviconerror = true">
+    <mat-icon *ngIf="faviconerror" color="warn">photo</mat-icon>
+  </div>
+</ng-template>

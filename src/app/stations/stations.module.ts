@@ -26,6 +26,9 @@ import { StationsSearchComponent } from './stations-search/stations-search.compo
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatListModule} from '@angular/material/list';
+import {ShareButtonsModule} from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 
 
@@ -61,6 +64,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatSortModule,
     MatPaginatorModule,
     MatTooltipModule,
+    MatListModule,
+    ShareButtonsModule,
+    ShareIconsModule,
   ]
 })
 export class StationsModule { }

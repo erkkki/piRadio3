@@ -97,11 +97,17 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
     }
   }
 
+  filterStations(stations: Station[]): Station[] {
+    return stations.filter((station) => {
+      return station.lastcheckok;
+    });
+  }
+
   search(params): void {
     this.loading = true;
     this.radioApiService.getStationsSearch(new HttpParams({ fromObject: params}))
       .subscribe(next => {
-        this.stations = next;
+        this.stations = this.filterStations(next);
         this.loading = false;
       }, error => {
         console.log('Something went wrong in search of stations.');

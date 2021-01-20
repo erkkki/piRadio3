@@ -16,6 +16,7 @@ import {Station} from '../../core/models/station';
 export class StationComponent implements OnInit {
 
   station: Station;
+  faviconerror: boolean;
   stationUuid: string;
 
   constructor(private route: ActivatedRoute, private radioApiService: RadioApiService) { }
