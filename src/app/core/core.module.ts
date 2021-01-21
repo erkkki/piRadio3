@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 
 import { RadioApiService } from './services/radio-api.service';
@@ -11,15 +12,16 @@ import { CountriesService } from './services/countries.service';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserModule
   ],
   providers: [
-    /** TODO remove radio api later. */
     RadioApiService,
     RadioApiServerService,
     PlayerService,
     GenresService,
     CountriesService,
+    Title,
   ]
 })
 export class CoreModule { }

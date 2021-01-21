@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {FormControl, FormGroup} from '@angular/forms';
 
@@ -31,6 +31,7 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
 
   constructor(private radioApiService: RadioApiService,
               private route: ActivatedRoute,
+              private router: Router,
               private mediaMatcher: MediaMatcher) {
     this.mediaQueryList = mediaMatcher.matchMedia('(max-width: 768px)');
     this.loading = false;
@@ -47,28 +48,31 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
         this.filterForm.patchValue({country: {country: params.country}});
       }
       if (params?.genre) {
+        this.filterForm.reset();
         this.filterForm.patchValue({genre: {genre: params.genre}});
       }
     });
     this.subscriptions.push(sub);
 
     /** Initial search */
-    let formValues = this.filterForm.value;
+    const formValues = this.filterForm.value;
     this.search(this.getParams(formValues));
 
-    /** Watch form values to change and start new search */
-    sub = this.filterForm.valueChanges.pipe(
+    this.formChange();
+  }
+
+  /** Watch form values to change and start new search */
+  private formChange(): void {
+    let formValues = this.filterForm.value;
+    const sub = this.filterForm.valueChanges.pipe(
       distinctUntilChanged()
     ).subscribe(() => {
       formValues = this.filterForm.value;
       localStorage.setItem('stationsearchform', JSON.stringify(formValues));
+      this.router.navigateByUrl('/stations/search');
       this.search(this.getParams(formValues));
     });
     this.subscriptions.push(sub);
-  }
-
-  submit(form): void {
-    console.log(form.value);
   }
 
   getParams(formValues): object {

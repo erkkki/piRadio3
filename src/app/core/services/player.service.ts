@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
+import { Title } from '@angular/platform-browser';
+
 import { environment } from '../../../environments/environment';
 
-import {BehaviorSubject, ReplaySubject, Subject, combineLatest} from 'rxjs';
+import {BehaviorSubject, combineLatest} from 'rxjs';
 
 import {Station} from '../models/station';
-import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {RadioApiService} from './radio-api.service';
 
 declare var Clappr: any;
@@ -75,13 +77,45 @@ export class PlayerService {
 
   public player: any;
 
-  constructor(private radioApiService: RadioApiService) {
+  constructor(
+    private radioApiService: RadioApiService,
+    private titleService: Title,
+  ) {
     this.volume = new BehaviorSubject<number>(100);
     this.playing = new BehaviorSubject<boolean>(false);
     this.station = new BehaviorSubject<Station>(emptyStation);
     this.error = new BehaviorSubject<any>(null);
 
+    if (!environment.production) {
+      this.volume.next(4);
+      this.error.subscribe(value => console.log(value));
+    }
+    this.loadFromLocalStorage();
 
+    /** Events */
+    this.onError();
+    this.onVolumeChange();
+    this.onStationChange();
+  }
+
+  private onStationChange(): void {
+    this.station.pipe(
+      debounceTime(100),
+      distinctUntilChanged()
+    ).subscribe(value => {
+      this.loadPlayBack(value);
+      this.titleService.setTitle(value.name);
+    });
+  }
+
+  private onVolumeChange(): void {
+    this.volume.pipe(
+      debounceTime(10),
+      distinctUntilChanged()
+    ).subscribe(value => this.changeVolume(value));
+  }
+
+  private onError(): void {
     /**
      * If error & http stream link.
      * Try to change it to https.
@@ -91,26 +125,14 @@ export class PlayerService {
       if (!value[1] || !value[0]) {
         return;
       }
+      const title = 'Error: ' + this.titleService.getTitle();
+      this.titleService.setTitle(title);
+
       if (value[0].url_resolved.startsWith('http://')) {
         value[0].url_resolved = value[0].url_resolved.replace('http://', 'https://');
         this.station.next(value[0]);
       }
     });
-
-    if (!environment.production) {
-      this.volume.next(4);
-      this.error.subscribe(value => console.log(value));
-    }
-    this.loadFromLocalStorage();
-
-    this.volume.pipe(
-      debounceTime(10),
-      distinctUntilChanged()
-    ).subscribe(value => this.changeVolume(value));
-    this.station.pipe(
-      debounceTime(100),
-      distinctUntilChanged()
-    ).subscribe(value => this.loadPlayBack(value));
 
   }
 
