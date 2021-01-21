@@ -98,7 +98,7 @@ export class PlayerService {
       if (!value[1] || !value[0]) {
         return;
       }
-      if (!environment.production) {
+      if (value[1].name !== '') {
         const title = 'Error: ' + this.titleService.getTitle();
         this.titleService.setTitle(title);
       }
