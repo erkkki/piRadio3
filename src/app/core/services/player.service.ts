@@ -98,11 +98,6 @@ export class PlayerService {
       if (!value[1] || !value[0]) {
         return;
       }
-      if (value[1].name !== '') {
-        const title = 'Error: ' + this.titleService.getTitle();
-        this.titleService.setTitle(title);
-      }
-
       if (value[0].url_resolved.startsWith('http://')) {
         value[0].url_resolved = value[0].url_resolved.replace('http://', 'https://');
         this.station.next(value[0]);
