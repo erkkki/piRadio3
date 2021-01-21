@@ -7,11 +7,12 @@ import { version as clapprVersion } from 'node_modules/clappr/package.json';
 
 export const environment = {
   production: false,
+  radioApiUrl: 'https://fr1.api.radio-browser.info/json/servers',
+  ga: 'G-NOTAREALGA',
+
   angular: angVersion,
   material: materialVersion,
   clappr: clapprVersion,
-  radioApiUrl: 'https://fr1.api.radio-browser.info/json/servers',
-  ga: 'G-NOTAREALGA',
 };
 
 
