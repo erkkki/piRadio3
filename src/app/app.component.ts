@@ -24,15 +24,18 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy{
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.mediaQueryList = this.mediaMatcher.matchMedia('(max-width: 768px)');
-    let sub = this.sidenav.openedStart.subscribe(val => {
-      this.sideNavOpen = true;
+    /** To fix ExpressionChangedAfterItHasBeenCheckedError */
+    setTimeout(() => {
+      this.mediaQueryList = this.mediaMatcher.matchMedia('(max-width: 768px)');
+      let sub = this.sidenav.openedStart.subscribe(val => {
+        this.sideNavOpen = true;
+      });
+      this.sub.push(sub);
+      sub = this.sidenav.closedStart.subscribe(val => {
+        this.sideNavOpen = false;
+      });
+      this.sub.push(sub);
     });
-    this.sub.push(sub);
-    sub = this.sidenav.closedStart.subscribe(val => {
-      this.sideNavOpen = false;
-    });
-    this.sub.push(sub);
   }
 
   ngOnDestroy(): void {

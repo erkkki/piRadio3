@@ -29,10 +29,12 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
     genre: new FormControl(''),
   });
 
-  constructor(private radioApiService: RadioApiService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private mediaMatcher: MediaMatcher) {
+  constructor(
+    private radioApiService: RadioApiService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private mediaMatcher: MediaMatcher
+  ) {
     this.mediaQueryList = mediaMatcher.matchMedia('(max-width: 768px)');
     this.loading = false;
   }

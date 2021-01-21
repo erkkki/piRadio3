@@ -3,7 +3,7 @@ import {
   SimpleChanges, AfterViewInit, OnDestroy, HostBinding, ElementRef, AfterViewChecked
 } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
+import {MatSort, MatSortable} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {Subscription} from 'rxjs';
@@ -47,6 +47,14 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
     /** To fix ExpressionChangedAfterItHasBeenCheckedError */
     setTimeout(() => {
       this.responsiveColumns();
+
+      /** Default sort */
+      if (this.displayedColumns.includes('clicktrend')) {
+        this.sort.sort(({ id: 'clicktrend', start: 'asc'}) as MatSortable);
+      }
+      if (this.displayedColumns.includes('votes')) {
+        this.sort.sort(({ id: 'votes', start: 'asc'}) as MatSortable);
+      }
     });
 
     /** Sort change */
