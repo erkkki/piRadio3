@@ -2,6 +2,8 @@
 
 TODO.md
 
+/app/enviroments/environment.prod.ts
+
 # compiled output
 /dist
 /tmp

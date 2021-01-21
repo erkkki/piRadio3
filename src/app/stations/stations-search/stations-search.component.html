@@ -34,7 +34,6 @@
        fxLayoutAlign="center center">
     <div fxFlex="60" fxFlex.md="80" fxFlex.sm="100" fxFlex.xs="100">
       <div *ngIf="stations.length > 0">
-<!--        <app-station-table  [stations]="stations"></app-station-table>-->
         <app-shared-station-table [stations]="stations"></app-shared-station-table>
       </div>
       <div class="error-container">

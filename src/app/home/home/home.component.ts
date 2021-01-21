@@ -11,6 +11,7 @@ import {GenresService} from '../../core/services/genres.service';
 })
 export class HomeComponent implements OnInit {
 
+  stats$: Observable<any>;
   topStation$: Observable<any[]>;
   genres$: Observable<any[]>;
 
@@ -21,5 +22,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.topStation$ = this.radioApi.getTopStation();
     this.genres$ = this.genreService.topTwenty;
+    this.stats$ = this.radioApi.getStats();
   }
 }

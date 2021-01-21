@@ -2,6 +2,7 @@
   <div fxLayout="row wrap" fxLayoutAlign="space-evenly" fxFlexFill>
 
     <div fxFlex="50" fxFlex.lg="30" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
+      <ng-container *ngTemplateOutlet="stats"></ng-container>
       <ng-container *ngTemplateOutlet="about"></ng-container>
     </div>
     <div fxFlex="50" fxFlex.lg="30" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
@@ -13,11 +14,43 @@
   </div>
 </div>
 
+<ng-template #stats>
+  <mat-card class="mat-elevation-z12" *ngIf="stats$ | async as stats">
+    <mat-card-title>Stats</mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>Station count at the moment: <span class="primary">&nbsp; {{ stats.stations | number}}</span></mat-list-item>
+        <mat-list-item>Station clicks last hour: <span class="primary">&nbsp; {{ stats.clicks_last_hour | number}}</span></mat-list-item>
+        <mat-list-item>Station clicks last day: <span class="primary">&nbsp; {{ stats.clicks_last_day | number}}</span></mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
 <ng-template #about>
   <mat-card class="mat-elevation-z12">
     <mat-card-title>About</mat-card-title>
     <mat-card-content>
-      Radio station player / search tool.
+      <mat-list>
+        <div mat-subheader>Radio player</div>
+        <div mat-subheader>Build with</div>
+        <mat-list-item matTooltip="Api for radio stations.">
+          <a mat-button href="https://www.radio-browser.info/">Radio-browser</a>
+        </mat-list-item>
+        <mat-list-item matTooltip="Clappr is an extensible media player for the web.">
+          <a mat-button href="https://github.com/clappr/clappr">Clappr</a>
+        </mat-list-item>
+        <mat-list-item matTooltip="Open-source web application framework led by the Angular Team at Google">
+          <a mat-button href="https://angular.io/">
+            <img src="/assets/angular.svg" alt="Angular" width="32px"> Angular
+          </a>
+        </mat-list-item>
+        <mat-list-item matTooltip="Material Design components for Angular">
+          <a mat-button href="https://material.angular.io/">
+            <img src="/assets/angular-white-transparent.svg" alt="Angular" width="32px"> Angular Material
+          </a>
+        </mat-list-item>
+      </mat-list>
     </mat-card-content>
   </mat-card>
 </ng-template>

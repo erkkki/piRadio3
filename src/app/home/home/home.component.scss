@@ -1,11 +1,24 @@
 @import "src/_variables.scss";
+
+.primary {
+  color: mat-color($primary);
+}
+
 .container {
   padding-top: 100px;
   margin: auto;
   width: 100%;
 }
+a {
+  color: mat-color($primary);
+}
 mat-card {
   margin: 20px;
+}
+
+mat-card-title {
+  padding: 10px;
+  color: mat-color($primary);
 }
 
 @media only screen and (max-width: 1200px) {
@@ -31,7 +44,3 @@ mat-card {
 
 
 
-mat-card-title {
-  padding: 10px;
-  color: mat-color($primary);
-}

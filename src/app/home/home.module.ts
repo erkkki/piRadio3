@@ -9,6 +9,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {SharedModule} from '../shared/shared.module';
 import {FlexModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
+import {MatListModule} from '@angular/material/list';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import {MatCardModule} from '@angular/material/card';
     SharedModule,
     FlexModule,
     MatCardModule,
+    MatListModule,
+    MatTooltipModule,
   ]
 })
 export class HomeModule { }
