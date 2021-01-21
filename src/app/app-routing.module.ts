@@ -1,8 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { HomeComponent } from './home/home/home.component';
+
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full'
+  },
   {
     path: 'countries',
     loadChildren: () => import('./countries/countries.module').then(m => m.CountriesModule)
@@ -18,6 +25,11 @@ const routes: Routes = [
   {
     path: 'player',
     loadChildren: () => import('./player/player.module').then(m => m.PlayerModule)
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];
 
