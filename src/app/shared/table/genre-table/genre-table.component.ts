@@ -13,6 +13,8 @@ import {MatPaginator} from '@angular/material/paginator';
 export class GenreTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   @Input() genres: Genre[];
+  @Input() showSort: string | boolean = true;
+  @Input() showPaginator: string | boolean = true;
   @Input() pageSize = 20;
   subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['name', 'stationcount'];
@@ -57,6 +59,12 @@ export class GenreTableComponent implements OnInit, OnChanges, AfterViewInit, On
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (typeof this.showPaginator === 'string' && this.showPaginator === 'false') {
+      this.showPaginator = false;
+    }
+    if (typeof this.showSort === 'string' && this.showSort === 'false') {
+      this.showSort = false;
+    }
     if (this.genres === null) {
       return;
     }

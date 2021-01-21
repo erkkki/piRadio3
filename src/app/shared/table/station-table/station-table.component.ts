@@ -19,6 +19,8 @@ import Table = WebAssembly.Table;
 export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   @Input() stations: Station[];
+  @Input() showSort: string | boolean = true;
+  @Input() showPaginator: string | boolean = true;
   @Input() pageSize = 20;
   sortedStations: Station[];
   subscriptions: Subscription[] = [];
@@ -69,6 +71,9 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
   }
 
   sortData(): void {
+    if (!this.stations) {
+      return;
+    }
     const data = this.stations.slice();
     this.paginator.pageIndex = 0;
     const isAsc = this.sort.direction !== 'asc';
@@ -90,6 +95,12 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
 
   /** Input data changed, load new data to table */
   ngOnChanges(changes: SimpleChanges): void {
+    if (typeof this.showPaginator === 'string' && this.showPaginator === 'false') {
+      this.showPaginator = false;
+    }
+    if (typeof this.showSort === 'string' && this.showSort === 'false') {
+      this.showSort = false;
+    }
     if (this.stations === null) {
       return;
     }

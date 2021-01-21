@@ -13,6 +13,8 @@ import {MatPaginator} from '@angular/material/paginator';
 export class CountryTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   @Input() countries: Country[];
+  @Input() showSort: string | boolean = true;
+  @Input() showPaginator: string | boolean = true;
   subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['name', 'stationcount'];
   data = new MatTableDataSource([]);
@@ -57,6 +59,12 @@ export class CountryTableComponent implements OnInit, OnChanges, AfterViewInit, 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (typeof this.showPaginator === 'string' && this.showPaginator === 'false') {
+      this.showPaginator = false;
+    }
+    if (typeof this.showSort === 'string' && this.showSort === 'false') {
+      this.showSort = false;
+    }
     if (this.countries === null) {
       return;
     }

@@ -42,7 +42,7 @@
         </mat-list-item>
         <mat-list-item matTooltip="Open-source web application framework led by the Angular Team at Google">
           <a mat-button href="https://angular.io/">
-            <img src="/assets/angular.svg" alt="Angular" width="32px"> Angular
+            <img src="/assets/angular.svg" alt="Angular" width="32px"> Angular 10
           </a>
         </mat-list-item>
         <mat-list-item matTooltip="Material Design components for Angular">
@@ -57,9 +57,9 @@
 
 <ng-template #topGenres>
   <mat-card class="mat-elevation-z12">
-    <mat-card-title>Genres</mat-card-title>
+    <mat-card-title class="link" routerLink="/genres">Genres</mat-card-title>
     <mat-card-content>
-      <app-shared-genre-table [pageSize]="10" [genres]="genres$ | async"></app-shared-genre-table>
+      <app-shared-genre-table [pageSize]="10" showSort="false" showPaginator="false" [genres]="genres$ | async"></app-shared-genre-table>
     </mat-card-content>
   </mat-card>
 </ng-template>
@@ -68,7 +68,7 @@
   <mat-card class="mat-elevation-z12">
     <mat-card-title>Most popular station</mat-card-title>
     <mat-card-content>
-      <app-shared-station-table [pageSize]="10" [stations]="topStation$ | async"></app-shared-station-table>
+      <app-shared-station-table [pageSize]="10" showSort="false" [stations]="topStation$ | async"></app-shared-station-table>
     </mat-card-content>
   </mat-card>
 </ng-template>

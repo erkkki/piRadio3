@@ -12,7 +12,13 @@
     </ng-container>
 
     <ng-container matColumnDef="station-name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Station </th>
+      <ng-container *ngIf="showSort">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Station </th>
+      </ng-container>
+      <ng-container *ngIf="!showSort">
+        <th mat-header-cell *matHeaderCellDef> Station </th>
+      </ng-container>
+
       <td mat-cell *matCellDef="let element">
         <div fxLayout="column">
           <span fxFlex="60" routerLink="/stations/station/{{element.stationuuid}}">{{element.name | titlecase}}</span>
@@ -27,7 +33,12 @@
     </ng-container>
 
     <ng-container matColumnDef="station-name-compact">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Station </th>
+      <ng-container *ngIf="showSort">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Station </th>
+      </ng-container>
+      <ng-container *ngIf="!showSort">
+        <th mat-header-cell *matHeaderCellDef> Station </th>
+      </ng-container>
       <td mat-cell *matCellDef="let element">
         <span routerLink="/stations/station/{{element.stationuuid}}">{{element.name | titlecase}}</span>
       </td>
@@ -72,7 +83,13 @@
 
     <!--  Number of votes for this station. This number is by server and only ever increases. It will never be reset to 0.-->
     <ng-container matColumnDef="votes">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Votes </th>
+      <ng-container *ngIf="showSort">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Votes </th>
+      </ng-container>
+      <ng-container *ngIf="!showSort">
+        <th mat-header-cell *matHeaderCellDef> Votes </th>
+      </ng-container>
+
       <td mat-cell *matCellDef="let element">{{element.votes | number}}</td>
     </ng-container>
 
@@ -97,7 +114,13 @@
 
     <!--  The difference of the clickcounts within the last 2 days. Posivite values mean an increase, negative a decrease of clicks.-->
     <ng-container matColumnDef="clicktrend">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Votes</th>
+      <ng-container *ngIf="showSort">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Votes</th>
+      </ng-container>
+      <ng-container *ngIf="!showSort">
+        <th mat-header-cell *matHeaderCellDef>Votes</th>
+      </ng-container>
+
       <td mat-cell *matCellDef="let element">
         <div fxLayout="column" fxLayoutAlign="center center">
           <div fxFlex="60">
@@ -126,5 +149,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [length]="stationCount" [pageSize]="pageSize" (page)="pageChange($event)"></mat-paginator>
+  <ng-container *ngIf="showPaginator">
+    <mat-paginator [length]="stationCount" [pageSize]="pageSize" (page)="pageChange($event)"></mat-paginator>
+  </ng-container>
 </div>
