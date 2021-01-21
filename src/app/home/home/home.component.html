@@ -2,8 +2,10 @@
   <div fxLayout="row wrap" fxLayoutAlign="space-evenly" fxFlexFill>
 
     <div fxFlex="50" fxFlex.lg="30" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
+      <header>
+        <ng-container *ngTemplateOutlet="about"></ng-container>
+      </header>
       <ng-container *ngTemplateOutlet="stats"></ng-container>
-      <ng-container *ngTemplateOutlet="about"></ng-container>
     </div>
     <div fxFlex="50" fxFlex.lg="30" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
       <ng-container *ngTemplateOutlet="topStations"></ng-container>
@@ -35,19 +37,19 @@
         <div mat-subheader>Radio player</div>
         <div mat-subheader>Build with</div>
         <mat-list-item matTooltip="Api for radio stations.">
-          <a mat-button href="https://www.radio-browser.info/">Radio-browser</a>
+          <a mat-button aria-label="Radio browser" href="https://www.radio-browser.info/">Radio-browser</a>
         </mat-list-item>
         <mat-list-item matTooltip="Clappr is an extensible media player for the web.">
-          <a mat-button href="https://github.com/clappr/clappr">Clappr</a>
+          <a mat-button aria-label="Clappr" href="https://github.com/clappr/clappr">Clappr</a>
         </mat-list-item>
         <mat-list-item matTooltip="Open-source web application framework led by the Angular Team at Google">
-          <a mat-button href="https://angular.io/">
-            <img src="/assets/angular.svg" alt="Angular" width="32px"> Angular 10
+          <a mat-button aria-label="Angular" href="https://angular.io/">
+            <img src="/assets/angular.svg" alt="Angular" width="32px" height="32px"> Angular 10
           </a>
         </mat-list-item>
         <mat-list-item matTooltip="Material Design components for Angular">
-          <a mat-button href="https://material.angular.io/">
-            <img src="/assets/angular-white-transparent.svg" alt="Angular" width="32px"> Angular Material
+          <a mat-button aria-label="Angular Material" href="https://material.angular.io/">
+            <img src="/assets/angular-white-transparent.svg" alt="Angular" width="32px" height="32px"> Angular Material
           </a>
         </mat-list-item>
       </mat-list>
