@@ -127,7 +127,7 @@ export class PlayerService {
       this.player = new Clappr.Player({
         source: '',
         parentId: '#player',
-        autoPlay: true,
+        autoPlay: false,
         baseUrl: '/assets',
       });
       this.player.on(Clappr.Events.PLAYER_ERROR , () => this.error.next({type: 'player', msg: 'Error in player.'}));
