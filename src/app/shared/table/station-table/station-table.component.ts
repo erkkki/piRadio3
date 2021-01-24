@@ -51,12 +51,12 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
       this.responsiveColumns();
 
       /** Default sort */
-      if (this.displayedColumns.includes('clicktrend')) {
-        this.sort.sort(({ id: 'clicktrend', start: 'asc'}) as MatSortable);
-      }
-      if (this.displayedColumns.includes('votes')) {
-        this.sort.sort(({ id: 'votes', start: 'asc'}) as MatSortable);
-      }
+      // if (this.displayedColumns.includes('clicktrend')) {
+      //   this.sort.sort(({ id: 'clicktrend', start: 'asc'}) as MatSortable);
+      // }
+      // if (this.displayedColumns.includes('votes')) {
+      //   this.sort.sort(({ id: 'votes', start: 'asc'}) as MatSortable);
+      // }
     });
 
     /** Sort change */
@@ -75,7 +75,9 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
       return;
     }
     const data = this.stations.slice();
-    this.paginator.pageIndex = 0;
+    if (this.showPaginator) {
+      this.paginator.pageIndex = 0;
+    }
     const isAsc = this.sort.direction !== 'asc';
     data.sort((a, b) => {
       switch (this.sort.active) {

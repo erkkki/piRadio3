@@ -5,6 +5,7 @@ import { PlayerService } from '../../core/services/player.service';
 
 import { Station } from '../../core/models/station';
 import {BehaviorSubject, ReplaySubject} from 'rxjs';
+import {StationHistoryService} from '../../core/services/station-history.service';
 
 @Component({
   selector: 'app-temp-player',
@@ -15,13 +16,17 @@ export class TempPlayerComponent implements OnInit {
 
   station: BehaviorSubject<Station>;
   playState: BehaviorSubject<boolean>;
+  stationHistory$: BehaviorSubject<Station[]>;
 
-
-  constructor(private playerService: PlayerService) { }
+  constructor(
+    private playerService: PlayerService,
+    private stationHistoryService: StationHistoryService,
+  ) { }
 
   ngOnInit(): void {
     this.station = this.playerService.station;
     this.playState = this.playerService.playing;
+    this.stationHistory$ = this.stationHistoryService.stations$;
   }
 
 }

@@ -8,6 +8,7 @@ import { RadioApiServerService } from './services/radio-api-server.service';
 import { PlayerService } from './services/player.service';
 import { GenresService } from './services/genres.service';
 import { CountriesService } from './services/countries.service';
+import {StationHistoryService} from './services/station-history.service';
 
 @NgModule({
   declarations: [],
@@ -22,6 +23,7 @@ import { CountriesService } from './services/countries.service';
     GenresService,
     CountriesService,
     Title,
+    StationHistoryService,
   ]
 })
 export class CoreModule { }

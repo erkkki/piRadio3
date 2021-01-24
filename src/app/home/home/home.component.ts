@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 import { environment } from '../../../environments/environment';
 
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 import {GenresService} from '../../core/services/genres.service';
 import {RadioApiService} from '../../core/services/radio-api.service';
+import {StationHistoryService} from '../../core/services/station-history.service';
+import { Station } from '../../core/models/station';
+import {Genre} from '../../core/models/genre';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +18,9 @@ import {RadioApiService} from '../../core/services/radio-api.service';
 export class HomeComponent implements OnInit {
 
   stats$: Observable<any>;
-  topStation$: Observable<any[]>;
-  genres$: Observable<any[]>;
+  topStation$: Observable<Station[]>;
+  genres$: Observable<Genre[]>;
+  history$: Observable<Station[]>;
 
   angular = environment.angular;
   material = environment.material;
@@ -24,11 +28,14 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private radioApi: RadioApiService,
-    private genreService: GenresService) {}
+    private genreService: GenresService,
+    private stationHistoryService: StationHistoryService,
+  ) {}
 
   ngOnInit(): void {
     this.topStation$ = this.radioApi.getTopStation();
     this.genres$ = this.genreService.topTwenty;
     this.stats$ = this.radioApi.getStats();
+    this.history$ = this.stationHistoryService.stations$;
   }
 }

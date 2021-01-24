@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/c
 import {MediaMatcher} from '@angular/cdk/layout';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Subscription} from 'rxjs';
+import {StationHistoryService} from './core/services/station-history.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy{
 
   constructor(
     private mediaMatcher: MediaMatcher,
+    /** Just loading services here to have them loaded all. */
+    private stationHistoryService: StationHistoryService,
   ) {
     this.sub = [];
   }
