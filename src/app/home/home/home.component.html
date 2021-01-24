@@ -1,18 +1,14 @@
 <div class="container">
   <div fxLayout="row wrap" fxLayoutAlign="space-evenly" fxFlexFill>
-    <div fxFlex="50" fxFlex.lg="33" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
-      <ng-container *ngTemplateOutlet="topStations"></ng-container>
-    </div>
-    <div fxFlex="50" fxFlex.lg="33" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100" *ngIf="history$ | async">
+    <div fxFlex="33" fxFlex.lg="33" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100" *ngIf="history$ | async">
       <ng-container *ngTemplateOutlet="history"></ng-container>
-    </div>
-    <div fxFlex="50" fxFlex.lg="33" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
       <ng-container *ngTemplateOutlet="topGenres"></ng-container>
     </div>
-    <div fxFlex="50" fxFlex.lg="33" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
-      <ng-container *ngTemplateOutlet="about"></ng-container>
+    <div fxFlex="33" fxFlex.lg="33" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100">
+      <ng-container *ngTemplateOutlet="topStations"></ng-container>
     </div>
-    <div fxFlex="50" fxFlex.lg="33" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100">
+    <div fxFlex="33" fxFlex.lg="33" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100">
+      <ng-container *ngTemplateOutlet="about"></ng-container>
       <ng-container *ngTemplateOutlet="stats"></ng-container>
     </div>
   </div>
