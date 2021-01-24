@@ -2,7 +2,7 @@
 
 TODO.md
 
-/app/enviroments/environment.prod.ts
+src/environments/environment.prod.ts
 
 # compiled output
 /dist
