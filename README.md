@@ -1,5 +1,7 @@
 # piradio3
-New version for [piradio.](https://www.piradio.fi)
+New version for [Piradio.](https://www.piradio.fi).
+
+The old version moved [here](https://piradio.erkheikki.fi).
 
  * Changed from AngularJs to Angular.
 
