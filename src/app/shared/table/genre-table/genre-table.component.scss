@@ -2,6 +2,9 @@ table {
   width: 100%;
 }
 
+tr.mat-row, tr.mat-footer-row {
+  height: 24px;
+}
 .mat-column-stationcount {
   width: 10vw;
   text-align: right;

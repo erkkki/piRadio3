@@ -25,4 +25,8 @@ export class PlayButtonComponent implements OnInit {
   changeStation(station: Station): void {
     this.playerService.station.next(station);
   }
+
+  pause(): void {
+    this.playerService.togglePLaying();
+  }
 }

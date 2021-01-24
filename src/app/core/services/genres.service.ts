@@ -20,8 +20,8 @@ export class GenresService {
     this.genres = new BehaviorSubject<Genre[]>(null);
     this.topTwenty = new BehaviorSubject<Genre[]>(null);
     this.radioApiService.getTags().pipe(first()).subscribe((result: Genre[]) => {
-      const top = result.sort((a, b) => b.stationcount - a.stationcount).slice(0, 20);
       this.genres.next(result);
+      const top = result.sort((a, b) => b.stationcount - a.stationcount).slice(0, 20);
       this.topTwenty.next(top);
     });
   }

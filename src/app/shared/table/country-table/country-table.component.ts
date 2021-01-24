@@ -18,7 +18,7 @@ export class CountryTableComponent implements OnInit, OnChanges, AfterViewInit, 
   subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['name', 'stationcount'];
   data = new MatTableDataSource([]);
-  pageSize = 20;
+  pageSize = 40;
   count = 0;
 
   @ViewChild(MatSort) sort: MatSort;

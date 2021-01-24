@@ -15,7 +15,7 @@ export class GenreTableComponent implements OnInit, OnChanges, AfterViewInit, On
   @Input() genres: Genre[];
   @Input() showSort: string | boolean = true;
   @Input() showPaginator: string | boolean = true;
-  @Input() pageSize = 20;
+  @Input() pageSize = 40;
   subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['name', 'stationcount'];
   data = new MatTableDataSource([]);
