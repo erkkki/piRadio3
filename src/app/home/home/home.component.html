@@ -16,7 +16,7 @@
 
 <ng-template #stats>
   <mat-card class="mat-elevation-z12" *ngIf="stats$ | async as stats">
-    <mat-card-title>Stats</mat-card-title>
+    <mat-card-title>Stats from Radio Browser api</mat-card-title>
     <mat-card-content>
       <mat-list>
         <mat-list-item>Station count at the moment: <span class="primary">&nbsp; {{ stats.stations | number}}</span></mat-list-item>
