@@ -2,13 +2,23 @@
   <div fxLayout="row wrap" fxLayoutAlign="space-evenly" fxFlexFill>
     <div fxFlex="33" fxFlex.lg="33" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100" *ngIf="history$ | async">
       <ng-container *ngTemplateOutlet="history"></ng-container>
+    </div>
+    <div fxFlex="33" fxFlex.lg="33" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100">
       <ng-container *ngTemplateOutlet="topGenres"></ng-container>
     </div>
     <div fxFlex="33" fxFlex.lg="33" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100">
       <ng-container *ngTemplateOutlet="topStations"></ng-container>
     </div>
+
+  </div>
+</div>
+
+<div class="container">
+  <div fxLayout="row wrap" fxLayoutAlign="space-evenly" fxFlexFill>
     <div fxFlex="33" fxFlex.lg="33" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100">
       <ng-container *ngTemplateOutlet="about"></ng-container>
+    </div>
+    <div fxFlex="33" fxFlex.lg="33" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100">
       <ng-container *ngTemplateOutlet="stats"></ng-container>
     </div>
   </div>
@@ -35,7 +45,7 @@
         <div mat-subheader>Radio player</div>
         <div mat-subheader>Build with</div>
         <mat-list-item matTooltip="Api for radio stations.">
-          <a mat-button aria-label="Radio browser" href="https://www.radio-browser.info/">Radio-browser</a>
+          <a mat-button aria-label="Radio browser" href="https://www.radio-browser.info/">Radio-browser api</a>
         </mat-list-item>
         <mat-list-item matTooltip="Clappr is an extensible media player for the web.">
           <a mat-button aria-label="Clappr" href="https://github.com/clappr/clappr">Clappr {{clappr}}</a>
@@ -57,7 +67,7 @@
 
 <ng-template #topGenres>
   <mat-card class="mat-elevation-z12">
-    <mat-card-title class="link" routerLink="/genres">Genres</mat-card-title>
+    <mat-card-title class="link" routerLink="/genres">Popular Genres</mat-card-title>
     <mat-card-content>
       <app-shared-genre-table [pageSize]="10" showSort="false" showPaginator="false" [genres]="genres$ | async"></app-shared-genre-table>
     </mat-card-content>
