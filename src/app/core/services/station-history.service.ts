@@ -31,10 +31,14 @@ export class StationHistoryService {
         return (station.stationuuid !== newStation.stationuuid);
       });
     }
+
+    if (newStation.stationuuid === '') {
+      return;
+    }
     this.stations.push(newStation);
 
     this.save();
-    this.stations$.next(this.stations.reverse());
+    this.stations$.next([...this.stations].reverse());
   }
 
   private save(): void {

@@ -49,14 +49,6 @@ export class StationTableComponent implements OnInit, OnChanges, AfterViewInit, 
     /** To fix ExpressionChangedAfterItHasBeenCheckedError */
     setTimeout(() => {
       this.responsiveColumns();
-
-      /** Default sort */
-      // if (this.displayedColumns.includes('clicktrend')) {
-      //   this.sort.sort(({ id: 'clicktrend', start: 'asc'}) as MatSortable);
-      // }
-      // if (this.displayedColumns.includes('votes')) {
-      //   this.sort.sort(({ id: 'votes', start: 'asc'}) as MatSortable);
-      // }
     });
 
     /** Sort change */
