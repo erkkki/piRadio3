@@ -7,6 +7,10 @@ export const environment = {
   radioApiUrl: 'https://fr1.api.radio-browser.info/json/servers',
   ga: 'G-NOTAREALGA',
 
+  apiUrl: 'http://localhost:8000',
+  loginUrl: 'http://localhost:8000/auth/login',
+  logoutUrl: 'http://localhost:8000/auth/logout',
+
   angular: angVersion,
   material: materialVersion,
   clappr: clapprVersion,

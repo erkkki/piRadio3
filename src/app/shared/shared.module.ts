@@ -28,6 +28,8 @@ import { GenreListComponent } from './list/genre-list/genre-list.component';
 import {MatCardModule} from '@angular/material/card';
 import { CountryListComponent } from './list/country-list/country-list.component';
 import { CountryTableComponent } from './table/country-table/country-table.component';
+import { LoginComponent } from './login/login.component';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -43,6 +45,7 @@ import { CountryTableComponent } from './table/country-table/country-table.compo
     GenreListComponent,
     CountryListComponent,
     CountryTableComponent,
+    LoginComponent,
   ],
   imports: [
     RouterModule,
@@ -61,6 +64,7 @@ import { CountryTableComponent } from './table/country-table/country-table.compo
     MatPaginatorModule,
     MatSortModule,
     MatCardModule,
+    MatListModule,
   ],
   exports: [
     PlayButtonComponent,
@@ -74,6 +78,7 @@ import { CountryTableComponent } from './table/country-table/country-table.compo
     GenreListComponent,
     CountryListComponent,
     CountryTableComponent,
+    LoginComponent,
   ]
 })
 export class SharedModule { }
