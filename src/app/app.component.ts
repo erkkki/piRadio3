@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs';
 import {StationHistoryService} from './core/services/station-history.service';
 import {UserService} from './core/services/user.service';
 import {User} from './core/models/user';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy{
   mediaQueryList: MediaQueryList;
   sideNavOpen = true;
   sub: Subscription[];
+
+  loginUrl: string = environment.loginUrl;
+  logoutUrl: string = environment.logoutUrl;
+
 
   currentUser: User;
 
@@ -27,7 +32,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy{
     private userService: UserService,
   ) {
     this.sub = [];
-    this.userService.currentUser.subscribe(user => this.currentUser);
+    this.userService.currentUser.subscribe(user => this.currentUser = user);
   }
 
   ngOnInit(): void {}

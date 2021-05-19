@@ -19,7 +19,13 @@
         <a mat-list-item routerLink="/countries" routerLinkActive="active-link">Countries</a>
         <a mat-list-item routerLink="/genres" routerLinkActive="active-link">Genres</a>
 <!--        <a mat-list-item routerLink="/player" routerLinkActive="active-link">Player</a>-->
-        <app-login></app-login>
+        <ng-container *ngIf="!currentUser">
+          <a mat-list-item href="{{loginUrl}}">Login</a>
+        </ng-container>
+        <ng-container *ngIf="currentUser">
+          <a mat-list-item routerLink="/profile" routerLinkActive="active-link" >Profile</a>
+          <a mat-list-item href="{{logoutUrl}}">Logout</a>
+        </ng-container>
 
       </mat-nav-list>
 
