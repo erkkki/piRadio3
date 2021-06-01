@@ -21,7 +21,6 @@ import {MatCardModule} from '@angular/material/card';
 import { PlayButtonComponent } from './play-button/play-button.component';
 import { GenreSelectComponent } from './input/genre-select/genre-select.component';
 import { CountrySelectComponent } from './input/country-select/country-select.component';
-import { FavoriteComponent } from './favorite/favorite.component';
 import { ClapprComponent } from './clappr/clappr.component';
 import { FocusDirective } from './directives/focus.directive';
 import { StationTableComponent } from './table/station-table/station-table.component';
@@ -37,7 +36,6 @@ import { CountryTableComponent } from './table/country-table/country-table.compo
     PlayButtonComponent,
     GenreSelectComponent,
     CountrySelectComponent,
-    FavoriteComponent,
     ClapprComponent,
     FocusDirective,
     StationTableComponent,
@@ -69,7 +67,6 @@ import { CountryTableComponent } from './table/country-table/country-table.compo
     PlayButtonComponent,
     GenreSelectComponent,
     CountrySelectComponent,
-    FavoriteComponent,
     ClapprComponent,
     FocusDirective,
     StationTableComponent,

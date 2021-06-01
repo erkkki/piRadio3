@@ -9,7 +9,9 @@ import { PlayerService } from './services/player.service';
 import { GenresService } from './services/genres.service';
 import { CountriesService } from './services/countries.service';
 import { StationHistoryService } from './services/station-history.service';
-import {UserService} from './services/user.service';
+import { UserService } from './services/user.service';
+import { FavouriteService } from './services/favourite.service';
+
 
 @NgModule({
   declarations: [],
@@ -26,6 +28,7 @@ import {UserService} from './services/user.service';
     Title,
     StationHistoryService,
     UserService,
+    FavouriteService,
   ]
 })
 export class CoreModule { }
