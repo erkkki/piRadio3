@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Station} from '../models/station';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs';
+import {Station} from '../models/station';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,28 @@ export class FavouriteService {
   // api_favourite_stations_delete_item       DELETE   ANY      ANY    /api/favourite_stations/{id}.{_format}
 
   private apiUrl = environment.apiUrl;
+  private stations: BehaviorSubject<Station[]>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.stations = new BehaviorSubject<Station[]>([]);
+  }
+
+  getStations(): Station[] {
+    return this.stations.getValue();
+  }
+
+  addStation(newStation: Station): void {
+    let array = this.stations.getValue();
+    array.push(newStation);
+    this.stations.next(array);
+  }
+
+  removeStation(station: Station): void {
+    let stations = this.stations.getValue().filter(value => {
+      return value.stationuuid !== station.stationuuid;
+    });
+    this.stations.next(stations);
+  }
 
   getFavourites(): Observable<any> {
     return this.http.get(this.apiUrl + '/api/favourite_stations.json', {withCredentials: true});

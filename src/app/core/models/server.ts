@@ -16,6 +16,8 @@ export interface ServerConfig {
   mirror_pull_interval_seconds: number;
   update_caches_interval_seconds: number;
   server_name: string;
+  server_location: string;
+  server_country_code: string;
   check_retries: number;
   check_batchsize: number;
   check_pause_seconds: number;
