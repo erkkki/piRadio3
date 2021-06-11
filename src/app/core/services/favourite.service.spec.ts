@@ -50,7 +50,7 @@ describe('FavouriteService', () => {
     expect(favourites).toEqual([stationsMock[0], stationsMock[1], stationsMock[2]]);
   });
 
-  it('Test removing station', () => {
+  it('Remove station', () => {
     service.addStation(stationsMock[0]);
     service.addStation(stationsMock[1]);
     service.addStation(stationsMock[2]);

@@ -38,11 +38,11 @@ export class FavouriteService {
     this.stations.next(stations);
   }
 
-  getFavourites(): Observable<any> {
+  private getFavourites(): Observable<any> {
     return this.http.get(this.apiUrl + '/api/favourite_stations.json', {withCredentials: true});
   }
 
-  save(station: Station): Observable<any> {
+  private save(station: Station): Observable<any> {
     const favStation = {
       name: station.name,
       stationuuid: station.stationuuid,
@@ -51,7 +51,7 @@ export class FavouriteService {
   }
 
   // TODO
-  delete(station: Station): void {
+  private delete(station: Station): void {
     return;
   }
 }
