@@ -4,7 +4,7 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {Subscription} from 'rxjs';
 import {StationHistoryService} from './core/services/station-history.service';
 import {UserService} from './core/services/user.service';
-import {User} from './core/models/user';
+import {User} from './core/models/user.interface';
 import {environment} from '../environments/environment';
 
 @Component({

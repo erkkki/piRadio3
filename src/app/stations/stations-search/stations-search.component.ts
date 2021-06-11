@@ -6,7 +6,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 
-import {Station} from '../../core/models/station';
+import {Station} from '../../core/models/station.interface';
 import {RadioApiService} from '../../core/services/radio-api.service';
 import {HttpParams} from '@angular/common/http';
 

@@ -4,7 +4,7 @@ import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@
 import {filter} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 
-import { Genre } from '../../../core/models/genre';
+import { Genre } from '../../../core/models/genre.interface';
 import { GenresService } from '../../../core/services/genres.service';
 
 @Component({

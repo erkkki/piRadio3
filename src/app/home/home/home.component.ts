@@ -7,8 +7,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {GenresService} from '../../core/services/genres.service';
 import {RadioApiService} from '../../core/services/radio-api.service';
 import {StationHistoryService} from '../../core/services/station-history.service';
-import { Station } from '../../core/models/station';
-import {Genre} from '../../core/models/genre';
+import { Station } from '../../core/models/station.interface';
+import {Genre} from '../../core/models/genre.interface';
 
 @Component({
   selector: 'app-home',

@@ -3,7 +3,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, ReplaySubject, Subscription} from 'rxjs';
 
 import {PlayerService} from '../../core/services/player.service';
-import {Station} from '../../core/models/station';
+import {Station} from '../../core/models/station.interface';
 
 @Component({
   selector: 'app-player-pause',

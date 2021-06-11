@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {GenresService} from '../../core/services/genres.service';
-import { Genre } from '../../core/models/genre';
+import { Genre } from '../../core/models/genre.interface';
 import {Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
 

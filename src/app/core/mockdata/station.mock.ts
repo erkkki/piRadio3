@@ -1,4 +1,4 @@
-import {Station} from '../models/station';
+import {Station} from '../models/station.interface';
 
 
 /**

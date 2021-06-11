@@ -1,4 +1,4 @@
-import {Server, ServerConfig} from '../models/server';
+import {Server, ServerConfig} from '../models/server.interface';
 
 /**
  * List of api servers

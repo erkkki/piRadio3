@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CountriesService} from '../../core/services/countries.service';
 
-import { Country } from '../../core/models/country';
+import { Country } from '../../core/models/country.interface';
 import {BehaviorSubject, Subscription} from 'rxjs';
 
 @Component({

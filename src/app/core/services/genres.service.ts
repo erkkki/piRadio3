@@ -4,7 +4,7 @@ import {BehaviorSubject} from 'rxjs';
 import {first} from 'rxjs/operators';
 
 import { RadioApiService } from './radio-api.service';
-import { Genre } from '../models/genre';
+import { Genre } from '../models/genre.interface';
 
 
 

@@ -1,8 +1,3 @@
-export interface Server {
-  ip: string;
-  name: string;
-}
-
 export interface ServerConfig {
   check_enabled: boolean;
   prometheus_exporter_enabled: boolean;

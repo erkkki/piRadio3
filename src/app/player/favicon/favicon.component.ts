@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PlayerService} from '../../core/services/player.service';
-import {Station} from '../../core/models/station';
+import {Station} from '../../core/models/station.interface';
 import {Subscription} from 'rxjs';
 
 @Component({

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Genre} from '../../../core/models/genre';
+import {Genre} from '../../../core/models/genre.interface';
 
 @Component({
   selector: 'app-shared-genre-list',

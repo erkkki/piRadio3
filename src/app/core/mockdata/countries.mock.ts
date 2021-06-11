@@ -1,7 +1,7 @@
 /**
  * https://fr1.api.radio-browser.info/json/countries
  */
-import {Country} from '../models/country';
+import {Country} from '../models/country.interface';
 
 export const countriesMock: Country[] = [{name: 'Afghanistan', stationcount: 123}, {name: 'Albania', stationcount: 16}, {
   name: 'Algeria',

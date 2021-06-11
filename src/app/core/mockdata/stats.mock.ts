@@ -1,8 +1,9 @@
 /**
  * https://fr1.api.radio-browser.info/json/stats
  */
+import {Stats} from '../models/stats.interface';
 
-export const statsMock = {
+export const statsMock: Stats = {
   supported_version: 1,
   software_version: '0.7.14',
   status: 'OK',

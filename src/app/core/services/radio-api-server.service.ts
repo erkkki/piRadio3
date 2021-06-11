@@ -6,7 +6,7 @@ import {catchError, first, map, retry, switchMap} from 'rxjs/operators';
 import {sample} from 'lodash-es';
 
 import {environment} from '../../../environments/environment';
-import {Server} from '../models/server';
+import {Server} from '../models/server.interface';
 
 
 

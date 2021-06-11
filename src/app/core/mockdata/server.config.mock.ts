@@ -1,4 +1,4 @@
-import {ServerConfig} from '../models/server';
+import {ServerConfig} from '../models/server.interface';
 
 /**
  * Server config

@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map, filter, switchMap} from 'rxjs/operators';
 
 import {RadioApiServerService} from './radio-api-server.service';
-import {Station} from '../models/station';
+import {Station} from '../models/station.interface';
 
 @Injectable({
   providedIn: 'root'

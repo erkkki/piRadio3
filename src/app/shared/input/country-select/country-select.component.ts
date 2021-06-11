@@ -4,7 +4,7 @@ import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@
 import {filter} from 'rxjs/operators';
 
 import { CountriesService } from '../../../core/services/countries.service';
-import { Country } from '../../../core/models/country';
+import { Country } from '../../../core/models/country.interface';
 
 
 
