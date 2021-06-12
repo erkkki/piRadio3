@@ -11,33 +11,6 @@ import {RadioApiService} from './radio-api.service';
 
 declare var Clappr: any;
 
-const emptyStation: Station = {
-  bitrate: 0,
-  changeuuid: '',
-  clickcount: 0,
-  clicktimestamp: '',
-  clicktrend: 0,
-  codec: '',
-  country: '',
-  countrycode: '',
-  favicon: '',
-  hls: 0,
-  homepage: '',
-  language: '',
-  lastchangetime: '',
-  lastcheckok: 0,
-  lastcheckoktime: '',
-  lastchecktime: '',
-  lastlocalchecktime: '',
-  name: '',
-  state: '',
-  stationuuid: '',
-  tags: '',
-  url: '',
-  url_resolved: '',
-  votes: 0,
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -56,7 +29,7 @@ export class PlayerService {
   ) {
     this.volume = new BehaviorSubject<number>(100);
     this.playing = new BehaviorSubject<boolean>(false);
-    this.station = new BehaviorSubject<Station>(emptyStation);
+    this.station = new BehaviorSubject<Station>(null);
     this.error = new BehaviorSubject<any>(null);
 
     if (!environment.production) {
