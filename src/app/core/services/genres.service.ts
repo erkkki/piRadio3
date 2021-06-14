@@ -1,28 +1,26 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 
-import {BehaviorSubject} from 'rxjs';
-import {first} from 'rxjs/operators';
-
-import { RadioApiService } from './radio-api.service';
-import { Genre } from '../models/genre.interface';
-
-
+import {RadioApiService} from './radio-api.service';
+import {Tag} from '../models/radio.api.interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GenresService {
 
-  genres: BehaviorSubject<Genre[]>;
-  topTwenty: BehaviorSubject<Genre[]>;
+  private readonly genres: BehaviorSubject<Tag[]>;
 
   constructor(private radioApiService: RadioApiService) {
-    this.genres = new BehaviorSubject<Genre[]>(null);
-    this.topTwenty = new BehaviorSubject<Genre[]>(null);
-    this.radioApiService.getTags().pipe(first()).subscribe((result: Genre[]) => {
-      this.genres.next(result);
-      const top = result.sort((a, b) => b.stationcount - a.stationcount).slice(0, 20);
-      this.topTwenty.next(top);
-    });
+    this.genres = new BehaviorSubject<Tag[]>([]);
+  }
+
+  getGenres(): Observable<Tag[]> {
+    if (this.genres.getValue().length === 0) {
+      this.radioApiService.getTags().subscribe(genres => {
+        this.genres.next(genres);
+      });
+    }
+    return this.genres;
   }
 }

@@ -1,11 +1,11 @@
-import {Genre} from '../models/genre.interface';
-
-
 /**
  * Tags / genres.
  * https://fr1.api.radio-browser.info/json/tags
  */
-export const genrersMock: Genre[] = [{name: '#101', stationcount: 1}, {name: '#agm', stationcount: 1}, {
+import {Tag} from '../models/radio.api.interfaces';
+
+
+export const genrersMock: Tag[] = [{name: '#101', stationcount: 1}, {name: '#agm', stationcount: 1}, {
   name: '#bordeaux',
   stationcount: 1
 }, {name: '#breaks', stationcount: 1}, {name: '#charts', stationcount: 1}, {

@@ -3,8 +3,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 
 import {PlayerService} from './player.service';
-import {Station} from '../models/station.interface';
-
+import {Station} from '../models/radio.api.interfaces';
 
 
 @Injectable({

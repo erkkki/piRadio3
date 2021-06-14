@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
-import {Station} from '../models/station.interface';
+import {Station} from '../models/radio.api.interfaces';
 
 @Injectable({
   providedIn: 'root'

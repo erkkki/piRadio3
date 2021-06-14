@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 
 import {BehaviorSubject, combineLatest} from 'rxjs';
 
-import {Station} from '../models/station.interface';
+import {Station} from '../models/radio.api.interfaces';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {RadioApiService} from './radio-api.service';
 

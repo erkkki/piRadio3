@@ -4,7 +4,7 @@ import { version as clapprVersion } from 'node_modules/clappr/package.json';
 
 export const environment = {
   production: false,
-  radioApiUrl: 'https://fr1.api.radio-browser.info/json/servers',
+  radioApiUrl: 'fr1.api.radio-browser.info',
   ga: 'G-NOTAREALGA',
 
   apiUrl: 'http://localhost:8000',

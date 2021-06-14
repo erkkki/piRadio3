@@ -1,10 +1,10 @@
-import {Station} from '../models/station.interface';
-
-
 /**
  *  Top 100 stations from radio api
  *  https://nl1.api.radio-browser.info/json/stations/topclick/100
  */
+import {Station} from '../models/radio.api.interfaces';
+
+
 export const stationsMock: Station[] = [{
   changeuuid: 'f15a6ba5-6674-11ea-be63-52543be04c81',
   stationuuid: 'f15a6b99-6674-11ea-be63-52543be04c81',

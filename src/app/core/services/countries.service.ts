@@ -4,8 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {first} from 'rxjs/operators';
 
 import { RadioApiService } from './radio-api.service';
-import { Country } from '../models/country.interface';
-
+import {Country} from '../models/radio.api.interfaces';
 
 
 @Injectable({
@@ -13,23 +12,18 @@ import { Country } from '../models/country.interface';
 })
 export class CountriesService {
 
-  countries: BehaviorSubject<Country[]>;
+  private readonly countries: BehaviorSubject<Country[]>;
 
   constructor(private radioApiService: RadioApiService) {
     this.countries = new BehaviorSubject<Country[]>([]);
-    this.loadCountriesFromApi();
   }
 
   getCountries(): Observable<Country[]> {
-    if (this.countries.getValue().length > 0) {
-      this.loadCountriesFromApi();
+    if (this.countries.getValue().length === 0) {
+      this.radioApiService.getCountries().subscribe(countries => {
+        this.countries.next(countries);
+      });
     }
     return this.countries;
-  }
-
-  private loadCountriesFromApi(): void {
-    this.radioApiService.getCountries().pipe(first()).subscribe((result) => {
-      this.countries.next(result);
-    });
   }
 }
