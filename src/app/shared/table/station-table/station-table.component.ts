@@ -8,7 +8,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {Subscription} from 'rxjs';
 
-import {Station} from '../../../core/models/station.interface';
+import {Station} from '../../../core/models/radio.api.interfaces';
 import Table = WebAssembly.Table;
 
 @Component({

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Genre} from '../../../core/models/genre.interface';
+import {Tag} from '../../../core/models/radio.api.interfaces';
 
 @Component({
   selector: 'app-shared-genre-list',
@@ -8,7 +8,7 @@ import {Genre} from '../../../core/models/genre.interface';
 })
 export class GenreListComponent implements OnInit {
 
-  @Input() genres: Genre[];
+  @Input() genres: Tag[];
 
   constructor() { }
 

@@ -4,9 +4,9 @@ import {MediaMatcher} from '@angular/cdk/layout';
 import {FormControl, FormGroup} from '@angular/forms';
 
 import {Subscription} from 'rxjs';
-import {distinctUntilChanged} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
-import {Station} from '../../core/models/station.interface';
+import {Station} from '../../core/models/radio.api.interfaces';
 import {RadioApiService} from '../../core/services/radio-api.service';
 import {HttpParams} from '@angular/common/http';
 
@@ -111,7 +111,11 @@ export class StationsSearchComponent implements OnInit, OnDestroy {
 
   search(params): void {
     this.loading = true;
-    this.radioApiService.getStationsSearch(new HttpParams({ fromObject: params}))
+    this.radioApiService.searchStations({params})
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+      )
       .subscribe(next => {
         this.stations = this.filterStations(next);
         this.loading = false;

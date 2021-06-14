@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Country} from '../../../core/models/country.interface';
+import {Country} from '../../../core/models/radio.api.interfaces';
 
 @Component({
   selector: 'app-shared-country-list',

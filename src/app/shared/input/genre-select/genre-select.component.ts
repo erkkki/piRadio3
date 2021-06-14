@@ -4,8 +4,10 @@ import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@
 import {filter} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 
-import { Genre } from '../../../core/models/genre.interface';
+
 import { GenresService } from '../../../core/services/genres.service';
+import {Tag} from '../../../core/models/radio.api.interfaces';
+
 
 @Component({
   selector: 'app-genre-select',
@@ -24,7 +26,7 @@ export class GenreSelectComponent implements OnInit, ControlValueAccessor, OnDes
   form = new FormGroup({
     genre: new FormControl(''),
   });
-  genres: Genre[];
+  genres: Tag[];
   subscriptions: Subscription[] = [];
 
   constructor(private genreService: GenresService) { }
@@ -32,7 +34,7 @@ export class GenreSelectComponent implements OnInit, ControlValueAccessor, OnDes
   ngOnInit(): void {
     let sub: Subscription;
 
-    sub = this.genreService.genres
+    sub = this.genreService.getGenres()
       .pipe(
         filter(result => result !== null)
       ).subscribe((result) => {

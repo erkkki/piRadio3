@@ -6,7 +6,7 @@ import {switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
 import {RadioApiService} from '../../core/services/radio-api.service';
-import {Station} from '../../core/models/station.interface';
+import {Station} from '../../core/models/radio.api.interfaces';
 
 @Component({
   selector: 'app-station',

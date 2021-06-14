@@ -4,8 +4,7 @@ import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@
 import {filter} from 'rxjs/operators';
 
 import { CountriesService } from '../../../core/services/countries.service';
-import { Country } from '../../../core/models/country.interface';
-
+import {Country} from '../../../core/models/radio.api.interfaces';
 
 
 @Component({
@@ -31,7 +30,7 @@ export class CountrySelectComponent implements OnInit, ControlValueAccessor {
   constructor(private countryService: CountriesService) { }
 
   ngOnInit(): void {
-    this.countryService.countries
+    this.countryService.getCountries()
       .pipe(
         filter(result => result !== null)
       )

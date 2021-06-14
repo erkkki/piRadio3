@@ -4,7 +4,6 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 
 
 import { RadioApiService } from './services/radio-api.service';
-import { RadioApiServerService } from './services/radio-api-server.service';
 import { PlayerService } from './services/player.service';
 import { GenresService } from './services/genres.service';
 import { CountriesService } from './services/countries.service';
@@ -21,7 +20,6 @@ import { FavouriteService } from './services/favourite.service';
   ],
   providers: [
     RadioApiService,
-    RadioApiServerService,
     PlayerService,
     GenresService,
     CountriesService,

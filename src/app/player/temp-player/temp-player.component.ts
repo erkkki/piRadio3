@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { PlayerService } from '../../core/services/player.service';
 
-import { Station } from '../../core/models/station.interface';
+
 import {BehaviorSubject, ReplaySubject} from 'rxjs';
 import {StationHistoryService} from '../../core/services/station-history.service';
+
+import {Station} from '../../core/models/radio.api.interfaces';
 
 @Component({
   selector: 'app-temp-player',

@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {GenresService} from '../../core/services/genres.service';
-import { Genre } from '../../core/models/genre.interface';
+import {Tag} from '../../core/models/radio.api.interfaces';
 import {Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
 
@@ -13,17 +13,15 @@ import {filter} from 'rxjs/operators';
 export class GenresComponent implements OnInit, OnDestroy {
 
   value = '';
-  genres: Genre[] = [];
-  filteredGenres: Genre[] = [];
+  genres: Tag[] = [];
+  filteredGenres: Tag[] = [];
   subscriptions: Subscription[] = [];
-
 
   constructor(private genreService: GenresService) { }
 
-
   ngOnInit(): void {
     let sub: Subscription;
-    sub = this.genreService.genres.pipe(filter(value => value !== null)).subscribe(value => {
+    sub = this.genreService.getGenres().pipe(filter(value => value !== null)).subscribe(value => {
       this.genres = value;
       this.filteredGenres = value.filter(genre => (genre.stationcount > 100));
     });

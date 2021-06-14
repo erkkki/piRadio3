@@ -7,8 +7,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {GenresService} from '../../core/services/genres.service';
 import {RadioApiService} from '../../core/services/radio-api.service';
 import {StationHistoryService} from '../../core/services/station-history.service';
-import { Station } from '../../core/models/station.interface';
-import {Genre} from '../../core/models/genre.interface';
+import {Station, Tag} from '../../core/models/radio.api.interfaces';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   stats$: Observable<any>;
   topStation$: Observable<Station[]>;
-  genres$: Observable<Genre[]>;
+  genres$: Observable<Tag[]>;
   history$: Observable<Station[]>;
 
   angular = environment.angular;
@@ -33,9 +32,10 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.topStation$ = this.radioApi.getTopStation();
-    this.genres$ = this.genreService.topTwenty;
-    this.stats$ = this.radioApi.getStats();
+    this.topStation$ = this.radioApi.searchStationsByVotes();
+    /** TODO top genres */
+    this.genres$ = this.genreService.getGenres();
+    this.stats$ = this.radioApi.getServerStats();
     this.history$ = this.stationHistoryService.stations$;
   }
 }

@@ -1,9 +1,10 @@
 import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {Genre} from '../../../core/models/genre.interface';
 import {Subscription} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+
+import {Tag} from '../../../core/models/radio.api.interfaces';
 
 @Component({
   selector: 'app-shared-genre-table',
@@ -12,7 +13,7 @@ import {MatPaginator} from '@angular/material/paginator';
 })
 export class GenreTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
-  @Input() genres: Genre[];
+  @Input() genres: Tag[];
   @Input() showSort: string | boolean = true;
   @Input() showPaginator: string | boolean = true;
   @Input() pageSize = 40;

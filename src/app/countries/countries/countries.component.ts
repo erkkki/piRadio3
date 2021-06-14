@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CountriesService} from '../../core/services/countries.service';
 
-import { Country } from '../../core/models/country.interface';
+import {Country} from '../../core/models/radio.api.interfaces';
 import {BehaviorSubject, Subscription} from 'rxjs';
 
 @Component({
@@ -19,7 +19,7 @@ export class CountriesComponent implements OnInit, OnDestroy {
   constructor(private countryService: CountriesService) { }
 
   ngOnInit(): void {
-    this.subscription = this.countryService.countries.subscribe(value => {
+    this.subscription = this.countryService.getCountries().subscribe(value => {
       this.countries = value;
       this.filteredCountries = value;
     });

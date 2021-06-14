@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { PlayerService } from '../../core/services/player.service';
-import { Station } from '../../core/models/station.interface';
+import {Station} from '../../core/models/radio.api.interfaces';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
