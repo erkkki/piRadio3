@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 
-import {BehaviorSubject} from 'rxjs';
-
-import {PlayerService} from './player.service';
+import {RadioApiService} from './radio-api.service';
 import {Station} from '../models/radio.api.interfaces';
+
 
 
 @Injectable({
@@ -11,44 +11,65 @@ import {Station} from '../models/radio.api.interfaces';
 })
 export class StationHistoryService {
 
-  stations$: BehaviorSubject<Station[]>;
-  stations: Station[] = [];
-  localStorageKey = 'stationHistory';
+  private localStorageKey = 'history';
+  private maxStationCount = 10;
+  list: BehaviorSubject<Station[]>;
 
-  constructor(private playerService: PlayerService) {
-    this.stations = this.get();
-    this.stations$ = new BehaviorSubject<Station[]>(this.stations);
+  constructor(private radioApi: RadioApiService) {
+    this.list = new BehaviorSubject<Station[]>([]);
+    this.init();
+  }
 
-    this.playerService.station.subscribe((newStation) => {
-      this.addNew(newStation);
+  init(): void {
+    const stationUuids = this.loadFromLocalStorage();
+
+    stationUuids.forEach(stationUuid => {
+      this.loadStationFromApi(stationUuid);
     });
   }
 
-  private addNew(newStation: Station): void {
-    if (this.stations) {
-      this.stations = this.stations.filter((station) => {
-        return (station.stationuuid !== newStation.stationuuid);
-      });
-    }
-
-    if (newStation.stationuuid === '') {
-      return;
-    }
-    this.stations.push(newStation);
-
-    this.save();
-    this.stations$.next([...this.stations].reverse());
+  getStations(): Observable<Station[]> {
+    return this.list;
   }
 
-  private save(): void {
-    if (this.stations.length > 10) {
-      this.stations = this.stations.slice(this.stations.length - 10, this.stations.length);
+  add(station: Station): void {
+    let stations = this.list.getValue();
+    const length = stations.push(station);
+
+    if (length > this.maxStationCount) {
+      this.remove(stations[0]);
+      stations = this.list.getValue();
     }
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.stations));
+
+    this.list.next(stations);
+    this.saveToLocalStorage(stations);
   }
 
-  private get(): Station[] {
-    const stations = JSON.parse(localStorage.getItem(this.localStorageKey));
-    return (stations) ? stations : [];
+  remove(station: Station): void {
+    let list = this.list.getValue();
+    list = list.filter(data => data.stationuuid !== station.stationuuid);
+    this.list.next(list);
+    this.saveToLocalStorage(list);
+  }
+
+  loadStationFromApi(uuid: string): void {
+    this.radioApi.searchStationsByUuid({uuids: uuid}).subscribe(data => {
+      this.add(data[0]);
+    });
+  }
+
+  saveToLocalStorage(stations: Station[]): string {
+    const stationUuidList = stations.map(station => station.stationuuid);
+    const jsonData = JSON.stringify(stationUuidList);
+
+    localStorage.setItem(this.localStorageKey, jsonData);
+
+    return jsonData;
+  }
+
+  loadFromLocalStorage(): string[] {
+    const jsonData = localStorage.getItem(this.localStorageKey);
+    if (!jsonData) { return []; }
+    return JSON.parse(jsonData);
   }
 }
