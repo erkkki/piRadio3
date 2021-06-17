@@ -28,15 +28,15 @@ describe('Genre / tag service', () => {
 
   it('should return empty list of tags', () => {
     service.getGenres().subscribe(data => {
-      expect(data.length).toBe(0);
+      expect(data).toEqual([]);
     });
   });
 
   it('should return list of tags', () => {
     spyOn(radioApiService, 'getTags').and.returnValue(of(genrersMock));
 
-    service.getGenres().pipe(skip(1)).subscribe(data => {
-      expect(data.length).toBe(genrersMock.length);
+    service.getGenres().subscribe(data => {
+      expect(data).toEqual(genrersMock);
     });
   });
 });

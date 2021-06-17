@@ -28,15 +28,15 @@ describe('Countries service', () => {
 
   it('should return empty list of countries', () => {
     service.getCountries().subscribe(data => {
-      expect(data.length).toBe(0);
+      expect(data).toEqual([]);
     });
   });
 
   it('should return list of countries', () => {
     spyOn(radioApiService, 'getCountries').and.returnValue(of(countriesMock));
 
-    service.getCountries().pipe(skip(1)).subscribe(data => {
-      expect(data.length).toBe(countriesMock.length);
+    service.getCountries().subscribe(data => {
+      expect(data).toEqual(countriesMock);
     });
   });
 });
