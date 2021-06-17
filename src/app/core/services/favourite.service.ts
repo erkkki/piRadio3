@@ -9,10 +9,7 @@ import {Station} from '../models/radio.api.interfaces';
 })
 export class FavouriteService {
 
-  // api_favourite_stations_get_collection    GET      ANY      ANY    /api/favourite_stations.{_format}
-  // api_favourite_stations_post_collection   POST     ANY      ANY    /api/favourite_stations.{_format}
-  // api_favourite_stations_get_item          GET      ANY      ANY    /api/favourite_stations/{id}.{_format}
-  // api_favourite_stations_delete_item       DELETE   ANY      ANY    /api/favourite_stations/{id}.{_format}
+
 
   private apiUrl = environment.apiUrl;
   private stations: BehaviorSubject<Station[]>;
@@ -25,33 +22,39 @@ export class FavouriteService {
     return this.stations.getValue();
   }
 
-  addStation(newStation: Station): void {
-    let array = this.stations.getValue();
-    array.push(newStation);
-    this.stations.next(array);
+  add(station: Station): void {
+    let list = this.stations.getValue();
+    let checkDuplicate = list.some(data => data.stationuuid === station.stationuuid);
+    if (checkDuplicate) {
+      return;
+    }
+    list.push(station);
+    this.stations.next(list);
   }
 
-  removeStation(station: Station): void {
-    let stations = this.stations.getValue().filter(value => {
-      return value.stationuuid !== station.stationuuid;
-    });
-    this.stations.next(stations);
+  remove(station: Station): void {
+    let list = this.stations.getValue();
+    list = list.filter(data => data.stationuuid !== station.stationuuid);
+    this.stations.next(list);
   }
 
-  private getFavourites(): Observable<any> {
-    return this.http.get(this.apiUrl + '/api/favourite_stations.json', {withCredentials: true});
+  apiGetList(options?: { format?: string}): Observable<Station[]> {
+    const format = options?.format || 'json';
+    return this.http.get<Station[]>(`${this.apiUrl}/api/favourite_stations.${format}`);
   }
 
-  private save(station: Station): Observable<any> {
-    const favStation = {
-      name: station.name,
-      stationuuid: station.stationuuid,
-    };
-    return this.http.post(this.apiUrl + '/api/favourite_stations.json', favStation, {withCredentials: true});
+  apiAdd(station: Station, options?: { format?: string}): Observable<any> {
+    const format = options?.format || 'json';
+    return this.http.post<Station>(`${this.apiUrl}/api/favourite_stations.${format}`, station);
   }
 
-  // TODO
-  private delete(station: Station): void {
-    return;
+  apiGet(station: Station, options?: { format?: string}): Observable<any> {
+    const format = options?.format || 'json';
+    return this.http.get<Station>(`${this.apiUrl}/api/favourite_stations/${station.stationuuid}.${format}`);
+  }
+
+  apiRemove(station: Station, options?: { format?: string}): Observable<any> {
+    const format = options?.format || 'json';
+    return this.http.delete(`${this.apiUrl}/api/favourite_stations/${station.stationuuid}.${format}`);
   }
 }

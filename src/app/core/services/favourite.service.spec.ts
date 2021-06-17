@@ -29,53 +29,75 @@ describe('FavouriteService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('Get empty list of favourite stations', () => {
+
+  it('should get empty list of favourite stations', () => {
     let favourites = service.getStations();
     expect(favourites).toEqual([]);
   });
 
-  it('Add new station', () => {
-    service.addStation(stationsMock[0]);
+
+  it('should add station', () => {
+    service.add(stationsMock[0]);
 
     let favourites = service.getStations();
     expect(favourites).toEqual([stationsMock[0]]);
   });
 
-  it('Add multiple stations', () => {
-    service.addStation(stationsMock[0]);
-    service.addStation(stationsMock[1]);
-    service.addStation(stationsMock[2]);
+  it('should add multiple stations', () => {
+    service.add(stationsMock[0]);
+    service.add(stationsMock[1]);
+    service.add(stationsMock[2]);
 
     let favourites = service.getStations();
     expect(favourites).toEqual([stationsMock[0], stationsMock[1], stationsMock[2]]);
   });
 
-  it('Remove station', () => {
-    service.addStation(stationsMock[0]);
-    service.addStation(stationsMock[1]);
-    service.addStation(stationsMock[2]);
+  it('should remove station', () => {
+    service.add(stationsMock[0]);
+    service.add(stationsMock[1]);
+    service.add(stationsMock[2]);
 
     let favourites = service.getStations();
     expect(favourites).toEqual([stationsMock[0], stationsMock[1], stationsMock[2]]);
 
-    service.removeStation(stationsMock[1]);
+    service.remove(stationsMock[1]);
 
     favourites = service.getStations();
     expect(favourites).toEqual([stationsMock[0], stationsMock[2]]);
   });
 
-  // it('Get Favourite stations', () => {
-  //   const data = [];
-  //
-  //   service.getFavourites()
-  //     .subscribe((result) => {
-  //       expect(result).toBe(data);
-  //     });
-  //
-  //   const req = httpTestingController.expectOne(environment.apiUrl + '/api/favourite_stations.json');
-  //
-  //   expect(req.request.method).toBe('GET');
-  //
-  //   req.flush(data);
-  // });
+  it('should call api to get stations', () => {
+    service.apiGetList().subscribe();
+
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/api/favourite_stations.json`);
+    expect(req.request.method).toBe('GET');
+    req.flush({});
+  });
+
+  it('should call api to add station', () => {
+    const station = stationsMock[0];
+    service.apiAdd(station).subscribe();
+
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/api/favourite_stations.json`);
+    expect(req.request.method).toBe('POST');
+    req.flush({});
+  });
+
+  it('should call api to remove station', () => {
+    const station = stationsMock[0];
+    service.apiRemove(station).subscribe();
+
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/api/favourite_stations/${station.stationuuid}.json`);
+    expect(req.request.method).toBe('DELETE');
+    req.flush({});
+  });
+
+  it('should call api to get station', () => {
+    const station = stationsMock[0];
+    service.apiGet(station).subscribe();
+
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/api/favourite_stations/${station.stationuuid}.json`);
+    expect(req.request.method).toBe('GET');
+    req.flush({});
+  });
 });
