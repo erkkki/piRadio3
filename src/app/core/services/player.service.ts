@@ -8,6 +8,7 @@ import {BehaviorSubject, combineLatest} from 'rxjs';
 import {Station} from '../models/radio.api.interfaces';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {RadioApiService} from './radio-api.service';
+import {StationHistoryService} from './station-history.service';
 
 declare var Clappr: any;
 
@@ -26,6 +27,7 @@ export class PlayerService {
   constructor(
     private radioApiService: RadioApiService,
     private titleService: Title,
+    private history: StationHistoryService,
   ) {
     this.volume = new BehaviorSubject<number>(100);
     this.playing = new BehaviorSubject<boolean>(false);
@@ -51,6 +53,7 @@ export class PlayerService {
     ).subscribe(value => {
       this.loadPlayBack(value);
       this.titleService.setTitle(value.name);
+      this.history.add(value);
     });
   }
 

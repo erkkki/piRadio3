@@ -34,22 +34,28 @@ export class StationHistoryService {
 
   add(station: Station): void {
     let stations = this.list.getValue();
-    const length = stations.push(station);
+    let length = 0;
 
+    /** Remove duplicates station from list */
+    stations = stations.filter(data => data.stationuuid !== station.stationuuid);
+
+    /** Add to station to list and get length */
+    length = stations.push(station);
+
+    /** Remove oldest if over max length */
     if (length > this.maxStationCount) {
-      this.remove(stations[0]);
-      stations = this.list.getValue();
+      stations = stations.splice(1);
     }
 
     this.list.next(stations);
-    this.saveToLocalStorage(stations);
+    this.saveToLocalStorage(this.list.getValue());
   }
 
   remove(station: Station): void {
     let list = this.list.getValue();
     list = list.filter(data => data.stationuuid !== station.stationuuid);
     this.list.next(list);
-    this.saveToLocalStorage(list);
+    this.saveToLocalStorage(this.list.getValue());
   }
 
   loadStationFromApi(uuid: string): void {
@@ -59,7 +65,7 @@ export class StationHistoryService {
   }
 
   saveToLocalStorage(stations: Station[]): string {
-    const stationUuidList = stations.map(station => station.stationuuid);
+    const stationUuidList = stations.map(station => station?.stationuuid);
     const jsonData = JSON.stringify(stationUuidList);
 
     localStorage.setItem(this.localStorageKey, jsonData);

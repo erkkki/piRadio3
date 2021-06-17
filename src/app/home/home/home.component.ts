@@ -36,6 +36,6 @@ export class HomeComponent implements OnInit {
     /** TODO top genres */
     this.genres$ = this.genreService.getGenres();
     this.stats$ = this.radioApi.getServerStats();
-    this.history$ = this.stationHistoryService.stations$;
+    this.history$ = this.stationHistoryService.getStations();
   }
 }

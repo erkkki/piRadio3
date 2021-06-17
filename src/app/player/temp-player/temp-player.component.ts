@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../core/services/player.service';
 
 
-import {BehaviorSubject, ReplaySubject} from 'rxjs';
+import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {StationHistoryService} from '../../core/services/station-history.service';
 
 import {Station} from '../../core/models/radio.api.interfaces';
@@ -18,7 +18,7 @@ export class TempPlayerComponent implements OnInit {
 
   station: BehaviorSubject<Station>;
   playState: BehaviorSubject<boolean>;
-  stationHistory$: BehaviorSubject<Station[]>;
+  stationHistory$: Observable<Station[]>;
 
   constructor(
     private playerService: PlayerService,
@@ -28,7 +28,7 @@ export class TempPlayerComponent implements OnInit {
   ngOnInit(): void {
     this.station = this.playerService.station;
     this.playState = this.playerService.playing;
-    this.stationHistory$ = this.stationHistoryService.stations$;
+    this.stationHistory$ = this.stationHistoryService.getStations();
   }
 
 }

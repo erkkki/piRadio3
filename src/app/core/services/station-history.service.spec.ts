@@ -20,6 +20,10 @@ describe('Station history service', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
   afterEach(() => {
     localStorage.clear();
     httpTestingController.verify();
@@ -102,6 +106,22 @@ describe('Station history service', () => {
     service.getStations().subscribe(value => {
       expect(value).toEqual(expectedResult);
     });
+  });
+
+  it('should not keep duplicates in list', () => {
+    let index = 0;
+    const station = stationsMock[0];
+    const stationTwo = stationsMock[3];
+    const expectedValues = [[], [station], [station, stationTwo], [stationTwo, station]];
+
+    service.getStations().subscribe(data => {
+      expect(data).toEqual(expectedValues[index]);
+      index++;
+    });
+
+    service.add(station);
+    service.add(stationTwo);
+    service.add(station);
   });
 
 });
