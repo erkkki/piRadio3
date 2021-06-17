@@ -26,6 +26,7 @@ export class RadioApiService {
 
   private protocol = 'https';
   private radioApi = environment.radioApiUrl;
+  private defaultLimit = 1000;
   private serverMirrors: MirrorServer[] = [];
 
   constructor(private http: HttpClient) {}
@@ -81,7 +82,7 @@ export class RadioApiService {
       reverse: false,
       hidebroken: true,
       offset: 0,
-      limit: 100,
+      limit: this.defaultLimit,
     }, ...options?.params};
 
     return  this.get<Country[]>(`${format}/countries/${filter}`, params);
@@ -111,7 +112,7 @@ export class RadioApiService {
         reverse: false,
         hidebroken: true,
         offset: 0,
-        limit: 100,
+        limit: this.defaultLimit,
       }, ...options?.params};
 
     return  this.get<CountryCode[]>(`${format}/countrycodes/${filter}`, params);
@@ -141,7 +142,7 @@ export class RadioApiService {
         reverse: false,
         hidebroken: true,
         offset: 0,
-        limit: 100,
+        limit: this.defaultLimit,
       }, ...options?.params};
 
     return  this.get<Codecs[]>(`${format}/codecs/${filter}`, params);
@@ -173,7 +174,7 @@ export class RadioApiService {
         reverse: false,
         hidebroken: true,
         offset: 0,
-        limit: 100,
+        limit: this.defaultLimit,
       }, ...options?.params};
 
     if (country) {
@@ -207,7 +208,7 @@ export class RadioApiService {
         reverse: false,
         hidebroken: true,
         offset: 0,
-        limit: 100,
+        limit: this.defaultLimit,
       }, ...options?.params};
 
     return  this.get<Language[]>(`${format}/languages/${filter}`, params);
@@ -237,7 +238,7 @@ export class RadioApiService {
         reverse: false,
         hidebroken: true,
         offset: 0,
-        limit: 100,
+        limit: this.defaultLimit,
       }, ...options?.params};
 
     return  this.get<Tag[]>(`${format}/tags/${filter}`, params);
@@ -268,7 +269,7 @@ export class RadioApiService {
         reverse: false,
         hidebroken: true,
         offset: 0,
-        limit: 100,
+        limit: this.defaultLimit,
       }, ...options?.params};
 
     return  this.get<Station[]>(`${format}/stations/${by}/${filter}`, params);
@@ -293,7 +294,7 @@ export class RadioApiService {
         reverse: false,
         hidebroken: true,
         offset: 0,
-        limit: 100,
+        limit: this.defaultLimit,
       }, ...options?.params};
 
     return this.get<Station[]>(`${format}/stations`, params);
@@ -367,7 +368,7 @@ export class RadioApiService {
         reverse: false,
         hidebroken: true,
         offset: 0,
-        limit: 100,
+        limit: this.defaultLimit,
       }, ...options?.params};
 
     return this.get<Station[]>(`${format}/stations/search`, params);
@@ -403,9 +404,9 @@ export class RadioApiService {
     };
   }): Observable<Station[]> {
     const format = options?.format || 'json';
-    const rowcount = options?.rowcount || 100;
+    const rowcount = options?.rowcount || this.defaultLimit;
     const params = {...{
-        limit: 100,
+        limit: this.defaultLimit,
         hidebroken: true
       }, ...options?.params};
     return this.get<Station[]>(`${format}/stations/topclick/${rowcount}`, params);
@@ -425,9 +426,9 @@ export class RadioApiService {
     };
   }): Observable<Station[]> {
     const format = options?.format || 'json';
-    const rowcount = options?.rowcount || 100;
+    const rowcount = options?.rowcount || this.defaultLimit;
     const params = {...{
-        limit: 100,
+        limit: this.defaultLimit,
         hidebroken: true
       }, ...options?.params};
     return this.get<Station[]>(`${format}/stations/topvote/${rowcount}`, params);
@@ -447,9 +448,9 @@ export class RadioApiService {
     };
   }): Observable<Station[]> {
     const format = options?.format || 'json';
-    const rowcount = options?.rowcount || 100;
+    const rowcount = options?.rowcount || this.defaultLimit;
     const params = {...{
-        limit: 100,
+        limit: this.defaultLimit,
         hidebroken: true
       }, ...options?.params};
     return this.get<Station[]>(`${format}/stations/lastclick/${rowcount}`, params);
@@ -469,9 +470,9 @@ export class RadioApiService {
     };
   }): Observable<Station[]> {
     const format = options?.format || 'json';
-    const rowcount = options?.rowcount || 100;
+    const rowcount = options?.rowcount || this.defaultLimit;
     const params = {...{
-        limit: 100,
+        limit: this.defaultLimit,
         hidebroken: true
       }, ...options?.params};
     return this.get<Station[]>(`${format}/stations/lastchange/${rowcount}`, params);

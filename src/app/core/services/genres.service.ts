@@ -17,7 +17,7 @@ export class GenresService {
 
   getGenres(): Observable<Tag[]> {
     if (this.genres.getValue().length === 0) {
-      this.radioApiService.getTags({params: {limit: 10000}}).subscribe(genres => {
+      this.radioApiService.getTags().subscribe(genres => {
         this.genres.next(genres);
       });
     }
