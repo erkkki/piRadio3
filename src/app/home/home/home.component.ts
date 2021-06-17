@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { environment } from '../../../environments/environment';
 
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 
 import {GenresService} from '../../core/services/genres.service';
 import {RadioApiService} from '../../core/services/radio-api.service';
