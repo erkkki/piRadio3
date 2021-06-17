@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {Station} from '../models/radio.api.interfaces';
+import {FavouriteStation} from '../models/api.interfaces';
+import {RadioApiService} from './radio-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +14,22 @@ export class FavouriteService {
 
 
   private apiUrl = environment.apiUrl;
-  private stations: BehaviorSubject<Station[]>;
+  stations: BehaviorSubject<Station[]>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private radioApi: RadioApiService) {
     this.stations = new BehaviorSubject<Station[]>([]);
   }
 
-  getStations(): Station[] {
-    return this.stations.getValue();
+  init(): void {
+    this.apiGetList().subscribe(data => {
+      data.forEach(station => {
+        this.loadStationFromApi(station.stationuuid);
+      });
+    });
+  }
+
+  getStations(): Observable<Station[]> {
+    return this.stations;
   }
 
   add(station: Station): void {
@@ -38,23 +48,24 @@ export class FavouriteService {
     this.stations.next(list);
   }
 
-  apiGetList(options?: { format?: string}): Observable<Station[]> {
+  loadStationFromApi(uuid: string): void {
+    this.radioApi.searchStationsByUuid({uuids: uuid}).subscribe(data => {
+      this.add(data[0]);
+    });
+  }
+
+  apiGetList(options?: { format?: string}): Observable<FavouriteStation[]> {
     const format = options?.format || 'json';
-    return this.http.get<Station[]>(`${this.apiUrl}/api/favourite_stations.${format}`);
+    return this.http.get<FavouriteStation[]>(`${this.apiUrl}/api/favourite_stations.${format}`, {withCredentials: true});
   }
 
   apiAdd(station: Station, options?: { format?: string}): Observable<any> {
     const format = options?.format || 'json';
-    return this.http.post<Station>(`${this.apiUrl}/api/favourite_stations.${format}`, station);
-  }
-
-  apiGet(station: Station, options?: { format?: string}): Observable<any> {
-    const format = options?.format || 'json';
-    return this.http.get<Station>(`${this.apiUrl}/api/favourite_stations/${station.stationuuid}.${format}`);
+    return this.http.post<Station>(`${this.apiUrl}/api/favourite_stations.${format}`, station, {withCredentials: true});
   }
 
   apiRemove(station: Station, options?: { format?: string}): Observable<any> {
     const format = options?.format || 'json';
-    return this.http.delete(`${this.apiUrl}/api/favourite_stations/${station.stationuuid}.${format}`);
+    return this.http.delete(`${this.apiUrl}/api/favourite_stations/${station.stationuuid}.${format}`, {withCredentials: true});
   }
 }
