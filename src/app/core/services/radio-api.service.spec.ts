@@ -33,7 +33,7 @@ describe('Radio api service', () => {
   it('should call radio api to get countries.', () => {
     service.getCountries().subscribe();
 
-    let req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/countries/?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    let req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/countries/?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
 
@@ -46,7 +46,7 @@ describe('Radio api service', () => {
   it('should call radio api to get country codes.', () => {
     service.getCountryCodes().subscribe();
 
-    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/countrycodes/?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/countrycodes/?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
@@ -54,7 +54,7 @@ describe('Radio api service', () => {
   it('should call radio api to get codecs.', () => {
     service.getCodecs().subscribe();
 
-    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/codecs/?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/codecs/?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
@@ -62,20 +62,20 @@ describe('Radio api service', () => {
   it('should call radio api to get states.', () => {
     service.getStates().subscribe();
 
-    let req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/states/?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    let req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/states/?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
 
 
     service.getStates({filter: 'ber'}).subscribe();
 
-    req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/states/ber?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/states/ber?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
 
     service.getStates({filter: 'ber', country: 'Germany'}).subscribe();
 
-    req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/states/Germany/ber?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/states/Germany/ber?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
@@ -83,7 +83,7 @@ describe('Radio api service', () => {
   it('should call radio api to get languages.', () => {
     service.getLanguages().subscribe();
 
-    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/languages/?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/languages/?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
@@ -91,7 +91,7 @@ describe('Radio api service', () => {
   it('should get tags / genres list from api', () => {
     service.getTags().subscribe();
 
-    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/tags/?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/tags/?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
@@ -99,13 +99,13 @@ describe('Radio api service', () => {
   it('should get stations by search', () => {
     service.getStationsBy('jazz', 'byname').subscribe();
 
-    let req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/byname/jazz?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    let req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/byname/jazz?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
 
     service.getStationsBy('austria', 'bycountry').subscribe();
 
-    req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/bycountry/austria?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/bycountry/austria?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
@@ -113,7 +113,7 @@ describe('Radio api service', () => {
   it('should get all stations', () => {
     service.getStations().subscribe();
 
-    let req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    let req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
@@ -125,9 +125,9 @@ describe('Radio api service', () => {
     expect(req.request.method).toBe('GET');
     req.flush({});
 
-    service.getClicks({seconds: 1000}).subscribe();
+    service.getClicks({seconds: 10000}).subscribe();
 
-    req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/clicks?stationuuid=&lastclickuuid=&seconds=1000`);
+    req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/clicks?stationuuid=&lastclickuuid=&seconds=10000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
@@ -144,13 +144,13 @@ describe('Radio api service', () => {
   it('should send station search call to api', () =>  {
     service.searchStations().subscribe();
 
-    let req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/search?order=name&reverse=false&hidebroken=true&offset=0&limit=100`);
+    let req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/search?order=name&reverse=false&hidebroken=true&offset=0&limit=1000`);
     expect(req.request.method).toBe('GET');
     req.flush({});
 
     service.searchStations({params: {country: 'Finland'}}).subscribe();
 
-    req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/search?order=name&reverse=false&hidebroken=true&offset=0&limit=100&country=Finland`);
+    req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/search?order=name&reverse=false&hidebroken=true&offset=0&limit=1000&country=Finland`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
@@ -170,7 +170,7 @@ describe('Radio api service', () => {
   it('should send search stations by votes', () =>  {
     service.searchStationsByVotes().subscribe();
 
-    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/topvote/100?limit=100&hidebroken=true`);
+    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/topvote/1000?limit=1000&hidebroken=true`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
@@ -178,7 +178,7 @@ describe('Radio api service', () => {
   it('should send search stations by recent click', () =>  {
     service.searchStationsByRecentClick().subscribe();
 
-    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/lastclick/100?limit=100&hidebroken=true`);
+    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/lastclick/1000?limit=1000&hidebroken=true`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
@@ -186,7 +186,7 @@ describe('Radio api service', () => {
   it('should send search stations by lastchange', () =>  {
     service.searchStationsByRecentClick().subscribe();
 
-    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/lastclick/100?limit=100&hidebroken=true`);
+    const req = httpTestingController.expectOne(`https://${environment.radioApiUrl}/json/stations/lastclick/1000?limit=1000&hidebroken=true`);
     expect(req.request.method).toBe('GET');
     req.flush({});
   });
